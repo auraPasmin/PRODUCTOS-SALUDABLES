@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2020 a las 06:05:22
+-- Tiempo de generación: 13-11-2020 a las 02:11:49
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -128,7 +128,7 @@ CREATE TABLE `recibo` (
   `V` int(10) NOT NULL,
   `C` varchar(50) NOT NULL,
   `P` varchar(50) NOT NULL,
-  `Fecha` date NOT NULL,
+  `Fecha` datetime NOT NULL,
   `Cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
