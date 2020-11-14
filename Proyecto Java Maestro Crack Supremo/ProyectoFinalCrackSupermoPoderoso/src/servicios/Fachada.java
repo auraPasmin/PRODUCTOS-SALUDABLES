@@ -20,7 +20,7 @@ public class Fachada {
                 Runtime.getRuntime().addShutdownHook(new MiShDwnHook());
                 //Recupera los parámetros de conexión del archivo 
                 //jdbc.properties
-                //ResourceBundle rb = ResourceBundle.getBundle("servicios.jdbc");
+                
                 String driver = "com.mysql.jdbc.Driver";
                 String url = "jdbc:mysql://localhost/proyectomaestrocracksupremo";
                 String pwd = "";
