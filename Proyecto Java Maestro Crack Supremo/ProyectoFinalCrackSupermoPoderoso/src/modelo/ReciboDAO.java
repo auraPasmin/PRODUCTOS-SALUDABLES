@@ -18,7 +18,7 @@ public class ReciboDAO {
         String sqlStatement;
 
         try {
-            conexion = Fachada.startConection();
+            conexion = Fachada.startConnection();
             sqlStatement = "INSERT INTO recibo VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
 
