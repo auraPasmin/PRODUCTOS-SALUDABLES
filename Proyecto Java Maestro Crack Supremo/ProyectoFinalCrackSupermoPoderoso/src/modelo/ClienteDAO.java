@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 public class ClienteDAO {
+    String url, name, pass;
     public ClienteDAO() {
         // Nothing here
     }
@@ -21,7 +22,7 @@ public class ClienteDAO {
         String sqlStatement;
         
         try {
-            // Here -> conexion = <Clase del Driver>.startConnection();
+            conexion = <Clase del Driver>.startConnection();
             sqlStatement = "INSERT INTO cliente VALUES (?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
 

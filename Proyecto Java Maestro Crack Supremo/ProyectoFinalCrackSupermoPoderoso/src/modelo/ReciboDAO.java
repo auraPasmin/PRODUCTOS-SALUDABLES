@@ -1,6 +1,7 @@
 package modelo;
 import java.sql.*;
 import java.util.ArrayList;
+import servicios.Fachada;
 
 public class ReciboDAO {
     public ReciboDAO() {
@@ -17,7 +18,7 @@ public class ReciboDAO {
         String sqlStatement;
 
         try {
-            // conexion = <Clase de Driver<.startConection();
+            conexion = Fachada.startConection();
             sqlStatement = "INSERT INTO recibo VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
 
@@ -59,9 +60,10 @@ public class ReciboDAO {
         ResultSet busqueda = null;
         ArrayList<Recibo> listarRecibos = null;
 
-        try {
-
-        }
+//        try {
+//
+//        }
+        return null;
     }
 
     /**
