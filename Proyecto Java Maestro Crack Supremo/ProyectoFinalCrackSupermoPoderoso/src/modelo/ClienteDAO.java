@@ -26,9 +26,8 @@ public class ClienteDAO {
             conexion = Fachada1.startConnection();
             sqlStatement = "INSERT INTO cliente VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
-
-            instruccion.setString(1, cliente.getNombre());
-            instruccion.setString(2, cliente.getNIT());
+            instruccion.setString(1, cliente.getNIT());
+            instruccion.setString(2, cliente.getNombre());     
             instruccion.setString(3, cliente.getDireccion());
             instruccion.setDouble(4, cliente.getX());
             instruccion.setDouble(5, cliente.getY());

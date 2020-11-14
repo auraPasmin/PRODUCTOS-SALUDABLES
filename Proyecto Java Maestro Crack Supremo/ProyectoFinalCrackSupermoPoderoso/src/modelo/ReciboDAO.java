@@ -35,7 +35,7 @@ public class ReciboDAO {
             resultado = instruccion.executeUpdate();
         }
         catch(SQLException e) {
-            // Do something ...
+            System.out.println("jeje fallo xd ");
         }
         finally {
             try {
@@ -45,7 +45,7 @@ public class ReciboDAO {
                     conexion.close();
             }
             catch(SQLException ex) {
-                // Do something ...
+                System.out.println("jeje no cerro xd");
             }
         }
         return resultado;
