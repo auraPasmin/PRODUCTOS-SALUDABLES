@@ -1,7 +1,7 @@
 package modelo;
 import java.sql.*;
 import java.util.ArrayList;
-import servicios.Fachada;
+import servicios.Fachada1;
 
 public class ReciboDAO {
     public ReciboDAO() {
@@ -18,7 +18,7 @@ public class ReciboDAO {
         String sqlStatement;
 
         try {
-            conexion = Fachada.startConnection();
+            conexion = Fachada1.startConnection();
             sqlStatement = "INSERT INTO recibo VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
 

@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 
-public class Fachada {
+public class Fachada1 {
     private static Connection con = null;
     
     public static Connection startConnection(){
@@ -44,7 +44,7 @@ public class Fachada {
         @Override
         public void run(){
             try{
-                Connection con = Fachada.startConnection();
+                Connection con = Fachada1.startConnection();
                 con.close();                     
             }
             catch (Exception ex){
