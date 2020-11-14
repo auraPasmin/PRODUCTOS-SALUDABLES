@@ -24,7 +24,7 @@ public class ClienteDAO {
         
         try {
             conexion = Fachada1.startConnection();
-            sqlStatement = "INSERT INTO cliente VALUES (?, ?, ?, ?)";
+            sqlStatement = "INSERT INTO cliente VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
 
             instruccion.setString(1, cliente.getNombre());
@@ -36,7 +36,7 @@ public class ClienteDAO {
             resultado = instruccion.executeUpdate();
         }
         catch(SQLException e) {
-            // Do something ...
+            System.out.println(e.getMessage());
         }
         finally {
             try {
@@ -44,7 +44,7 @@ public class ClienteDAO {
                     instruccion.close();
             }
             catch (SQLException ex) {
-                // Do something ...
+                System.out.println("xdddddddd");
             }
         }
         return resultado;
