@@ -1,9 +1,11 @@
 package modelo;
 import java.sql.*;
 import java.util.ArrayList;
+import servicios.Fachada1;
 
 
 public class ClienteDAO {
+    String url, name, pass;
     public ClienteDAO() {
         // Nothing here
     }
@@ -21,12 +23,11 @@ public class ClienteDAO {
         String sqlStatement;
         
         try {
-            // Here -> conexion = <Clase del Driver>.startConnection();
-            sqlStatement = "INSERT INTO cliente VALUES (?, ?, ?, ?)";
+            conexion = Fachada1.startConnection();
+            sqlStatement = "INSERT INTO cliente VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
-
-            instruccion.setString(1, cliente.getNombre());
-            instruccion.setString(2, cliente.getNIT());
+            instruccion.setString(1, cliente.getNIT());
+            instruccion.setString(2, cliente.getNombre());     
             instruccion.setString(3, cliente.getDireccion());
             instruccion.setDouble(4, cliente.getX());
             instruccion.setDouble(5, cliente.getY());
@@ -34,7 +35,7 @@ public class ClienteDAO {
             resultado = instruccion.executeUpdate();
         }
         catch(SQLException e) {
-            // Do something ...
+            System.out.println(e.getMessage());
         }
         finally {
             try {
@@ -42,7 +43,7 @@ public class ClienteDAO {
                     instruccion.close();
             }
             catch (SQLException ex) {
-                // Do something ...
+                System.out.println("xdddddddd");
             }
         }
         return resultado;
@@ -61,7 +62,7 @@ public class ClienteDAO {
         String statementSql;
 
         try {
-            // conexion = <Clase del Driver>.startConnection();
+            conexion = Fachada1.startConnection();
             statementSql = "SELECT * FROM cliente ORDER BY NIT";
             instruccion = conexion.prepareStatement(statementSql);
             resultConsulta = instruccion.executeQuery();
@@ -110,7 +111,7 @@ public class ClienteDAO {
         String sqlStatement;
 
         try {
-            // conexion = <Clase de Driver>.startConnection();
+            conexion = Fachada1.startConnection();
             sqlStatement = "SELECT * FROM cliente WHERE NIT = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
             instruccion.setString(1, nit);
@@ -157,7 +158,7 @@ public class ClienteDAO {
         String sqlStatement;
         
         try {
-            // conexion = <Clase de Driver>.startConnection();
+            conexion = Fachada1.startConnection();
             sqlStatement = "UPDATE cliente SET nombre = ?, direccion = ?" +
                               ", X = ?, Y = ? WHERE NIT = ?";
             instrucciones = conexion.prepareStatement(sqlStatement);
@@ -201,7 +202,7 @@ public class ClienteDAO {
         String sqlStatement;
 
         try{
-            // conexion = <Clase de Driver>.startConnection();
+            conexion = Fachada1.startConnection();
             sqlStatement = "DELETE FROM cliente WHERE NIT = ?";
             instrucciones = conexion.prepareStatement(sqlStatement);
 

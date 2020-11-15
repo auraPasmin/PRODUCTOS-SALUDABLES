@@ -54,7 +54,7 @@ public class Materia_Prima {
 
     @Override
     public String toString() {
-        return "Materia_Prima{" + "nombre=" + nombre + ", cantidad=" + cantidad + ", fechaCaducidad=" + fechaCaducidad + ", nit_proveedor=" + nit_proveedor + '}';
+        return "Materia_Prima{ " + "nombre=" + nombre + ", cantidad=" + cantidad + ", fechaCaducidad=" + fechaCaducidad + ", nit_proveedor=" + nit_proveedor + '}';
     }
     
 }
