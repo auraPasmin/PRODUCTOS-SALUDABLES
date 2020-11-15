@@ -1,7 +1,7 @@
 package modelo;
 import java.sql.*;
 import java.util.ArrayList;
-import servicios.Fachada1;
+import servicios.Fachada;
 
 
 public class ClienteDAO {
@@ -23,7 +23,7 @@ public class ClienteDAO {
         String sqlStatement;
         
         try {
-            conexion = Fachada1.startConnection();
+            conexion = Fachada.startConnection();
             sqlStatement = "INSERT INTO cliente VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
             instruccion.setString(1, cliente.getNIT());
@@ -62,7 +62,7 @@ public class ClienteDAO {
         String statementSql;
 
         try {
-            conexion = Fachada1.startConnection();
+            conexion = Fachada.startConnection();
             statementSql = "SELECT * FROM cliente ORDER BY NIT";
             instruccion = conexion.prepareStatement(statementSql);
             resultConsulta = instruccion.executeQuery();
@@ -111,7 +111,7 @@ public class ClienteDAO {
         String sqlStatement;
 
         try {
-            conexion = Fachada1.startConnection();
+            conexion = Fachada.startConnection();
             sqlStatement = "SELECT * FROM cliente WHERE NIT = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
             instruccion.setString(1, nit);
@@ -158,7 +158,7 @@ public class ClienteDAO {
         String sqlStatement;
         
         try {
-            conexion = Fachada1.startConnection();
+            conexion = Fachada.startConnection();
             sqlStatement = "UPDATE cliente SET nombre = ?, direccion = ?" +
                               ", X = ?, Y = ? WHERE NIT = ?";
             instrucciones = conexion.prepareStatement(sqlStatement);
@@ -202,7 +202,7 @@ public class ClienteDAO {
         String sqlStatement;
 
         try{
-            conexion = Fachada1.startConnection();
+            conexion = Fachada.startConnection();
             sqlStatement = "DELETE FROM cliente WHERE NIT = ?";
             instrucciones = conexion.prepareStatement(sqlStatement);
 

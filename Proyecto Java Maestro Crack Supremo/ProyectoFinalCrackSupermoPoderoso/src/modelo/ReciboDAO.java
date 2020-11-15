@@ -1,7 +1,7 @@
 package modelo;
 import java.sql.*;
 import java.util.ArrayList;
-import servicios.Fachada1;
+import servicios.Fachada;
 
 public class ReciboDAO {
     public ReciboDAO() {
@@ -18,7 +18,7 @@ public class ReciboDAO {
         String sqlStatement;
 
         try {
-            conexion = Fachada1.startConnection();
+            conexion = Fachada.startConnection();
             sqlStatement = "INSERT INTO recibo VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
 
@@ -35,7 +35,7 @@ public class ReciboDAO {
             resultado = instruccion.executeUpdate();
         }
         catch(SQLException e) {
-            System.out.println("jeje fallo xd ");
+            System.out.println(e.getMessage());
         }
         finally {
             try {
@@ -54,7 +54,7 @@ public class ReciboDAO {
      /**
       * read
       */
-    public ArrayList<Recibo> readRecibo() {
+    /*public ArrayList<Recibo> readRecibo() {
         Connection conexion = null;
         PreparedStatement instruccion =null;
         ResultSet busqueda = null;
@@ -64,7 +64,7 @@ public class ReciboDAO {
 //
 //        }
         return null;
-    }
+    }*/
 
     /**
      * update
