@@ -35,7 +35,7 @@ public class ReciboDAO {
             resultado = instruccion.executeUpdate();
         }
         catch(SQLException e) {
-            System.out.println("jeje fallo xd ");
+            System.out.println(e.getErrorCode());
         }
         finally {
             try {

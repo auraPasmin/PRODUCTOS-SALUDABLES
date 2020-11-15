@@ -7,7 +7,7 @@ public class Pruebas {
         Recibo R = new Recibo();
         R.setC("Lalo's tienda");
         R.setCantidad(30);
-        R.setP("Empanada");
+        R.setP("Empanadas");
         R.setV(1006037732);
         R.setFecha(LocalDateTime.now());
         ReciboDAO r = new ReciboDAO();
