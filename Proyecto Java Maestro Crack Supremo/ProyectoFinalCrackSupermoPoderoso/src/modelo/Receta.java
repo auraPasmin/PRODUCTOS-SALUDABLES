@@ -1,15 +1,15 @@
 package modelo;
 
 public class Receta {
-    private String p, n;
+    private String p, m;
     private int cantidad;
 
     public String getP() {
         return p;
     }
 
-    public String getN() {
-        return n;
+    public String getM() {
+        return m;
     }
 
     public int getCantidad() {
@@ -20,8 +20,8 @@ public class Receta {
         this.p = p;
     }
 
-    public void setN(String n) {
-        this.n = n;
+    public void setM(String m) {
+        this.m = m;
     }
 
     public void setCantidad(int cantidad) {
