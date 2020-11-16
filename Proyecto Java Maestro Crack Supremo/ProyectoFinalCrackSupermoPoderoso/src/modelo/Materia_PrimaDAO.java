@@ -18,7 +18,7 @@ public class Materia_PrimaDAO {
      * @param materia_prima, materia prima a registrar en la DB
      * @return 1 si se creo exitosamente, 0 si no se realizaron
      * cambios
-     * @see Class RecetaDAO
+     * @see Class Materia_PrimaDAO
      */
     public int createMateria_Prima(Materia_Prima materia_prima) {
         Connection conexion = null;
@@ -57,9 +57,9 @@ public class Materia_PrimaDAO {
 
     /**
      * <strong>Lee</strong> de la DB las recetas
-     * @return <code>ArrayList<Receta></code> una lista
+     * @return <code>ArrayList<Materia_Prima></code> una lista
      * de las recetas.
-     * @see Class recetaDAO
+     * @see Class Materia_PrimaDAO
      */
     public ArrayList<Materia_Prima> readMateriaPrima() {
         Connection conexion = null;
@@ -105,10 +105,10 @@ public class Materia_PrimaDAO {
 
     /**
      * <strong>Actualiza</strong> una materia prima de la DB
-     * @param mt, una receta a ser cambiada
+     * @param mt, una materia prima a ser cambiada
      * @return 1 si se realizo la actualizacion, 0 si
      * no se realizo ningun cambio
-     * @see Class RecetaDAO
+     * @see Class Materia_PrimaDAO
      */
     public int updateMateriaPrima(Materia_Prima mt) {
         Connection conexion = null;
@@ -152,7 +152,7 @@ public class Materia_PrimaDAO {
      * @param nombre, el nombre de la materia prima a borrar
      * @return 1 si se realizo la eliminacion correctamente,
      * 0 si no se realizo nada
-     * @see Class RecetaDAO
+     * @see Class Materia_PrimaDAO
      */
     public int deleteMateriaPrima(String nombre) {
         Connection conexion = null;
