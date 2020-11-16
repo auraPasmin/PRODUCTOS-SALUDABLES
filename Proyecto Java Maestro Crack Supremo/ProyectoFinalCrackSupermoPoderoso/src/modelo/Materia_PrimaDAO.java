@@ -1,23 +1,26 @@
 package modelo;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import servicios.Fachada;
 
-import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-
-public class RecetaDAO {
-    public RecetaDAO() {
-        // Nothing here
-    }
+public class Materia_PrimaDAO {
+        public Materia_PrimaDAO() {
+            // Nothing here
+        }
 
     /**
-     * <strong>Crea</strong> una receta para el producto
-     * @param receta, receta a registrar en la DB
+     * <strong>Crea</strong> y registra una materia prima la DB
+     * @param materia_prima, materia prima a registrar en la DB
      * @return 1 si se creo exitosamente, 0 si no se realizaron
      * cambios
-     * @see Class RecetaDAO
+     * @see Class Materia_PrimaDAO
      */
-    public int createReceta(Receta receta) {
+    public int createMateria_Prima(Materia_Prima materia_prima) {
         Connection conexion = null;
         PreparedStatement instruccion = null;
         int result = 0;
@@ -25,13 +28,14 @@ public class RecetaDAO {
 
         try {
             conexion = Fachada.startConnection();
-            sqlStatement = "INSERT INTO receta VALUES (?, ?, ?)";
+            sqlStatement = "INSERT INTO materiaprima VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
 
-            instruccion.setString(1,receta.getP());
-            instruccion.setString(2, receta.getM());
-            instruccion.setInt(3, receta.getCantidad());
-
+            instruccion.setString(1,materia_prima.getNombre());
+            instruccion.setInt(2, materia_prima.getCantidad());
+            instruccion.setDate(3, Date.valueOf(materia_prima.getFechaCaducidad()));
+            instruccion.setString(4, materia_prima.getNit_proveedor());
+            instruccion.setInt(5, materia_prima.getValor_unitario());
             result = instruccion.executeUpdate();
         }
         catch(SQLException e) {
@@ -53,32 +57,33 @@ public class RecetaDAO {
 
     /**
      * <strong>Lee</strong> de la DB las recetas
-     * @return <code>ArrayList<Receta></code> una lista
+     * @return <code>ArrayList<Materia_Prima></code> una lista
      * de las recetas.
-     * @see Class recetaDAO
+     * @see Class Materia_PrimaDAO
      */
-    public ArrayList<Receta> readRecetas() {
+    public ArrayList<Materia_Prima> readMateriaPrima() {
         Connection conexion = null;
         PreparedStatement instruccion = null;
-        ArrayList<Receta> listarReceta = null;
+        ArrayList<Materia_Prima> listarMateria = null;
         ResultSet resultado = null;
         String sqlStatement;
 
         try {
-            listarReceta = new ArrayList<>();
+            listarMateria = new ArrayList<>();
             conexion = Fachada.startConnection();
-            sqlStatement = "SELECT * FROM receta ORDER BY P";
+            sqlStatement = "SELECT * FROM materiaprima ORDER BY nombre";
             instruccion = conexion.prepareStatement(sqlStatement);
             resultado = instruccion.executeQuery();
 
             while(resultado.next()) {
-                Receta receta = new Receta();
+                Materia_Prima mp = new Materia_Prima();
 
-                receta.setP(resultado.getString(1));
-                receta.setM(resultado.getString(2));
-                receta.setCantidad(resultado.getInt(3));
-
-                listarReceta.add(receta);
+                mp.setNombre(resultado.getString(1));
+                mp.setCantidad(resultado.getInt(2));
+                mp.setFechaCaducidad(resultado.getDate(3).toLocalDate());
+                mp.setNit_proveedor(resultado.getString(4));
+                mp.setValor_unitario(resultado.getInt(5));
+                listarMateria.add(mp);
             }
         }
         catch(SQLException e) {
@@ -95,17 +100,17 @@ public class RecetaDAO {
                 // Do something
             }
         }
-        return listarReceta;
+        return listarMateria;
     }
 
     /**
-     * <strong>Actualiza</strong> una receta de la DB
-     * @param receta, una receta a ser cambiada
+     * <strong>Actualiza</strong> una materia prima de la DB
+     * @param mt, una materia prima a ser cambiada
      * @return 1 si se realizo la actualizacion, 0 si
      * no se realizo ningun cambio
-     * @see Class RecetaDAO
+     * @see Class Materia_PrimaDAO
      */
-    public int updateReceta(Receta receta) {
+    public int updateMateriaPrima(Materia_Prima mt) {
         Connection conexion = null;
         PreparedStatement instruccion = null;
         int resultado = 0;
@@ -113,12 +118,14 @@ public class RecetaDAO {
 
         try {
             conexion = Fachada.startConnection();
-            sqlStatement = "UPDATE receta M = ?, Cantidad = ? WHERE P = ?";
+            sqlStatement = "UPDATE materiaprima cantidad = ?, fechaCaducidad = ?, NIT_proveedor = ?, valorUnitario = ? WHERE nombre = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
 
-            instruccion.setString(1,receta.getM());
-            instruccion.setInt(2, receta.getCantidad());
-            instruccion.setString(3, receta.getP());
+            instruccion.setInt(1,mt.getCantidad());
+            instruccion.setDate(2, Date.valueOf(mt.getFechaCaducidad()));
+            instruccion.setString(3, mt.getNit_proveedor());
+            instruccion.setInt(4, mt.getValor_unitario());
+            instruccion.setString(5, mt.getNombre());
 
             resultado = instruccion.executeUpdate();
         }
@@ -140,24 +147,24 @@ public class RecetaDAO {
     }
 
     /**
-     * <strong>Borra</strong> una receta de un producto
+     * <strong>Borra</strong> una materia prima
      * registrado en la DB
-     * @param p, la receta del producto a ser eliminada
+     * @param nombre, el nombre de la materia prima a borrar
      * @return 1 si se realizo la eliminacion correctamente,
      * 0 si no se realizo nada
-     * @see Class RecetaDAO
+     * @see Class Materia_PrimaDAO
      */
-    public int deleteReceta(String p) {
+    public int deleteMateriaPrima(String nombre) {
         Connection conexion = null;
         PreparedStatement instruccion = null;
         int resultado = 0;
         String sqlstatement;
         try {
             conexion = Fachada.startConnection();
-            sqlstatement = "DELETE FROM receta WHERE P = ?";
+            sqlstatement = "DELETE FROM materiaprima WHERE nombre = ?";
             instruccion = conexion.prepareStatement(sqlstatement);
 
-            instruccion.setString(1, p);
+            instruccion.setString(1, nombre);
             resultado = instruccion.executeUpdate();
         }
         catch(SQLException e) {
@@ -175,49 +182,5 @@ public class RecetaDAO {
             }
         }
         return resultado;
-    }
-    
-    public String generarRecibo(int cedula, String NIT, LocalDate day){
-        
-        Connection conexion = null;
-        PreparedStatement instruccion = null;
-        ResultSet resultado = null;
-        String data = "";
-        String sqlStatement;
-
-        try {
-            conexion = Fachada.startConnection();
-            sqlStatement =  "SELECT R.P, R.Cantidad, P.Precio "
-                + "FROM recibo R JOIN producto P ON R.P=P.Nombre "
-                + "WHERE V= ? AND C= ? AND( Fecha BETWEEN ? AND ? )";
-            instruccion = conexion.prepareStatement(sqlStatement);
-
-            instruccion.setInt(1,cedula);
-            instruccion.setString(2, NIT);
-            instruccion.setDate(3, Date.valueOf(day));
-            instruccion.setDate(4, Date.valueOf(day.plusDays(1)));
-
-            instruccion.executeQuery();
-            
-            while(resultado.next()) {
-                data += resultado.getString(1) + ":" + resultado.getInt(2) + ":" + resultado.getInt(3) + "\n";
-            }
-        }
-        catch(SQLException e) {
-            // Do something ...
-        }
-        finally {
-            try {
-                if(instruccion != null)
-                    instruccion.close();
-                if(conexion != null)
-                    conexion.close();
-            }
-            catch (SQLException ex) {
-                // Do something ...
-            }
-        }
-        return data;
-
     }
 }

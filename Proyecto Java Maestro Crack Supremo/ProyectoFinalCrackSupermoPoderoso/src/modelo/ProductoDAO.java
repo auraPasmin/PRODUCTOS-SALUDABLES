@@ -1,23 +1,29 @@
 package modelo;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import servicios.Fachada;
 
-import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
-public class RecetaDAO {
-    public RecetaDAO() {
-        // Nothing here
+public class ProductoDAO {
+    
+    public ProductoDAO(){
     }
-
+    
     /**
-     * <strong>Crea</strong> una receta para el producto
-     * @param receta, receta a registrar en la DB
+     * <strong>Crea</strong> un producto
+     * @param producto, producto a registrar en la DB
      * @return 1 si se creo exitosamente, 0 si no se realizaron
      * cambios
-     * @see Class RecetaDAO
+     * @see Class ProductoDAO
      */
-    public int createReceta(Receta receta) {
+    public int createProducto(Producto producto) {
         Connection conexion = null;
         PreparedStatement instruccion = null;
         int result = 0;
@@ -25,12 +31,13 @@ public class RecetaDAO {
 
         try {
             conexion = Fachada.startConnection();
-            sqlStatement = "INSERT INTO receta VALUES (?, ?, ?)";
+            sqlStatement = "INSERT INTO receta VALUES (?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
 
-            instruccion.setString(1,receta.getP());
-            instruccion.setString(2, receta.getM());
-            instruccion.setInt(3, receta.getCantidad());
+            instruccion.setString(1, producto.getNombre());
+            instruccion.setInt(2, producto.getCantidad());
+            instruccion.setDouble(3, producto.getPrecio());
+            instruccion.setDate(4 , java.sql.Date.valueOf( producto.getFechaCaducidad()));
 
             result = instruccion.executeUpdate();
         }
@@ -52,33 +59,34 @@ public class RecetaDAO {
     }
 
     /**
-     * <strong>Lee</strong> de la DB las recetas
-     * @return <code>ArrayList<Receta></code> una lista
-     * de las recetas.
-     * @see Class recetaDAO
+     * <strong>Lee</strong> de la DB los productos
+     * @return <code>ArrayList<Producto></code> una lista
+     * de las productos.
+     * @see Class productoDAO
      */
-    public ArrayList<Receta> readRecetas() {
+    public ArrayList<Producto> readProducto() {
         Connection conexion = null;
         PreparedStatement instruccion = null;
-        ArrayList<Receta> listarReceta = null;
+        ArrayList<Producto> listarProducto = null;
         ResultSet resultado = null;
         String sqlStatement;
 
         try {
-            listarReceta = new ArrayList<>();
+            listarProducto = new ArrayList<>();
             conexion = Fachada.startConnection();
             sqlStatement = "SELECT * FROM receta ORDER BY P";
             instruccion = conexion.prepareStatement(sqlStatement);
             resultado = instruccion.executeQuery();
 
             while(resultado.next()) {
-                Receta receta = new Receta();
+                Producto prod = new Producto();
 
-                receta.setP(resultado.getString(1));
-                receta.setM(resultado.getString(2));
-                receta.setCantidad(resultado.getInt(3));
+                prod.setNombre(resultado.getString(1));
+                prod.setCantidad(resultado.getInt(2));
+                prod.setPrecio(resultado.getDouble(3));
+                prod.setFechaCaducidad(resultado.getDate(4).toLocalDate());
 
-                listarReceta.add(receta);
+                listarProducto.add(prod);
             }
         }
         catch(SQLException e) {
@@ -95,17 +103,17 @@ public class RecetaDAO {
                 // Do something
             }
         }
-        return listarReceta;
+        return listarProducto;
     }
 
     /**
-     * <strong>Actualiza</strong> una receta de la DB
-     * @param receta, una receta a ser cambiada
+     * <strong>Actualiza</strong> un producto de la DB
+     * @param producto, un producto a ser cambiado
      * @return 1 si se realizo la actualizacion, 0 si
      * no se realizo ningun cambio
-     * @see Class RecetaDAO
+     * @see Class ProductoDAO
      */
-    public int updateReceta(Receta receta) {
+    public int updateProducto(Producto producto) {
         Connection conexion = null;
         PreparedStatement instruccion = null;
         int resultado = 0;
@@ -113,12 +121,13 @@ public class RecetaDAO {
 
         try {
             conexion = Fachada.startConnection();
-            sqlStatement = "UPDATE receta M = ?, Cantidad = ? WHERE P = ?";
+            sqlStatement = "UPDATE producto Cantidad = ?, precio = ?, FechaCaducidad = ? WHERE nombre = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
 
-            instruccion.setString(1,receta.getM());
-            instruccion.setInt(2, receta.getCantidad());
-            instruccion.setString(3, receta.getP());
+            instruccion.setInt(1, producto.getCantidad());
+            instruccion.setDouble(2, producto.getPrecio());
+            instruccion.setDate(3 , java.sql.Date.valueOf( producto.getFechaCaducidad()));
+            instruccion.setString(4, producto.getNombre());
 
             resultado = instruccion.executeUpdate();
         }
@@ -140,21 +149,21 @@ public class RecetaDAO {
     }
 
     /**
-     * <strong>Borra</strong> una receta de un producto
+     * <strong>Borra</strong> un producto
      * registrado en la DB
-     * @param p, la receta del producto a ser eliminada
+     * @param p, el producto a ser eliminado
      * @return 1 si se realizo la eliminacion correctamente,
      * 0 si no se realizo nada
-     * @see Class RecetaDAO
+     * @see Class ProductoDAO
      */
-    public int deleteReceta(String p) {
+    public int deleteProducto(String p) {
         Connection conexion = null;
         PreparedStatement instruccion = null;
         int resultado = 0;
         String sqlstatement;
         try {
             conexion = Fachada.startConnection();
-            sqlstatement = "DELETE FROM receta WHERE P = ?";
+            sqlstatement = "DELETE FROM producto WHERE nombre = ?";
             instruccion = conexion.prepareStatement(sqlstatement);
 
             instruccion.setString(1, p);
@@ -175,49 +184,5 @@ public class RecetaDAO {
             }
         }
         return resultado;
-    }
-    
-    public String generarRecibo(int cedula, String NIT, LocalDate day){
-        
-        Connection conexion = null;
-        PreparedStatement instruccion = null;
-        ResultSet resultado = null;
-        String data = "";
-        String sqlStatement;
-
-        try {
-            conexion = Fachada.startConnection();
-            sqlStatement =  "SELECT R.P, R.Cantidad, P.Precio "
-                + "FROM recibo R JOIN producto P ON R.P=P.Nombre "
-                + "WHERE V= ? AND C= ? AND( Fecha BETWEEN ? AND ? )";
-            instruccion = conexion.prepareStatement(sqlStatement);
-
-            instruccion.setInt(1,cedula);
-            instruccion.setString(2, NIT);
-            instruccion.setDate(3, Date.valueOf(day));
-            instruccion.setDate(4, Date.valueOf(day.plusDays(1)));
-
-            instruccion.executeQuery();
-            
-            while(resultado.next()) {
-                data += resultado.getString(1) + ":" + resultado.getInt(2) + ":" + resultado.getInt(3) + "\n";
-            }
-        }
-        catch(SQLException e) {
-            // Do something ...
-        }
-        finally {
-            try {
-                if(instruccion != null)
-                    instruccion.close();
-                if(conexion != null)
-                    conexion.close();
-            }
-            catch (SQLException ex) {
-                // Do something ...
-            }
-        }
-        return data;
-
-    }
+    }  
 }
