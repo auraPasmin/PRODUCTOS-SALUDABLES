@@ -3,18 +3,17 @@ package modelo;
 public class Proveedor {
     private String nit,nombre,ubicacion;
     private int telefono;
-    private String email,nit_proveedor;
+    private String email;
 
     public Proveedor() {
     }
 
-    public Proveedor(String nit, String nombre, String ubicacion, int telefono, String email, String nit_proveedor) {
+    public Proveedor(String nit, String nombre, String ubicacion, int telefono, String email) {
         this.nit = nit;
         this.nombre = nombre;
         this.ubicacion = ubicacion;
         this.telefono = telefono;
         this.email = email;
-        this.nit_proveedor = nit_proveedor;
     }
 
     public String getNit() {
@@ -37,10 +36,6 @@ public class Proveedor {
         return email;
     }
 
-    public String getNit_proveedor() {
-        return nit_proveedor;
-    }
-
     public void setNit(String nit) {
         this.nit = nit;
     }
@@ -61,8 +56,10 @@ public class Proveedor {
         this.email = email;
     }
 
-    public void setNit_proveedor(String nit_proveedor) {
-        this.nit_proveedor = nit_proveedor;
+    @Override
+    public String toString() {
+        return "Proveedor{" + "nit=" + nit + ", nombre=" + nombre + ", ubicacion=" + ubicacion + ", telefono=" + telefono + ", email=" + email + '}';
     }
+
     
 }
