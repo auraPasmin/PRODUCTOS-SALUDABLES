@@ -7,11 +7,11 @@ public class Materia_Prima {
     private int cantidad;
     private LocalDate fechaCaducidad;
     private String nit_proveedor;
-    private double valor_unitario;
+    private int valor_unitario;
     public Materia_Prima() {
     }
 
-    public Materia_Prima(String nombre, int cantidad, LocalDate fechaCaducidad, String nit_proveedor, double valor_unitario) {
+    public Materia_Prima(String nombre, int cantidad, LocalDate fechaCaducidad, String nit_proveedor, int valor_unitario) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.fechaCaducidad = fechaCaducidad;
@@ -31,7 +31,7 @@ public class Materia_Prima {
     public String getNit_proveedor() {
         return nit_proveedor;
     }
-    public double getValor_unitario() {
+    public int getValor_unitario() {
         return valor_unitario;
     }
     public void setNombre(String nombre) {
@@ -46,7 +46,7 @@ public class Materia_Prima {
     public void setNit_proveedor(String nit_proveedor) {
         this.nit_proveedor = nit_proveedor;
     }
-    public void setValor_unitario(double valor_unitario) {
+    public void setValor_unitario(int valor_unitario) {
         this.valor_unitario = valor_unitario;
     }
     
