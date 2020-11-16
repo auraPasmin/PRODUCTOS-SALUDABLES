@@ -2,6 +2,7 @@ package modelo;
 import servicios.Fachada;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class RecetaDAO {
@@ -174,5 +175,49 @@ public class RecetaDAO {
             }
         }
         return resultado;
+    }
+    
+    public String generarRecibo(int cedula, String NIT, LocalDate day){
+        
+        Connection conexion = null;
+        PreparedStatement instruccion = null;
+        ResultSet resultado = null;
+        String data = "";
+        String sqlStatement;
+
+        try {
+            conexion = Fachada.startConnection();
+            sqlStatement =  "SELECT R.P, R.Cantidad, P.Precio "
+                + "FROM recibo R JOIN producto P ON R.P=P.Nombre "
+                + "WHERE V= ? AND C= ? AND( Fecha BETWEEN ? AND ? )";
+            instruccion = conexion.prepareStatement(sqlStatement);
+
+            instruccion.setInt(1,cedula);
+            instruccion.setString(2, NIT);
+            instruccion.setDate(3, Date.valueOf(day));
+            instruccion.setDate(4, Date.valueOf(day.plusDays(1)));
+
+            instruccion.executeQuery();
+            
+            while(resultado.next()) {
+                data += resultado.getString(1) + ":" + resultado.getInt(2) + ":" + resultado.getInt(3) + "\n";
+            }
+        }
+        catch(SQLException e) {
+            // Do something ...
+        }
+        finally {
+            try {
+                if(instruccion != null)
+                    instruccion.close();
+                if(conexion != null)
+                    conexion.close();
+            }
+            catch (SQLException ex) {
+                // Do something ...
+            }
+        }
+        return data;
+
     }
 }
