@@ -3,7 +3,6 @@ import servicios.Fachada;
 
 import java.sql.*;
 import java.util.ArrayList;
-import modelo.Receta;
 
 public class RecetaDAO {
     public RecetaDAO() {
