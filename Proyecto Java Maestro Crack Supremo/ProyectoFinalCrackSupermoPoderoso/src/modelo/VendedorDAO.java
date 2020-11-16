@@ -11,7 +11,11 @@ public class VendedorDAO {
     }
 
     /**
-     * create
+     * Crea una <strong>vendedor</strong> para la distribucion
+     * de los productos.
+     * @param vendedor, el vendedor a agregar a la DB
+     * @return Si se creo exitosamente devuelve 1, 0 si no realizo cambios.
+     * @see Class VendedorDAO
      */
     public int createVendedor(Vendedor vendedor) {
         Connection conexion = null;
@@ -52,7 +56,10 @@ public class VendedorDAO {
     }
 
     /**
-     * read
+     * <strong>Lee</strong> de la DB los vendedores
+     * @return <code>ArrayList<Vendedor></code> , una
+     * lista de los vendedores
+     * @see Class VendedoresDAO
      */
     public ArrayList<Vendedor> readVendedores() {
         Connection conexion = null;
@@ -99,7 +106,12 @@ public class VendedorDAO {
     }
 
     /**
-     * updat
+     * <strong>Actualiza</strong> los valores de un registro del
+     * vendedor en la DB.
+     * @param vendedor, valores nuevos del vendedor a actualizar
+     * @return Si se realizo el cambio con exito devuelve 1, 0 si
+     * no se realizo nada.
+     * @see Class VendedorDAO
      */
     public int updateVendedor(Vendedor vendedor) {
         Connection conexion = null;
@@ -124,7 +136,7 @@ public class VendedorDAO {
             resultado = instruccion.executeUpdate();
         }
         catch(SQLException e) {
-            // Do something ...
+            System.out.println(e.getErrorCode());
         }
         finally {
             try {
@@ -141,7 +153,11 @@ public class VendedorDAO {
     }
 
     /**
-     * delete
+     * <strong>Elimina</strong> un vendedor de la DB.
+     * @param cedula, identificacion del vendedor a eliminar
+     * @return Si se elimino con exito devuelve 1, 0 en caso
+     * contrario.
+     * @see Class VendedorDAO
      */
     public int deleteVendedor(int cedula) {
         Connection conexion = null;

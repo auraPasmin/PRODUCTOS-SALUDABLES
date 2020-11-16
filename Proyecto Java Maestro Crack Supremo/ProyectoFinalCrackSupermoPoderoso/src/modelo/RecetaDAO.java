@@ -11,7 +11,11 @@ public class RecetaDAO {
     }
 
     /**
-     * create
+     * <strong>Crea</strong> una receta para el producto
+     * @param receta, receta a registrar en la DB
+     * @return 1 si se creo exitosamente, 0 si no se realizaron
+     * cambios
+     * @see Class RecetaDAO
      */
     public int createReceta(Receta receta) {
         Connection conexion = null;
@@ -48,7 +52,10 @@ public class RecetaDAO {
     }
 
     /**
-     * read
+     * <strong>Lee</strong> de la DB las recetas
+     * @return <code>ArrayList<Receta></code> una lista
+     * de las recetas.
+     * @see Class recetaDAO
      */
     public ArrayList<Receta> readRecetas() {
         Connection conexion = null;
@@ -92,7 +99,11 @@ public class RecetaDAO {
     }
 
     /**
-     * updat
+     * <strong>Actualiza</strong> una receta de la DB
+     * @param receta, una receta a ser cambiada
+     * @return 1 si se realizo la actualizacion, 0 si
+     * no se realizo ningun cambio
+     * @see Class RecetaDAO
      */
     public int updateReceta(Receta receta) {
         Connection conexion = null;
@@ -129,7 +140,12 @@ public class RecetaDAO {
     }
 
     /**
-     * delete
+     * <strong>Borra</strong> una receta de un producto
+     * registrado en la DB
+     * @param p, la receta del producto a ser eliminada
+     * @return 1 si se realizo la eliminacion correctamente,
+     * 0 si no se realizo nada
+     * @see Class RecetaDAO
      */
     public int deleteReceta(String p) {
         Connection conexion = null;
