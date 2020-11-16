@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 
-public class Fachada1 {
+public class Fachada {
     private static Connection con = null;
     
     public static Connection startConnection(){
@@ -20,11 +20,12 @@ public class Fachada1 {
                 Runtime.getRuntime().addShutdownHook(new MiShDwnHook());
                 //Recupera los parámetros de conexión del archivo 
                 //jdbc.properties
-                
-                String driver = "com.mysql.jdbc.Driver";
-                String url = "jdbc:mysql://localhost/proyectomaestrocracksupremo";
+
+                ResourceBundle resource = ResourceBundle.getBundle("servicios.jdbc");
+                String driver = resource.getString("driver");
+                String url = resource.getString("url");
+                String usr = resource.getString("usr");
                 String pwd = "";
-                String usr = "root";
                 
                 Class.forName(driver);
                 con = DriverManager.getConnection(url, usr, pwd);
@@ -44,7 +45,7 @@ public class Fachada1 {
         @Override
         public void run(){
             try{
-                Connection con = Fachada1.startConnection();
+                Connection con = Fachada.startConnection();
                 con.close();                     
             }
             catch (Exception ex){

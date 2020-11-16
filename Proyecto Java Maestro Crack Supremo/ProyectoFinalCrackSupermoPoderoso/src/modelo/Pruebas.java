@@ -4,14 +4,12 @@ import java.time.LocalDateTime;
 
 public class Pruebas {
     public static void main(String[]args){
-        Recibo R = new Recibo();
-        R.setC("Lalo's tienda");
-        R.setCantidad(30);
-        R.setP("Empanadas");
-        R.setV(1006037732);
-        R.setFecha(LocalDateTime.now());
-        ReciboDAO r = new ReciboDAO();
-        r.createRecibo(R);
+        Receta receta = new Receta();
+        receta.setP("Udon");
+        receta.setM("fideos");
+        receta.setCantidad(260);
 
+        RecetaDAO rdao = new RecetaDAO();
+        rdao.createReceta(receta);
     }
 }
