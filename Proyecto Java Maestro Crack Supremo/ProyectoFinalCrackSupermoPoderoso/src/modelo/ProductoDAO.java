@@ -106,7 +106,50 @@ public class ProductoDAO {
         return listarProducto;
     }
     
+    public Producto cargarProducto(String nombre) {
+        Connection conexion = null;
+        PreparedStatement instruccion = null;
+        ArrayList<Producto> listarProducto = null;
+        ResultSet resultado = null;
+        String sqlStatement;
+        Producto prod = null;
+        try {
+            listarProducto = new ArrayList<>();
+            conexion = Fachada.startConnection();
+            sqlStatement = "SELECT * FROM producto WHERE nombre = ?";
+            instruccion = conexion.prepareStatement(sqlStatement);
+            instruccion.setString(1, nombre);
+            resultado = instruccion.executeQuery();
 
+            if(resultado.next()) {
+                prod = new Producto();
+
+                prod.setNombre(resultado.getString(1));
+                prod.setCantidad(resultado.getInt(2));
+                prod.setPrecio(resultado.getDouble(3));
+                prod.setFechaCaducidad(resultado.getDate(4).toLocalDate());
+
+                listarProducto.add(prod);
+            }else{
+                return prod;
+            }
+        }
+        catch(SQLException e) {
+            // Do something
+        }
+        finally {
+            try {
+                if(instruccion != null)
+                    instruccion.close();
+                if(conexion != null)
+                    conexion.close();
+            }
+            catch(SQLException ex) {
+                // Do something
+            }
+        }
+        return  prod;
+    }
 
     /**
      * <strong>Actualiza</strong> un producto de la DB
