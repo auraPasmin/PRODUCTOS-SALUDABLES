@@ -116,7 +116,7 @@ public class VendedorDAO {
             conexion = Fachada.startConnection();
             sqlStatement = "SELECT * FROM vendedores WHERE cedula = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
-            instruccion.setInt(0,cedula);
+            instruccion.setInt(1,cedula);
             resultado = instruccion.executeQuery();
 
             if(resultado.next()) {
@@ -131,7 +131,7 @@ public class VendedorDAO {
             }
         }
         catch(SQLException e) {
-            // Do something
+            System.out.println(e.getMessage());
         }
         finally {
             try {
