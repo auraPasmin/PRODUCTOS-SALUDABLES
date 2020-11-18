@@ -1,6 +1,7 @@
 package modelo;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import servicios.Fachada;
 
@@ -184,7 +185,7 @@ public class ReciboDAO {
         return resultado;
     }
     
-        public String generarRecibo(int cedula, String NIT, LocalDate day){
+    public String generarRecibo(int cedula, String NIT, LocalDate day){
         
         Connection conexion = null;
         PreparedStatement instruccion = null;
@@ -226,5 +227,13 @@ public class ReciboDAO {
         }
         return data;
 
+    }
+    
+    public int crearRecibo(int cedula, String NIT, LocalDateTime fecha, ArrayList<String> prod, ArrayList<Integer> cant){
+        for(int i = 0 ; i < prod.size() ; ++i){
+            Recibo r = new Recibo(cedula, NIT, prod.get(i), fecha, cant.get(i));
+            createRecibo(r);
+        }
+        return 1;
     }
 }
