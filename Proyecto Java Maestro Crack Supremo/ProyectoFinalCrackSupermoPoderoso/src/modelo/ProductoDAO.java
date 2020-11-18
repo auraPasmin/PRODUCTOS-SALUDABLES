@@ -31,7 +31,7 @@ public class ProductoDAO {
 
         try {
             conexion = Fachada.startConnection();
-            sqlStatement = "INSERT INTO receta VALUES (?, ?, ?, ?)";
+            sqlStatement = "INSERT INTO producto VALUES (?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
 
             instruccion.setString(1, producto.getNombre());
@@ -74,7 +74,7 @@ public class ProductoDAO {
         try {
             listarProducto = new ArrayList<>();
             conexion = Fachada.startConnection();
-            sqlStatement = "SELECT * FROM receta ORDER BY P";
+            sqlStatement = "SELECT * FROM producto ORDER BY P";
             instruccion = conexion.prepareStatement(sqlStatement);
             resultado = instruccion.executeQuery();
 
@@ -105,6 +105,8 @@ public class ProductoDAO {
         }
         return listarProducto;
     }
+    
+
 
     /**
      * <strong>Actualiza</strong> un producto de la DB
