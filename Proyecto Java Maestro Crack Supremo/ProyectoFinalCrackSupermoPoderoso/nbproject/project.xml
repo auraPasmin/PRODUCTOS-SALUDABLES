@@ -12,8 +12,12 @@
             </test-roots>
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>Actualiza</word>
+            <word>cambiado</word>
             <word>Crea</word>
+            <word>producto</word>
             <word>recibo</word>
+            <word>se</word>
             <word>una</word>
         </spellchecker-wordlist>
     </configuration>

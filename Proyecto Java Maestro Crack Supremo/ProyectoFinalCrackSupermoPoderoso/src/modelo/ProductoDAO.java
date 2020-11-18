@@ -154,7 +154,7 @@ public class ProductoDAO {
     /**
      * <strong>Actualiza</strong> un producto de la DB
      * @param producto, un producto a ser cambiado
-     * @return 1 si se realizo la actualizacion, 0 si
+     * @return 1 si se recibo la actualizacion, 0 si
      * no se realizo ningun cambio
      * @see Class ProductoDAO
      */
