@@ -106,7 +106,7 @@ public class ProductoDAO {
         return listarProducto;
     }
     
-    public Producto cargarProducto(String nombre) {
+    public Producto cargarProducto(String nombre) throws NEDException {
         Connection conexion = null;
         PreparedStatement instruccion = null;
         ArrayList<Producto> listarProducto = null;
@@ -131,7 +131,8 @@ public class ProductoDAO {
 
                 listarProducto.add(prod);
             }else{
-                return prod;
+                throw new NEDException(3,nombre);
+                
             }
         }
         catch(SQLException e) {
