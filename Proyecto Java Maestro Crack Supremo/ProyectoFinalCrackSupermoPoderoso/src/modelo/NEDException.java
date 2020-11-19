@@ -19,26 +19,26 @@ public class NEDException extends Exception{
     public NEDException(int code, String PK) {
         this.PK = PK;
         this.code = code;
-        switch (code) {
-            case 1:
+        switch ((code/100)*100) {
+            case 100:
                 entidad = "Cliente";
                 break;
-            case 2:
+            case 200:
                 entidad = "MateriaPrima";
                 break;
-            case 3:
+            case 300:
                 entidad = "Producto";
                 break;
-            case 4:
+            case 400:
                 entidad = "Proveedor";
                 break;
-            case 5:
+            case 500:
                 entidad = "Receta";
                 break;
-            case 6:
+            case 600:
                 entidad = "Recibo";
                 break;
-            case 7:
+            case 700:
                 entidad = "Vendedor";
             default:
                 break;
