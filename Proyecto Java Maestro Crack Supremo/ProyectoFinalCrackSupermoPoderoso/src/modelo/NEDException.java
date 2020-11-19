@@ -55,7 +55,7 @@ public class NEDException extends Exception{
 
     @Override
     public String toString() {
-        return entidad+":"+PK; //To change body of generated methods, choose Tools | Templates.
+        return code+":"+entidad+":"+PK; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -75,7 +75,7 @@ public class NEDException extends Exception{
 
     @Override
     public String getMessage() {
-        return "La entidad en la base de datos " + entidad + " no cuenta con un registro con llave primaria" + PK;
+        return "La entidad en la base de datos " + entidad + " no cuenta con un registro con llave primaria " + PK;
     }
     
 }
