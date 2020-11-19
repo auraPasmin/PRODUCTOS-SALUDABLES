@@ -8,9 +8,9 @@ public class Pruebas {
     public static void main(String[]args){
         ProductoDAO r = new ProductoDAO();
         try {
-            System.out.println(r.cargarProducto("Coca cola"));
+            throw new NEDException(701,"lala");
         } catch (NEDException ex) {
-            Logger.getLogger(Pruebas.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
         
         
