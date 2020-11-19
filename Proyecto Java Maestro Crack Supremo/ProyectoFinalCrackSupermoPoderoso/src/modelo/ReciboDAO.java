@@ -15,9 +15,10 @@ public class ReciboDAO {
      * @param recibo, un recibo a ser registrado en la DB.
      * @return 1 si se creo el registro exitosamente, 0
      * si no sucedio el registro a la DB
+     * @throws modelo.NEDException
      * @see Class ReciboDAO
      */
-    public int createRecibo(Recibo recibo) {
+    public int createRecibo(Recibo recibo) throws NEDException {
         Connection conexion = null;
         PreparedStatement instruccion = null;
         int resultado = 0;
@@ -27,7 +28,13 @@ public class ReciboDAO {
             conexion = Fachada.startConnection();
             sqlStatement = "INSERT INTO recibo VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
-
+            VendedorDAO v = new VendedorDAO();
+            v.cargarVendedor(recibo.getV());
+            ClienteDAO c = new ClienteDAO();
+            c.buscarNIT(recibo.getC());
+            ProductoDAO p = new ProductoDAO();
+            p.cargarProducto(recibo.getP());
+            
             instruccion.setInt(1, recibo.getV());
             instruccion.setString(2, recibo.getC());
             instruccion.setString(3, recibo.getP());
@@ -236,7 +243,7 @@ public class ReciboDAO {
         for(int i = 0 ; i < prod.size() ; ++i){
             pi = p.cargarProducto(prod.get(i));
             if(pi.getCantidad() < cant.get(i))
-                throw new NEDException(3, prod.get(i));
+                throw new NEDException(301, prod.get(i));
             else{
                 pi.setCantidad(pi.getCantidad() - cant.get(i));
                 venta.add(pi);
