@@ -45,13 +45,6 @@ public class NEDException extends Exception{
         }
     }
     
-    
-
-
-    
-
-
-
 
     @Override
     public String toString() {
@@ -59,23 +52,21 @@ public class NEDException extends Exception{
     }
 
     @Override
-    public synchronized Throwable initCause(Throwable thrwbl) {
-        return super.initCause(thrwbl); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public synchronized Throwable getCause() {
-        return super.getCause(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getLocalizedMessage() {
-        return super.getLocalizedMessage(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public String getMessage() {
         return "La entidad en la base de datos " + entidad + " no cuenta con un registro con llave primaria " + PK;
     }
+
+    public String getEntidad() {
+        return entidad;
+    }
+
+    public String getPK() {
+        return PK;
+    }
+
+    public int getCode() {
+        return code;
+    }
+    
     
 }
