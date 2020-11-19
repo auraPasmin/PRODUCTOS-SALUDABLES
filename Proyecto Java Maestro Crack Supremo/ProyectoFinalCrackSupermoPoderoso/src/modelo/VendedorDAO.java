@@ -106,7 +106,7 @@ public class VendedorDAO {
         return listarVendedor;
     }
     
-    public Vendedor cargarVendedor(int cedula) {
+    public Vendedor cargarVendedor(int cedula) throws NEDException {
         Connection conexion = null;
         PreparedStatement instruccion = null;
         ResultSet resultado = null;
@@ -127,7 +127,8 @@ public class VendedorDAO {
                 v.setComision(resultado.getDouble(4));
                 v.setTelefono(resultado.getInt(5));
                 v.setEmail(resultado.getString(6));
-
+            }else{
+                throw new NEDException(700,cedula+"");
             }
         }
         catch(SQLException e) {
