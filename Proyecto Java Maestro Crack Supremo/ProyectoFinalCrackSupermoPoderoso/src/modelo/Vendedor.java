@@ -77,5 +77,12 @@ public class Vendedor {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
+
+    @Override
+    public String toString() {
+        return "Vendedor{" + "cedula=" + cedula + ", nombre=" + nombre + ", cargo=" + cargo + ", telefono=" + telefono + ", email=" + email + ", comision=" + comision + ", sexo=" + sexo + '}';
+    }
+    
+    
     
 }
