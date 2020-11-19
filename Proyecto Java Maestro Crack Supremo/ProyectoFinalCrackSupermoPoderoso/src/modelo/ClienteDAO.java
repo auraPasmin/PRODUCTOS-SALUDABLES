@@ -101,9 +101,10 @@ public class ClienteDAO {
      * Realiza la busqueda de un cliente por su <strong>NIT</strong>
      * @param nit un identificador del cliente
      * @return Un objeto <code>Cliente</code> de la busqueda
+     * @throws NEDException
      * @see Class ClienteDAO
      */
-    public Cliente buscarNIT(String nit) {
+    public Cliente buscarNIT(String nit) throws NEDException {
         Cliente cliente = null;
         Connection conexion = null;
         PreparedStatement instruccion = null;
@@ -124,6 +125,8 @@ public class ClienteDAO {
                 cliente.setDireccion(busqueda.getString(3));
                 cliente.setX(busqueda.getDouble(4));
                 cliente.setY(busqueda.getDouble(5));
+            }else{
+                throw new NEDException(100, nit);
             }
         }
         catch(SQLException e) {
