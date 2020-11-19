@@ -230,21 +230,22 @@ public class ReciboDAO {
     }
     
     public int crearRecibo(int cedula, String NIT, LocalDateTime fecha, ArrayList<String> prod, ArrayList<Integer> cant) throws NEDException{
-        ProductoDAO p;
+        ArrayList<Producto> venta = new ArrayList<>();
+        ProductoDAO p= new ProductoDAO();;
         Producto pi;
         for(int i = 0 ; i < prod.size() ; ++i){
-            p = new ProductoDAO();
             pi = p.cargarProducto(prod.get(i));
             if(pi.getCantidad() < cant.get(i))
                 throw new NEDException(3, prod.get(i));
+            else{
+                pi.setCantidad(pi.getCantidad() - cant.get(i));
+                venta.add(pi);
+            }
         }
         for(int i = 0 ; i < prod.size() ; ++i){
             Recibo r = new Recibo(cedula, NIT, prod.get(i), fecha, cant.get(i));
             createRecibo(r);
-            p = new ProductoDAO();
-            pi = p.cargarProducto(prod.get(i));
-            pi.setCantidad(pi.getCantidad() - cant.get(i));
-            p.updateProducto(pi);
+            p.updateProducto(venta.get(i));
         }
         return 1;
     }
