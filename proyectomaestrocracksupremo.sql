@@ -34,7 +34,20 @@ CREATE TABLE `cliente` (
   `X` double NOT NULL,
   `Y` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+--
+-- Volcado de datos para la tabla `cliente`
+--
+INSERT INTO `cliente`(`NIT`, `nombre`, `direccion`,`X`, `Y`)VALUES
+("125489"  ,  "Andres" , "cra50-#45-52" ,   3.415627  ,  -76.884625),
+("789645"  ,  "Julio"  , "cra60-#56-64" ,   3.789546  ,  -76.963248),
+("748553"  ,  "Antonio", "cra70-#78-75" ,   3.978654  ,  -76.713584),
+("963588"  ,  "Omar"   , "cra80-#98-89" ,   3.312645  ,  -76.746982),
+("852199"  ,  "Alberto", "cra90-#32-97" ,   3.481592  ,  -76.761843),
+("456888"  ,  "Hernan" , "cra100-#36-12" ,   3.789463  ,  -76.798462),
+("321565"  ,  "Mario"  , "cra102-#76-13" ,   3.745823  ,  -76.964484),
+("731923"  ,  "Javier" , "cra103-#74-54" ,   3.741852  ,  -76.742035),
+("468200"  ,  "Alejandro" ,  "cra104-#86-87" ,   3.741258  ,  -76.789520),
+("591709"  ,  "Mauricio"  ,  "cra104-#97-54" ,   3.963258  ,  -76.745862)
 -- --------------------------------------------------------
 
 --
@@ -54,8 +67,13 @@ CREATE TABLE `materiaprima` (
 --
 
 INSERT INTO `materiaprima` (`nombre`, `cantidad`, `fechaCaducidad`, `NIT_proveedor`, `valorUnitario`) VALUES
-('carne', 500, '2020-11-05', '455301', 2500),
-('papa', 250, '2020-11-05', '455301', 800);
+("masa-hojaldre", 400, 2020-11-05, "985263", 600),
+("harina-trigo", 250, 2020-11-05, "985263", 600),
+("carne", 500, 2020-12-03, "985263", 600),
+("pollo", 300, 2020-12-05, "985263", 600),
+("papa", 800, 2021-02-10, "985263", 600),
+("queso", 300, 2021-02-29, "985263", 600),
+("arroz", 180, 2020-12-31, "985263", 600)
 
 -- --------------------------------------------------------
 
@@ -75,9 +93,15 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`Nombre`, `Cantidad`, `Precio`, `FechaCaducidad`) VALUES
-('Empanada', 10, 80, '2020-11-12');
+('empanada', 10, 80, '2020-11-29'),
+('papaRellena',20, 90, '2020-11-29'),
+('pastelDeCarne',20, 100, '2020-11-30'),
+('pastelDePollo',30, 70, '2020-11-30'),
+('churro',60, 50, '2020-11-25'),
+('dedo',40, 60, '2020-11-27'),
+('hojaldra',50, 70, '2020-11-20');
 
--- --------------------------------------------------------
+-- ------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `proveedor`
@@ -96,7 +120,11 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`NIT`, `Nombre`, `Ubicacion`, `Telefono`, `Email`) VALUES
-('455301', 'lalo', 'asdasd', 213214, 'asewqeqwe');
+('455301', 'lalo', 'calle#4950', 456421, 'dasd@correo.com'),
+('324567', 'lula', 'calle#4756', 462123, 'dtrey@correo.com'),
+('315468', 'lulu', 'calle#4562', 489798, 'juyj@correo.com'),
+('512245', 'lila', 'calle#7425', 421231, 'jliol@correo.com'),
+('778789', 'martha', 'calle#9632', 47446, 'papsa@correo.com@correo.com');
 
 -- --------------------------------------------------------
 
@@ -115,8 +143,18 @@ CREATE TABLE `receta` (
 --
 
 INSERT INTO `receta` (`P`, `M`, `Cantidad`) VALUES
-('Empanada', 'carne', 500),
-('Empanada', 'papa', 300);
+('Empanada', 'carne', 30),
+('Empanada', 'papa', 50),
+('papaRellena', 'papa', 40),
+('papaRellena', 'carne', 30),
+('papaRellena', 'arroz', 60),
+('pastelDeCarne', 'carne', 40),
+('pastelDeCarne', 'harinaDeTrigo', 80),
+('pastelDePollo', 'pollo', 50),
+('pastelDePollo', 'harinaDeTrigo', 80),
+('dedo', 'queso', 40),
+('dedo', 'masa-hojaldre', 60),
+('hojaldra', 'masa-hojaldre', 50);
 
 -- --------------------------------------------------------
 
@@ -147,6 +185,17 @@ CREATE TABLE `vendedores` (
   `correo` varchar(50) NOT NULL,
   `sexo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+--
+-- Volcado de datos para la tabla `receta`
+--
+INSERT INTO  `vendedores`(`cedula`,`nombre`,`cargo`,`comision`,`Telefono`,`correo`,`sexo`)
+VALUES 
+(456412,'Mario','vendedor',0.12,312353635,'dasda@correo.com'),
+(478798,'Marcus','vendedor',0.12,31055254,'htgr@correo.com'),
+(478541,'Arnold','vendedor',0.11,31425625,'ujki@correo.com'),
+(478544,'Bryan','vendedor',0.13,3124564,'lilo@correo.com'),
+(7884532,'Anton','vendedor',0.14,31324547,'kaka@correo.com');
+
 
 --
 -- Índices para tablas volcadas
