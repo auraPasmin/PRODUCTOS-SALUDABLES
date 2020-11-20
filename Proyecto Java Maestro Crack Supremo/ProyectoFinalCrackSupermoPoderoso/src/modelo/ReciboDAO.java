@@ -242,6 +242,7 @@ public class ReciboDAO {
         Producto pi;
         for(int i = 0 ; i < prod.size() ; ++i){
             pi = p.cargarProducto(prod.get(i));
+            System.out.println(prod.get(i));
             if(pi.getCantidad() < cant.get(i))
                 throw new NEDException(301, prod.get(i));
             else{
