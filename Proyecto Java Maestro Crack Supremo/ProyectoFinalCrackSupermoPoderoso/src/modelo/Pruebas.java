@@ -1,11 +1,18 @@
 package modelo;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Pruebas {
     public static void main(String[]args){
-        LocalDate t = LocalDate.now();
-        System.out.println(t.plusDays(1));
+        ProductoDAO r = new ProductoDAO();
+        try {
+            throw new NEDException(701,"lala");
+        } catch (NEDException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        
     }
 }

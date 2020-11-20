@@ -80,16 +80,17 @@ public class VendedorDAO {
                 v.setCedula(resultado.getInt(1));
                 v.setNombre(resultado.getString(2));
                 v.setCargo(resultado.getString(3));
-                v.setTelefono(resultado.getInt(4));
-                v.setEmail(resultado.getString(5));
-                v.setComision(resultado.getDouble(6));
+                v.setComision(resultado.getDouble(4));
+                v.setTelefono(resultado.getInt(5));
+                v.setEmail(resultado.getString(6));
+                
                 v.setSexo(resultado.getString(7));
 
                 listarVendedor.add(v);
             }
         }
         catch(SQLException e) {
-            // Do something
+            System.out.println(e.getMessage());
         }
         finally {
             try {
@@ -103,6 +104,48 @@ public class VendedorDAO {
             }
         }
         return listarVendedor;
+    }
+    
+    public Vendedor cargarVendedor(int cedula) throws NEDException {
+        Connection conexion = null;
+        PreparedStatement instruccion = null;
+        ResultSet resultado = null;
+        String sqlStatement;
+        Vendedor v = null;
+        try {
+            conexion = Fachada.startConnection();
+            sqlStatement = "SELECT * FROM vendedores WHERE cedula = ?";
+            instruccion = conexion.prepareStatement(sqlStatement);
+            instruccion.setInt(1,cedula);
+            resultado = instruccion.executeQuery();
+
+            if(resultado.next()) {
+                v = new Vendedor();
+                v.setCedula(resultado.getInt(1));
+                v.setNombre(resultado.getString(2));
+                v.setCargo(resultado.getString(3));
+                v.setComision(resultado.getDouble(4));
+                v.setTelefono(resultado.getInt(5));
+                v.setEmail(resultado.getString(6));
+            }else{
+                throw new NEDException(700,cedula+"");
+            }
+        }
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            try {
+                if(instruccion != null)
+                    instruccion.close();
+                if(conexion != null)
+                    conexion.close();
+            }
+            catch(SQLException ex) {
+                // Do something
+            }
+        }
+        return v;
     }
 
     /**

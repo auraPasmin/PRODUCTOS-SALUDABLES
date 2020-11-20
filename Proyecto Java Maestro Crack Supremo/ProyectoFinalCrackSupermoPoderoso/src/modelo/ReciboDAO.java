@@ -1,5 +1,7 @@
 package modelo;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import servicios.Fachada;
 
@@ -13,9 +15,10 @@ public class ReciboDAO {
      * @param recibo, un recibo a ser registrado en la DB.
      * @return 1 si se creo el registro exitosamente, 0
      * si no sucedio el registro a la DB
+     * @throws modelo.NEDException
      * @see Class ReciboDAO
      */
-    public int createRecibo(Recibo recibo) {
+    public int createRecibo(Recibo recibo) throws NEDException {
         Connection conexion = null;
         PreparedStatement instruccion = null;
         int resultado = 0;
@@ -25,7 +28,13 @@ public class ReciboDAO {
             conexion = Fachada.startConnection();
             sqlStatement = "INSERT INTO recibo VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
-
+            VendedorDAO v = new VendedorDAO();
+            v.cargarVendedor(recibo.getV());
+            ClienteDAO c = new ClienteDAO();
+            c.buscarNIT(recibo.getC());
+            ProductoDAO p = new ProductoDAO();
+            p.cargarProducto(recibo.getP());
+            
             instruccion.setInt(1, recibo.getV());
             instruccion.setString(2, recibo.getC());
             instruccion.setString(3, recibo.getP());
@@ -181,5 +190,70 @@ public class ReciboDAO {
             }
         }
         return resultado;
+    }
+    
+    public String generarRecibo(int cedula, String NIT, LocalDate day){
+        
+        Connection conexion = null;
+        PreparedStatement instruccion = null;
+        ResultSet resultado = null;
+        String data = "";
+        String sqlStatement;
+
+        try {
+            conexion = Fachada.startConnection();
+            sqlStatement =  "SELECT R.P, R.Cantidad, P.Precio "
+                + "FROM recibo R JOIN producto P ON R.P=P.Nombre "
+                + "WHERE V= ? AND C= ? AND( Fecha BETWEEN ? AND ? )";
+            instruccion = conexion.prepareStatement(sqlStatement);
+
+            instruccion.setInt(1,cedula);
+            instruccion.setString(2, NIT);
+            instruccion.setDate(3, Date.valueOf(day));
+            instruccion.setDate(4, Date.valueOf(day.plusDays(1)));
+
+            instruccion.executeQuery();
+            
+            while(resultado.next()) {
+                data += resultado.getString(1) + ":" + resultado.getInt(2) + ":" + resultado.getInt(3) + "\n";
+            }
+        }
+        catch(SQLException e) {
+            // Do something ...
+        }
+        finally {
+            try {
+                if(instruccion != null)
+                    instruccion.close();
+                if(conexion != null)
+                    conexion.close();
+            }
+            catch (SQLException ex) {
+                // Do something ...
+            }
+        }
+        return data;
+
+    }
+    
+    public int crearRecibo(int cedula, String NIT, LocalDateTime fecha, ArrayList<String> prod, ArrayList<Integer> cant) throws NEDException{
+        ArrayList<Producto> venta = new ArrayList<>();
+        ProductoDAO p= new ProductoDAO();;
+        Producto pi;
+        for(int i = 0 ; i < prod.size() ; ++i){
+            pi = p.cargarProducto(prod.get(i));
+            if(pi.getCantidad() < cant.get(i))
+                throw new NEDException(301, prod.get(i));
+            else{
+                pi.setCantidad(pi.getCantidad() - cant.get(i));
+                venta.add(pi);
+            }
+        }
+        for(int i = 0 ; i < prod.size() ; ++i){
+            Recibo r = new Recibo(cedula, NIT, prod.get(i), fecha, cant.get(i));
+            createRecibo(r);
+            p.updateProducto(venta.get(i));
+        }
+        return 1;
     }
 }

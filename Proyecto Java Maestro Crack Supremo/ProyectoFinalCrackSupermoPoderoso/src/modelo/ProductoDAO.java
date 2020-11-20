@@ -31,7 +31,7 @@ public class ProductoDAO {
 
         try {
             conexion = Fachada.startConnection();
-            sqlStatement = "INSERT INTO receta VALUES (?, ?, ?, ?)";
+            sqlStatement = "INSERT INTO producto VALUES (?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
 
             instruccion.setString(1, producto.getNombre());
@@ -74,7 +74,7 @@ public class ProductoDAO {
         try {
             listarProducto = new ArrayList<>();
             conexion = Fachada.startConnection();
-            sqlStatement = "SELECT * FROM receta ORDER BY P";
+            sqlStatement = "SELECT * FROM producto ORDER BY P";
             instruccion = conexion.prepareStatement(sqlStatement);
             resultado = instruccion.executeQuery();
 
@@ -105,11 +105,57 @@ public class ProductoDAO {
         }
         return listarProducto;
     }
+    
+    public Producto cargarProducto(String nombre) throws NEDException {
+        Connection conexion = null;
+        PreparedStatement instruccion = null;
+        ArrayList<Producto> listarProducto = null;
+        ResultSet resultado = null;
+        String sqlStatement;
+        Producto prod = null;
+        try {
+            listarProducto = new ArrayList<>();
+            conexion = Fachada.startConnection();
+            sqlStatement = "SELECT * FROM producto WHERE nombre = ?";
+            instruccion = conexion.prepareStatement(sqlStatement);
+            instruccion.setString(1, nombre);
+            resultado = instruccion.executeQuery();
+
+            if(resultado.next()) {
+                prod = new Producto();
+
+                prod.setNombre(resultado.getString(1));
+                prod.setCantidad(resultado.getInt(2));
+                prod.setPrecio(resultado.getDouble(3));
+                prod.setFechaCaducidad(resultado.getDate(4).toLocalDate());
+
+                listarProducto.add(prod);
+            }else{
+                throw new NEDException(3,nombre);
+                
+            }
+        }
+        catch(SQLException e) {
+            // Do something
+        }
+        finally {
+            try {
+                if(instruccion != null)
+                    instruccion.close();
+                if(conexion != null)
+                    conexion.close();
+            }
+            catch(SQLException ex) {
+                // Do something
+            }
+        }
+        return  prod;
+    }
 
     /**
      * <strong>Actualiza</strong> un producto de la DB
      * @param producto, un producto a ser cambiado
-     * @return 1 si se realizo la actualizacion, 0 si
+     * @return 1 si se recibo la actualizacion, 0 si
      * no se realizo ningun cambio
      * @see Class ProductoDAO
      */
