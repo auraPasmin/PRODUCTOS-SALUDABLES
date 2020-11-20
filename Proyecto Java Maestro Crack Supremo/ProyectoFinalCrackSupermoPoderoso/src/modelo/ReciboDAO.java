@@ -238,7 +238,7 @@ public class ReciboDAO {
     
     public int crearRecibo(int cedula, String NIT, LocalDateTime fecha, ArrayList<String> prod, ArrayList<Integer> cant) throws NEDException{
         ArrayList<Producto> venta = new ArrayList<>();
-        ProductoDAO p= new ProductoDAO();;
+        ProductoDAO p= new ProductoDAO();
         Producto pi;
         for(int i = 0 ; i < prod.size() ; ++i){
             pi = p.cargarProducto(prod.get(i));

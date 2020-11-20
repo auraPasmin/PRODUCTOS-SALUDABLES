@@ -109,12 +109,10 @@ public class ProductoDAO {
     public Producto cargarProducto(String nombre) throws NEDException {
         Connection conexion = null;
         PreparedStatement instruccion = null;
-        ArrayList<Producto> listarProducto = null;
         ResultSet resultado = null;
         String sqlStatement;
         Producto prod = null;
         try {
-            listarProducto = new ArrayList<>();
             conexion = Fachada.startConnection();
             sqlStatement = "SELECT * FROM producto WHERE nombre = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
@@ -128,10 +126,9 @@ public class ProductoDAO {
                 prod.setCantidad(resultado.getInt(2));
                 prod.setPrecio(resultado.getDouble(3));
                 prod.setFechaCaducidad(resultado.getDate(4).toLocalDate());
-
-                listarProducto.add(prod);
+                
             }else{
-                throw new NEDException(3,nombre);
+                throw new NEDException(303,nombre);
                 
             }
         }
@@ -149,7 +146,12 @@ public class ProductoDAO {
                 // Do something
             }
         }
-        return  prod;
+        if(prod == null){
+            throw new NEDException(300,nombre);
+        }else{
+            return  prod;
+        }
+        
     }
 
     /**
