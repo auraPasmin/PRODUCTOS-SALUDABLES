@@ -10,18 +10,18 @@ import javax.swing.JOptionPane;
 public class Pruebas {
     public static void main(String[]args){
         ReciboDAO r = new ReciboDAO();
+        ProductoDAO P = new ProductoDAO();
+
         ArrayList<String> p = new ArrayList<>();
         ArrayList<Integer> c = new ArrayList<>();
         
         
-        p.add("pastelDePollo");
-        c.add(20);
+
         p.add("dedo");
-        c.add(20);
-        p.add("hojaldra");
-        c.add(30);
+        c.add(40);
+
         try {
-            r.crearRecibo(456412, "456412", LocalDateTime.now(), p, c);
+            r.crearRecibo(456412, "125489", LocalDateTime.now(), p, c);
         } catch (NEDException ex) {
             System.out.println(ex.toString());
         }

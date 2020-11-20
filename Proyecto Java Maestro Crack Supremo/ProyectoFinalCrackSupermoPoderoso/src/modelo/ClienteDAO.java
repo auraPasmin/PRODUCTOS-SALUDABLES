@@ -41,6 +41,10 @@ public class ClienteDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
+                if(conexion != null){
+                    conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch (SQLException ex) {
                 System.out.println("xdddddddd");
@@ -85,8 +89,10 @@ public class ClienteDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch(SQLException ex) {
                 // Do something ...
@@ -136,8 +142,10 @@ public class ClienteDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch(SQLException ex) {
                 // Do something ...
@@ -181,8 +189,10 @@ public class ClienteDAO {
             try {
                 if(instrucciones != null)
                     instrucciones.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch(SQLException ex) {
                 // Do something ...
@@ -219,8 +229,10 @@ public class ClienteDAO {
             try {
                 if(instrucciones != null)
                     instrucciones.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch(SQLException ex) {
                 // Do something ...

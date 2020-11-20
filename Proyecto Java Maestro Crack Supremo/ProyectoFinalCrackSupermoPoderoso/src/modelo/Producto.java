@@ -49,5 +49,12 @@ public class Producto {
     public void setFechaCaducidad(LocalDate fechaCaducidad) {
         this.fechaCaducidad = fechaCaducidad;
     }
+
+    @Override
+    public String toString() {
+        return "Producto{" + "nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio + ", fechaCaducidad=" + fechaCaducidad + '}';
+    }
+    
+    
     
 }

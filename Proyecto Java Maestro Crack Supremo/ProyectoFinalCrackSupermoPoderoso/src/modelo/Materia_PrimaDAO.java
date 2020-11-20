@@ -45,8 +45,10 @@ public class Materia_PrimaDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch(SQLException ex){
                 System.out.println(ex.getMessage());
@@ -93,8 +95,10 @@ public class Materia_PrimaDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch(SQLException ex) {
                 // Do something
@@ -136,8 +140,10 @@ public class Materia_PrimaDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch (SQLException ex) {
                 // Do something ...
@@ -174,8 +180,10 @@ public class Materia_PrimaDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch (SQLException ex) {
                 // Do something

@@ -19,8 +19,8 @@ public class ProductoDAO {
     /**
      * <strong>Crea</strong> un producto
      * @param producto, producto a registrar en la DB
-     * @return 1 si se creo exitosamente, 0 si no se realizaron
-     * cambios
+     * @return 1 si se creo exitosamente, 0 si no se registro
+     * cambiado
      * @see Class ProductoDAO
      */
     public int createProducto(Producto producto) {
@@ -48,8 +48,10 @@ public class ProductoDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch(SQLException ex){
                 System.out.println(ex.getMessage());
@@ -96,8 +98,10 @@ public class ProductoDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch(SQLException ex) {
                 // Do something
@@ -114,6 +118,8 @@ public class ProductoDAO {
         Producto prod = null;
         try {
             conexion = Fachada.startConnection();
+            System.out.println(conexion.isClosed());
+            
             sqlStatement = "SELECT * FROM producto WHERE nombre = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
             instruccion.setString(1, nombre);
@@ -133,24 +139,28 @@ public class ProductoDAO {
             }
         }
         catch(SQLException e) {
-            // Do something
+            System.out.println(e.getMessage());
         }
-        finally {
+        
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
+                    
             }
             catch(SQLException ex) {
                 // Do something
             }
-        }
-        if(prod == null){
-            throw new NEDException(303,nombre);
-        }else{
-            return  prod;
-        }
+        
+        return  prod;
+//        if(prod == null){
+//            throw new NEDException(303,nombre);
+//        }else{
+//            return  prod;
+//        }
         
     }
 
@@ -169,7 +179,7 @@ public class ProductoDAO {
 
         try {
             conexion = Fachada.startConnection();
-            sqlStatement = "UPDATE producto Cantidad = ?, precio = ?, FechaCaducidad = ? WHERE nombre = ?";
+            sqlStatement = "UPDATE producto SET Cantidad = ?, precio = ?, FechaCaducidad = ? WHERE nombre = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
 
             instruccion.setInt(1, producto.getCantidad());
@@ -180,14 +190,17 @@ public class ProductoDAO {
             resultado = instruccion.executeUpdate();
         }
         catch(SQLException e) {
-            // Do something ...
+            System.out.println(e.toString());
         }
         finally {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
+                    
             }
             catch (SQLException ex) {
                 // Do something ...
@@ -224,8 +237,11 @@ public class ProductoDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
+                    
             }
             catch (SQLException ex) {
                 // Do something

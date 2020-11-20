@@ -28,12 +28,12 @@ public class ReciboDAO {
             conexion = Fachada.startConnection();
             sqlStatement = "INSERT INTO recibo VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
-            VendedorDAO v = new VendedorDAO();
-            v.cargarVendedor(recibo.getV());
-            ClienteDAO c = new ClienteDAO();
-            c.buscarNIT(recibo.getC());
-            ProductoDAO p = new ProductoDAO();
-            p.cargarProducto(recibo.getP());
+//            VendedorDAO v = new VendedorDAO();
+//            v.cargarVendedor(recibo.getV());
+//            ClienteDAO c = new ClienteDAO();
+//            c.buscarNIT(recibo.getC());
+//            ProductoDAO p = new ProductoDAO();
+//            p.cargarProducto(recibo.getP());
             
             instruccion.setInt(1, recibo.getV());
             instruccion.setString(2, recibo.getC());
@@ -50,8 +50,11 @@ public class ReciboDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
+                    
             }
             catch(SQLException ex) {
                 System.out.println("jeje no cerro xd");
@@ -97,8 +100,10 @@ public class ReciboDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch (SQLException ex) {
                 // Do something ...
@@ -143,8 +148,10 @@ public class ReciboDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch (SQLException ex) {
                 // Do something ...
@@ -182,8 +189,12 @@ public class ReciboDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
+                    
+                
             }
             catch (SQLException ex) {
                 // Do something
@@ -225,8 +236,10 @@ public class ReciboDAO {
             try {
                 if(instruccion != null)
                     instruccion.close();
-                if(conexion != null)
+                if(conexion != null){
                     conexion.close();
+                    Fachada.closeConnection();
+                }
             }
             catch (SQLException ex) {
                 // Do something ...
@@ -243,7 +256,7 @@ public class ReciboDAO {
         for(int i = 0 ; i < prod.size() ; ++i){
             ProductoDAO p= new ProductoDAO();
             pi = p.cargarProducto(prod.get(i));
-            System.out.println(prod.get(i));
+            System.out.println(pi.toString());
             if(pi.getCantidad() < cant.get(i))
                 throw new NEDException(301, prod.get(i));
             else{
@@ -251,11 +264,12 @@ public class ReciboDAO {
                 venta.add(pi);
             }
         }
+        System.out.println("salimos de verificar los productos xd");
         for(int i = 0 ; i < prod.size() ; ++i){
             ProductoDAO p= new ProductoDAO();
             Recibo r = new Recibo(cedula, NIT, prod.get(i), fecha, cant.get(i));
             createRecibo(r);
-            p.updateProducto(venta.get(i));
+            System.out.println(p.updateProducto(venta.get(i)));
         }
         return 1;
     }

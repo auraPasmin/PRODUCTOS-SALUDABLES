@@ -17,7 +17,7 @@ public class Fachada {
         {
             if(con == null){
                 //Determina cuando se termina el programa
-                Runtime.getRuntime().addShutdownHook(new MiShDwnHook());
+                //Runtime.getRuntime().addShutdownHook(new MiShDwnHook());
                 //Recupera los parámetros de conexión del archivo 
                 //jdbc.properties
 
@@ -37,6 +37,9 @@ public class Fachada {
                     ex.getMessage());
         }
         return con;
+    }
+    public static void closeConnection(){
+        con = null;
     }
     
     static class MiShDwnHook extends Thread{
