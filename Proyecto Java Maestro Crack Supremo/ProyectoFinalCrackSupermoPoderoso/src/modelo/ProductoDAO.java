@@ -128,7 +128,7 @@ public class ProductoDAO {
                 prod.setFechaCaducidad(resultado.getDate(4).toLocalDate());
                 
             }else{
-                throw new NEDException(303,nombre);
+                throw new NEDException(300,nombre);
                 
             }
         }
