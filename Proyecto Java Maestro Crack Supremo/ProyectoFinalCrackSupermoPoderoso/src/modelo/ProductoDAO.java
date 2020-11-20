@@ -147,7 +147,7 @@ public class ProductoDAO {
             }
         }
         if(prod == null){
-            throw new NEDException(300,nombre);
+            throw new NEDException(303,nombre);
         }else{
             return  prod;
         }
