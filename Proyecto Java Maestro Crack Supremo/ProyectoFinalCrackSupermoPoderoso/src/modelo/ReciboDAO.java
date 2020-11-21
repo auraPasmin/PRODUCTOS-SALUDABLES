@@ -213,24 +213,25 @@ public class ReciboDAO {
 
         try {
             conexion = Fachada.startConnection();
-            sqlStatement =  "SELECT R.P, R.Cantidad, P.Precio "
+            sqlStatement =  "SELECT R.P, R.Cantidad, P.Precio, (R.Cantidad*P.Precio) "
                 + "FROM recibo R JOIN producto P ON R.P=P.Nombre "
                 + "WHERE V= ? AND C= ? AND( Fecha BETWEEN ? AND ? )";
             instruccion = conexion.prepareStatement(sqlStatement);
+            
 
             instruccion.setInt(1,cedula);
             instruccion.setString(2, NIT);
             instruccion.setDate(3, Date.valueOf(day));
             instruccion.setDate(4, Date.valueOf(day.plusDays(1)));
-
-            instruccion.executeQuery();
+            System.out.println(instruccion);
+            resultado = instruccion.executeQuery();
             
             while(resultado.next()) {
-                data += resultado.getString(1) + ":" + resultado.getInt(2) + ":" + resultado.getInt(3) + "\n";
+                data += resultado.getString(1) + ":" + resultado.getInt(2) + ":" + resultado.getInt(3) +":"+resultado.getInt(4)+ "\n";
             }
         }
         catch(SQLException e) {
-            // Do something ...
+            System.out.println(e.toString());
         }
         finally {
             try {
