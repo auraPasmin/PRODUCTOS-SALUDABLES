@@ -16,12 +16,13 @@ public class Pruebas {
         ArrayList<Integer> c = new ArrayList<>();
         
         
-
-        p.add("dedo");
-        c.add(40);
+        p.add("churro");
+        c.add(30);
+        p.add("papaRellena");
+        c.add(10);
 
         try {
-            r.crearRecibo(456412, "125489", LocalDateTime.now(), p, c);
+            r.crearRecibo(456412, "963588", LocalDateTime.now(), p, c);
         } catch (NEDException ex) {
             System.out.println(ex.toString());
         }
