@@ -243,12 +243,13 @@ public class VendedorDAO {
         return resultado;
     }
     
-    public int encontrarUbicacion(int cedula, LocalDate day) throws NEDException{
+    public String encontrarUbicacion(int cedula, LocalDate day) throws NEDException{
         Connection conexion = null;
         PreparedStatement instruccion = null;
         ResultSet resultado = null;
         String sqlStatement;
         Vendedor v = null;
+        String res = "";
         try {
             conexion = Fachada.startConnection();
             sqlStatement = "SELECT DISTINCT c.x, C.y, R.Fecha "
@@ -259,17 +260,8 @@ public class VendedorDAO {
             instruccion.setDate(2, Date.valueOf(day));
             instruccion.setDate(3, Date.valueOf(day.plusDays(1)));
             resultado = instruccion.executeQuery();
-
-            if(resultado.next()) {
-                v = new Vendedor();
-                v.setCedula(resultado.getInt(1));
-                v.setNombre(resultado.getString(2));
-                v.setCargo(resultado.getString(3));
-                v.setComision(resultado.getDouble(4));
-                v.setTelefono(resultado.getInt(5));
-                v.setEmail(resultado.getString(6));
-            }else{
-                throw new NEDException(700,cedula+"");
+            while(resultado.next()) {
+                res+= resultado.getDouble(1) + ":" + resultado.getDouble(2) +"\n";
             }
         }
         catch(SQLException e) {
@@ -288,6 +280,6 @@ public class VendedorDAO {
                 // Do something
             }
         }
-        return cedula;
+        return res.trim();
     }
 }

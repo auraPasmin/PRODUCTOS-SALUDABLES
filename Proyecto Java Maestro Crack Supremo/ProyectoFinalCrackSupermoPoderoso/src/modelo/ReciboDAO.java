@@ -210,7 +210,7 @@ public class ReciboDAO {
         ResultSet resultado = null;
         String data = "";
         String sqlStatement;
-
+        
         try {
             conexion = Fachada.startConnection();
             sqlStatement =  "SELECT R.P, R.Cantidad, P.Precio, (R.Cantidad*P.Precio) "
@@ -246,7 +246,7 @@ public class ReciboDAO {
                 // Do something ...
             }
         }
-        return data;
+        return data.trim();
 
     }
     

@@ -1,7 +1,9 @@
 package modelo;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,23 +11,13 @@ import javax.swing.JOptionPane;
 
 public class Pruebas {
     public static void main(String[]args){
-        ReciboDAO r = new ReciboDAO();
-        ProductoDAO P = new ProductoDAO();
-
-        ArrayList<String> p = new ArrayList<>();
-        ArrayList<Integer> c = new ArrayList<>();
-        
-        
-        p.add("churro");
-        c.add(30);
-        p.add("papaRellena");
-        c.add(10);
-
+        LocalDate t = LocalDate.of(2020, 11, 20);
+        VendedorDAO v = new VendedorDAO();
         try {
-            r.crearRecibo(456412, "963588", LocalDateTime.now(), p, c);
+            System.out.println(v.encontrarUbicacion(456412, t).trim());
+            
         } catch (NEDException ex) {
-            System.out.println(ex.toString());
+            Logger.getLogger(Pruebas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 }

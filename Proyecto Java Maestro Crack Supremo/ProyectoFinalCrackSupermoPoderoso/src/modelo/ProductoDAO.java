@@ -124,7 +124,7 @@ public class ProductoDAO {
             instruccion = conexion.prepareStatement(sqlStatement);
             instruccion.setString(1, nombre);
             resultado = instruccion.executeQuery();
-
+            
             if(resultado.next()) {
                 prod = new Producto();
 
