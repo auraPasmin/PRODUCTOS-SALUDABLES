@@ -10,7 +10,6 @@ public class Recibo {
 
     public Recibo() {
     }
-
     public Recibo(int v, String c, String p, LocalDateTime fecha, int cantidad) {
         this.v = v;
         this.c = c;
