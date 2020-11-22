@@ -185,5 +185,56 @@ public class RecetaDAO {
         return resultado;
     }
     
+    public Object[][] generarReceta(Producto p) throws NEDException{    
+        Connection conexion = null;
+        PreparedStatement instruccion = null;
+        ResultSet resultado = null;
+        String data = "";
+        String sqlStatement;
+        Object[][]d = null;
+        try {
+            conexion = Fachada.startConnection();
+            sqlStatement =  "SELECT M,Cantidad FROM receta WHERE P = ?";
+            instruccion = conexion.prepareStatement(sqlStatement);
+            instruccion.setString(1,p.getNombre());
+            System.out.println(instruccion);
+            resultado = instruccion.executeQuery();
+            if(resultado.next()){
+                resultado.last();
+                int r = resultado.getRow();
+                d = new Object[r][2];
+                int i = 0;
+                resultado.beforeFirst();
+                while(resultado.next()) {
+                    d[i][0] = resultado.getString(1);
+                    d[i][1] = resultado.getInt(2);
+                    data += resultado.getString(1) + ":" + resultado.getInt(2) + "\n";
+                    ++i;
+                }
+            }else{
+                throw new NEDException(302,p.getNombre());
+            }
+            
+        }
+        catch(SQLException e) {
+            System.out.println(e.toString());
+        }
+        finally {
+            try {
+                if(instruccion != null)
+                    instruccion.close();
+                if(conexion != null){
+                    conexion.close();
+                    Fachada.closeConnection();
+                }
+            }
+            catch (SQLException ex) {
+                // Do something ...
+            }
+        }
+        return d;
+
+    }
+    
 
 }
