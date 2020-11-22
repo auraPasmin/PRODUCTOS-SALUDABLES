@@ -282,4 +282,8 @@ public class VendedorDAO {
         }
         return res.trim();
     }
+    
+    public double evaluarComision(Vendedor v){
+        
+    }
 }

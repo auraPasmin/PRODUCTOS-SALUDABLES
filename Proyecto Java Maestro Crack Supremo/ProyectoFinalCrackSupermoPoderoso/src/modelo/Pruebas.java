@@ -11,13 +11,9 @@ import javax.swing.JOptionPane;
 
 public class Pruebas {
     public static void main(String[]args){
-        LocalDate t = LocalDate.of(2020, 11, 20);
-        VendedorDAO v = new VendedorDAO();
-        try {
-            System.out.println(v.encontrarUbicacion(456412, t).trim());
-            
-        } catch (NEDException ex) {
-            Logger.getLogger(Pruebas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        LocalDate t = LocalDate.of(2020, 11, 01);
+        t.p
+        ReciboDAO v = new ReciboDAO();
+        System.out.println(v.generarRecibo(456412, "125489", t));
     }
 }

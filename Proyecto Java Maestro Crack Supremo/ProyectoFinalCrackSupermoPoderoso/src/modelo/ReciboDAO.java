@@ -3,6 +3,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import servicios.Fachada;
 
 public class ReciboDAO {
@@ -203,32 +204,41 @@ public class ReciboDAO {
         return resultado;
     }
     
-    public String generarRecibo(int cedula, String NIT, LocalDate day){
-        
+    public String generarRecibo(int cedula, String NIT, LocalDate day){    
         Connection conexion = null;
         PreparedStatement instruccion = null;
         ResultSet resultado = null;
         String data = "";
         String sqlStatement;
-        
+        Object[][]d = null;
         try {
             conexion = Fachada.startConnection();
             sqlStatement =  "SELECT R.P, R.Cantidad, P.Precio, (R.Cantidad*P.Precio) "
                 + "FROM recibo R JOIN producto P ON R.P=P.Nombre "
                 + "WHERE V= ? AND C= ? AND( Fecha BETWEEN ? AND ? )";
             instruccion = conexion.prepareStatement(sqlStatement);
-            
-
             instruccion.setInt(1,cedula);
             instruccion.setString(2, NIT);
             instruccion.setDate(3, Date.valueOf(day));
             instruccion.setDate(4, Date.valueOf(day.plusDays(1)));
             System.out.println(instruccion);
             resultado = instruccion.executeQuery();
-            
-            while(resultado.next()) {
-                data += resultado.getString(1) + ":" + resultado.getInt(2) + ":" + resultado.getInt(3) +":"+resultado.getInt(4)+ "\n";
+            if(resultado.next()){
+                resultado.last();
+                int r = resultado.getRow();
+                d = new Object[r][4];
+                int i = 0;
+                resultado.beforeFirst();
+                while(resultado.next()) {
+                    d[i][0] = resultado.getString(1);
+                    d[i][1] = resultado.getInt(2);
+                    d[i][2] = resultado.getInt(3);
+                    d[i][3] = resultado.getInt(4);
+                    data += resultado.getString(1) + ":" + resultado.getInt(2) + ":" + resultado.getInt(3) +":"+resultado.getInt(4)+ "\n";
+                    ++i;
+                }
             }
+            
         }
         catch(SQLException e) {
             System.out.println(e.toString());
@@ -252,7 +262,6 @@ public class ReciboDAO {
     
     public int crearRecibo(int cedula, String NIT, LocalDateTime fecha, ArrayList<String> prod, ArrayList<Integer> cant) throws NEDException{
         ArrayList<Producto> venta = new ArrayList<>();
-        
         Producto pi;
         for(int i = 0 ; i < prod.size() ; ++i){
             ProductoDAO p= new ProductoDAO();
