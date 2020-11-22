@@ -10,10 +10,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Pruebas {
-    public static void main(String[]args){
+    public static void main(String[]args) throws NEDException{
         LocalDate t = LocalDate.of(2020, 11, 01);
-        t.p
-        ReciboDAO v = new ReciboDAO();
-        System.out.println(v.generarRecibo(456412, "125489", t));
+        t.plusMonths(1);
+        System.out.println(t.plusMonths(1));
+        VendedorDAO v = new VendedorDAO();
+        System.out.println(v.evaluarComision(v.cargarVendedor(456412), t));
     }
 }
