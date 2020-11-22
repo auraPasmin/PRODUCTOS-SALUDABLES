@@ -243,16 +243,9 @@ public class Materia_PrimaDAO {
         ResultSet resultadoListar = null;
         String sqlStatement2;
 
-        try {
-            conexion = Fachada.startConnection();
-            sqlStatement2 = "SELECT * FROM materiaprima";
-
-            resultadoListar = listar.executeQuery(sqlStatement2);
-            mp =  (ArrayList<Materia_Prima>) resultadoListar;
-            
-            resultadoListar.last();
-            int size = resultadoListar.getRow();
-            resultadoListar.beforeFirst();
+            mp =  readMateriaPrima();
+            System.out.println(mp);
+            int size = mp.size();
             
             for(int i=0; i<size; i++){
                 if(mp.get(i).getNombre().equals(MP.getNombre())){
@@ -260,23 +253,6 @@ public class Materia_PrimaDAO {
                     this.updateMateriaPrima(MP);
                 }
             }
-        }
-        catch(SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        finally {
-            try {
-                if(listar != null)
-                    listar.close();
-                if(conexion != null){
-                    conexion.close();
-                    Fachada.closeConnection();
-                }
-            }
-            catch (SQLException ex) {
-                // Do something ...
-            }
-        }
         //return mp;
     }
     
