@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import servicios.Fachada;
 
@@ -105,6 +106,49 @@ public class Materia_PrimaDAO {
             }
         }
         return listarMateria;
+    }
+        public Materia_Prima cargarMateriaPrima(String nombre) throws NEDException {
+            Connection conexion = null;
+            PreparedStatement instruccion = null;
+            ResultSet resultado = null;
+            String sqlStatement;
+            Materia_Prima mt = null;
+            try {
+                conexion = Fachada.startConnection();
+                System.out.println(conexion.isClosed());
+
+                sqlStatement = "SELECT * FROM materiaprima WHERE nombre = ?";
+                instruccion = conexion.prepareStatement(sqlStatement);
+                instruccion.setString(1, nombre);
+                resultado = instruccion.executeQuery();
+
+                if(resultado.next()) {
+                    mt = new Materia_Prima();
+                    mt.setNombre(resultado.getString(1));
+                    mt.setCantidad(resultado.getInt(2));
+                    mt.setFechaCaducidad(resultado.getDate(3).toLocalDate());
+                    mt.setNit_proveedor(resultado.getString(4));
+                    mt.setValor_unitario(resultado.getInt(5));
+                }else{
+                    throw new NEDException(300,nombre);
+                }
+            }
+            catch(SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        
+            try {
+                if(instruccion != null)
+                    instruccion.close();
+                if(conexion != null){
+                    conexion.close();
+                    Fachada.closeConnection();
+                }          
+            }
+            catch(SQLException ex) {
+            }
+        
+        return mt;
     }
 
     /**
