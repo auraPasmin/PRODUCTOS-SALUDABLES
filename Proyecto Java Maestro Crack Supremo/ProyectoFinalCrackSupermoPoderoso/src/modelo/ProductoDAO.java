@@ -267,4 +267,16 @@ public class ProductoDAO {
         }
         return 1;
     }
+    
+    public String[][] mostrarStock(){
+        String[][]stock = null;
+        ArrayList<Producto> productos = this.readProducto();
+        
+        for(int i=0; i<productos.size();i++){
+            stock[i][0] = productos.get(i).getNombre();
+            stock[i][1] = ""+productos.get(i).getCantidad() ;
+        }
+        
+        return stock;
+    }
 }
