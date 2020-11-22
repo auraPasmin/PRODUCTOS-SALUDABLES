@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 public class Pruebas {
     public static void main(String[]args) throws NEDException{
 
-        ProductoDAO p = new ProductoDAO();
-        System.out.println(p.reabastecerProducto("paparellena", 3));
+        Materia_PrimaDAO m = new Materia_PrimaDAO();
+        m.crearMP(new Materia_Prima());
     }
 }
