@@ -148,20 +148,12 @@ public class ProductoDAO {
                 if(conexion != null){
                     conexion.close();
                     Fachada.closeConnection();
-                }
-                    
+                }          
             }
             catch(SQLException ex) {
-                // Do something
             }
         
         return  prod;
-//        if(prod == null){
-//            throw new NEDException(303,nombre);
-//        }else{
-//            return  prod;
-//        }
-        
     }
 
     /**
@@ -248,5 +240,28 @@ public class ProductoDAO {
             }
         }
         return resultado;
-    }  
+    }
+    public int reabastecerProducto(String nombreP, int cant, ArrayList<String> mat) throws NEDException{
+        ArrayList<Materia_Prima> venta = new ArrayList<>();
+        Producto pi;
+//        for(int i = 0 ; i < mat.size() ; ++i){
+//            Materia_PrimaDAO mp= new Materia_PrimaDAO();
+//            pi = mp.
+//            System.out.println(pi.toString());
+//            if(pi.getCantidad() < cant.get(i))
+//                throw new NEDException(301, prod.get(i));
+//            else{
+//                pi.setCantidad(pi.getCantidad() - cant.get(i));
+//                venta.add(pi);
+//            }
+//        }
+//        System.out.println("salimos de verificar los productos xd");
+//        for(int i = 0 ; i < prod.size() ; ++i){
+//            ProductoDAO p= new ProductoDAO();
+//            Recibo r = new Recibo(cedula, NIT, prod.get(i), fecha, cant.get(i));
+//            createRecibo(r);
+//            System.out.println(p.updateProducto(venta.get(i)));
+//        }
+        return 1;
+    }
 }
