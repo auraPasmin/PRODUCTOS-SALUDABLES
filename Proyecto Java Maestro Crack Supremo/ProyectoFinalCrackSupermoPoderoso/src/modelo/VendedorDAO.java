@@ -283,7 +283,42 @@ public class VendedorDAO {
         return res.trim();
     }
     
-    public double evaluarComision(Vendedor v){
+    public double evaluarComision(Vendedor v, LocalDate t){
         
+        Connection conexion = null;
+        PreparedStatement instruccion = null;
+        ResultSet resultado = null;
+        double comision = 0;
+        String sqlStatement; 
+        try {
+            conexion = Fachada.startConnection();
+            sqlStatement = "SELECT COUNT(DISTINCT V,C) FROM `recibo` WHERE Fecha BETWEEN ? AND ? and V = ?";
+            instruccion = conexion.prepareStatement(sqlStatement);
+            instruccion.setDate(1, Date.valueOf(t));
+            instruccion.setDate(2, Date.valueOf(t.plusMonths(1)));
+            instruccion.setInt(3, v.getCedula());
+            System.out.println(instruccion);
+            resultado = instruccion.executeQuery();
+            if(resultado.next()) {
+                comision = v.getComision()*resultado.getInt(1);
+            }
+        }
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            try {
+                if(instruccion != null)
+                    instruccion.close();
+                if(conexion != null){
+                    conexion.close();
+                    Fachada.closeConnection();
+                }
+            }
+            catch(SQLException ex) {
+                // Do something
+            }
+        }
+        return comision;
     }
 }
