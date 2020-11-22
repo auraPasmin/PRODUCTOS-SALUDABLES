@@ -166,7 +166,7 @@ public class Materia_PrimaDAO {
 
         try {
             conexion = Fachada.startConnection();
-            sqlStatement = "UPDATE materiaprima cantidad = ?, fechaCaducidad = ?, NIT_proveedor = ?, valorUnitario = ? WHERE nombre = ?";
+            sqlStatement = "UPDATE materiaprima SET cantidad = ?, fechaCaducidad = ?, NIT_proveedor = ?, valorUnitario = ? WHERE nombre = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
 
             instruccion.setInt(1,mt.getCantidad());
@@ -178,7 +178,7 @@ public class Materia_PrimaDAO {
             resultado = instruccion.executeUpdate();
         }
         catch(SQLException e) {
-            // Do something ...
+            System.out.println(e.getMessage());
         }
         finally {
             try {
