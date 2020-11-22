@@ -241,27 +241,30 @@ public class ProductoDAO {
         }
         return resultado;
     }
-    public int reabastecerProducto(String nombreP, int cant, ArrayList<String> mat) throws NEDException{
-        ArrayList<Materia_Prima> venta = new ArrayList<>();
-        Producto pi;
-//        for(int i = 0 ; i < mat.size() ; ++i){
-//            Materia_PrimaDAO mp= new Materia_PrimaDAO();
-//            pi = mp.
-//            System.out.println(pi.toString());
-//            if(pi.getCantidad() < cant.get(i))
-//                throw new NEDException(301, prod.get(i));
-//            else{
-//                pi.setCantidad(pi.getCantidad() - cant.get(i));
-//                venta.add(pi);
-//            }
-//        }
-//        System.out.println("salimos de verificar los productos xd");
-//        for(int i = 0 ; i < prod.size() ; ++i){
-//            ProductoDAO p= new ProductoDAO();
-//            Recibo r = new Recibo(cedula, NIT, prod.get(i), fecha, cant.get(i));
-//            createRecibo(r);
-//            System.out.println(p.updateProducto(venta.get(i)));
-//        }
+    public int reabastecerProducto(String nombreP, int cant) throws NEDException{
+        ArrayList<Materia_Prima> mps = new ArrayList<>();
+        Materia_Prima m;
+        Producto pi = cargarProducto(nombreP);
+        RecetaDAO r = new RecetaDAO();
+        Object[][]recetas = r.generarReceta(pi);
+        for(int i = 0 ; i < recetas.length ; ++i){
+            Materia_PrimaDAO mp= new Materia_PrimaDAO();
+            m = mp.cargarMateriaPrima((String) recetas[i][0]);
+            int necesario = (int)recetas[i][1];
+            if(m.getCantidad() < cant*necesario)
+                throw new NEDException(201, m.getNombre());
+            else{
+                m.setCantidad(m.getCantidad() - (cant*necesario));
+                mps.add(m);
+            }
+        }
+        pi.setCantidad(pi.getCantidad() + cant);
+        updateProducto(pi);
+        System.out.println("salimos de verificar la materia prima xd");
+        for(int i = 0 ; i < recetas.length ; ++i){
+            Materia_PrimaDAO mp= new Materia_PrimaDAO();
+            System.out.println(mp.updateMateriaPrima(mps.get(i)));
+        }
         return 1;
     }
 }
