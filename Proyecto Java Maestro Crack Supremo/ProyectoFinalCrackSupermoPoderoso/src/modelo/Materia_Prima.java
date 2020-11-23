@@ -8,6 +8,7 @@ public class Materia_Prima {
     private LocalDate fechaCaducidad;
     private String nit_proveedor;
     private int valor_unitario;
+    
     public Materia_Prima() {
     }
 
