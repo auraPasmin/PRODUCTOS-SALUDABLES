@@ -110,7 +110,7 @@ public class ClienteDAO {
      * @throws NEDException
      * @see Class ClienteDAO
      */
-    public Cliente buscarNIT(String nit) throws NEDException {
+    public Cliente cargarCliente(String nit) throws NEDException {
         Cliente cliente = null;
         Connection conexion = null;
         PreparedStatement instruccion = null;
@@ -239,6 +239,51 @@ public class ClienteDAO {
             }
         }
         return resultado;
+    }
+    public Object[][] generarRecibos(Cliente c){    
+        Connection conexion = null;
+        PreparedStatement instruccion = null;
+        ResultSet resultado = null;
+        String sqlStatement;
+        Object[][]d = null;
+        try {
+            conexion = Fachada.startConnection();
+            sqlStatement =  "SELECT DISTINCT V, Fecha FROM recibo WHERE C = ?";
+            instruccion = conexion.prepareStatement(sqlStatement);
+            instruccion.setString(1, c.getNombre());
+            System.out.println(instruccion);
+            resultado = instruccion.executeQuery();
+            if(resultado.next()){
+                resultado.last();
+                int r = resultado.getRow();
+                d = new Object[r][2];
+                int i = 0;
+                resultado.beforeFirst();
+                while(resultado.next()) {
+                    d[i][0] = resultado.getString(1);
+                    d[i][1] = resultado.getInt(2);
+                    ++i;
+                }
+            }  
+        }
+        catch(SQLException e) {
+            System.out.println(e.toString());
+        }
+        finally {
+            try {
+                if(instruccion != null)
+                    instruccion.close();
+                if(conexion != null){
+                    conexion.close();
+                    Fachada.closeConnection();
+                }
+            }
+            catch (SQLException ex) {
+                // Do something ...
+            }
+        }
+        return d;
+
     }
 
 }

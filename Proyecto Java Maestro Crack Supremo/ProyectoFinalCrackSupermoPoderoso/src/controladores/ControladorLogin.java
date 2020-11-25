@@ -64,7 +64,7 @@ public class ControladorLogin {
                 V = null;
             }
             try {
-                C = c.buscarNIT(cad);
+                C = c.cargarCliente(cad);
                 VistaCliente n = new VistaCliente();
                 n.setVisible(true);
                 vista.dispose();

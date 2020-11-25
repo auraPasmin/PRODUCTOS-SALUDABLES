@@ -5,6 +5,8 @@
  */
 package vistas;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author msp
@@ -180,6 +182,7 @@ public class VistaCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        DefaultTableModel m = (DefaultTableModel)jtFacturas.getModel();
         
     }//GEN-LAST:event_btnSalirActionPerformed
 

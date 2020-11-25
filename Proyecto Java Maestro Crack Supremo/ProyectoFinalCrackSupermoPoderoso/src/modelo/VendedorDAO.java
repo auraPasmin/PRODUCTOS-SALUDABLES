@@ -283,6 +283,53 @@ public class VendedorDAO {
         return res.trim();
     }
     
+    public Object[][] generarRecibos(Vendedor v){    
+        Connection conexion = null;
+        PreparedStatement instruccion = null;
+        ResultSet resultado = null;
+        String sqlStatement;
+        Object[][]d = null;
+        try {
+            conexion = Fachada.startConnection();
+            sqlStatement =  "SELECT DISTINCT C, Fecha FROM recibo WHERE V = ?";
+            instruccion = conexion.prepareStatement(sqlStatement);
+            instruccion.setInt(1, v.getCedula());
+            System.out.println(instruccion);
+            resultado = instruccion.executeQuery();
+            if(resultado.next()){
+                resultado.last();
+                int r = resultado.getRow();
+                d = new Object[r][2];
+                int i = 0;
+                resultado.beforeFirst();
+                while(resultado.next()) {
+                    d[i][0] = resultado.getString(1);
+                    d[i][1] = resultado.getString(2);
+                    ++i;
+                }
+            }
+            
+        }
+        catch(SQLException e) {
+            System.out.println(e.toString());
+        }
+        finally {
+            try {
+                if(instruccion != null)
+                    instruccion.close();
+                if(conexion != null){
+                    conexion.close();
+                    Fachada.closeConnection();
+                }
+            }
+            catch (SQLException ex) {
+                // Do something ...
+            }
+        }
+        return d;
+
+    }
+    
     public double evaluarComision(Vendedor v, LocalDate t){
         
         Connection conexion = null;
