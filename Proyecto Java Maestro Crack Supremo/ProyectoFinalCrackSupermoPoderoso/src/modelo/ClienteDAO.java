@@ -124,7 +124,7 @@ public class ClienteDAO {
             instruccion.setString(1, nit);
             busqueda = instruccion.executeQuery();
 
-            if(busqueda != null) {
+            if(busqueda.next()) {
                 cliente = new Cliente();
                 cliente.setNIT(busqueda.getString(1));
                 cliente.setNombre(busqueda.getString(2));
