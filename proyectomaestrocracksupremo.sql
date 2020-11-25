@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2020 a las 02:11:49
+-- Tiempo de generación: 25-11-2020 a las 15:49:39
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -34,20 +34,23 @@ CREATE TABLE `cliente` (
   `X` double NOT NULL,
   `Y` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Volcado de datos para la tabla `cliente`
 --
-INSERT INTO `cliente`(`NIT`, `nombre`, `direccion`,`X`, `Y`)VALUES
-("125489"  ,  "Andres" , "cra50-#45-52" ,   3.415627  ,  -76.884625),
-("789645"  ,  "Julio"  , "cra60-#56-64" ,   3.789546  ,  -76.963248),
-("748553"  ,  "Antonio", "cra70-#78-75" ,   3.978654  ,  -76.713584),
-("963588"  ,  "Omar"   , "cra80-#98-89" ,   3.312645  ,  -76.746982),
-("852199"  ,  "Alberto", "cra90-#32-97" ,   3.481592  ,  -76.761843),
-("456888"  ,  "Hernan" , "cra100-#36-12" ,   3.789463  ,  -76.798462),
-("321565"  ,  "Mario"  , "cra102-#76-13" ,   3.745823  ,  -76.964484),
-("731923"  ,  "Javier" , "cra103-#74-54" ,   3.741852  ,  -76.742035),
-("468200"  ,  "Alejandro" ,  "cra104-#86-87" ,   3.741258  ,  -76.789520),
-("591709"  ,  "Mauricio"  ,  "cra104-#97-54" ,   3.963258  ,  -76.745862)
+
+INSERT INTO `cliente` (`NIT`, `nombre`, `direccion`, `X`, `Y`) VALUES
+('125489', 'Andres', 'cra50-#45-52', 3.415627, -76.884625),
+('321565', 'Mario', 'cra102-#76-13', 3.745823, -76.964484),
+('456888', 'Hernan', 'cra100-#36-12', 3.789463, -76.798462),
+('468200', 'Alejandro', 'cra104-#86-87', 3.741258, -76.78952),
+('591709', 'Mauricio', 'cra104-#97-54', 3.963258, -76.745862),
+('731923', 'Javier', 'cra103-#74-54', 3.741852, -76.742035),
+('748553', 'Antonio', 'cra70-#78-75', 3.978654, -76.713584),
+('789645', 'Julio', 'cra60-#56-64', 3.789546, -76.963248),
+('852199', 'Alberto', 'cra90-#32-97', 3.481592, -76.761843),
+('963588', 'Omar', 'cra80-#98-89', 3.312645, -76.746982);
+
 -- --------------------------------------------------------
 
 --
@@ -67,13 +70,13 @@ CREATE TABLE `materiaprima` (
 --
 
 INSERT INTO `materiaprima` (`nombre`, `cantidad`, `fechaCaducidad`, `NIT_proveedor`, `valorUnitario`) VALUES
-("masa-hojaldre", 400, 2020-11-05, "985263", 600),
-("harina-trigo", 250, 2020-11-05, "985263", 600),
-("carne", 500, 2020-12-03, "985263", 600),
-("pollo", 300, 2020-12-05, "985263", 600),
-("papa", 800, 2021-02-10, "985263", 600),
-("queso", 300, 2021-02-29, "985263", 600),
-("arroz", 180, 2020-12-31, "985263", 600)
+('arroz', 0, '2020-12-31', '985263', 600),
+('carne', 410, '2020-12-03', '985263', 600),
+('harina-trigo', 250, '2020-11-05', '985263', 600),
+('masa-hojaldre', 400, '2020-11-05', '985263', 600),
+('papa', 680, '2021-02-10', '985263', 600),
+('pollo', 300, '2020-12-05', '985263', 600),
+('queso', 300, '0000-00-00', '985263', 600);
 
 -- --------------------------------------------------------
 
@@ -93,15 +96,15 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`Nombre`, `Cantidad`, `Precio`, `FechaCaducidad`) VALUES
+('churro', 0, 50, '2020-11-25'),
+('dedo', 10, 60, '2020-11-27'),
 ('empanada', 10, 80, '2020-11-29'),
-('papaRellena',20, 90, '2020-11-29'),
-('pastelDeCarne',20, 100, '2020-11-30'),
-('pastelDePollo',30, 70, '2020-11-30'),
-('churro',60, 50, '2020-11-25'),
-('dedo',40, 60, '2020-11-27'),
-('hojaldra',50, 70, '2020-11-20');
+('hojaldra', 20, 70, '2020-11-20'),
+('papaRellena', 34, 90, '2020-11-29'),
+('pastelDeCarne', 20, 100, '2020-11-30'),
+('pastelDePollo', 10, 70, '2020-11-30');
 
--- ------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `proveedor`
@@ -120,11 +123,11 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`NIT`, `Nombre`, `Ubicacion`, `Telefono`, `Email`) VALUES
-('455301', 'lalo', 'calle#4950', 456421, 'dasd@correo.com'),
-('324567', 'lula', 'calle#4756', 462123, 'dtrey@correo.com'),
 ('315468', 'lulu', 'calle#4562', 489798, 'juyj@correo.com'),
+('324567', 'lula', 'calle#4756', 462123, 'dtrey@correo.com'),
+('455301', 'lalo', 'calle#4950', 456421, 'dasd@correo.com'),
 ('512245', 'lila', 'calle#7425', 421231, 'jliol@correo.com'),
-('778789', 'martha', 'calle#9632', 47446, 'papsa@correo.com@correo.com');
+('985263', 'martha', 'calle#9632', 47446, 'papsa@correo.com@correo.com');
 
 -- --------------------------------------------------------
 
@@ -143,18 +146,18 @@ CREATE TABLE `receta` (
 --
 
 INSERT INTO `receta` (`P`, `M`, `Cantidad`) VALUES
+('dedo', 'masa-hojaldre', 60),
+('dedo', 'queso', 40),
 ('Empanada', 'carne', 30),
 ('Empanada', 'papa', 50),
-('papaRellena', 'papa', 40),
-('papaRellena', 'carne', 30),
+('hojaldra', 'masa-hojaldre', 50),
 ('papaRellena', 'arroz', 60),
+('papaRellena', 'carne', 30),
+('papaRellena', 'papa', 40),
 ('pastelDeCarne', 'carne', 40),
-('pastelDeCarne', 'harinaDeTrigo', 80),
-('pastelDePollo', 'pollo', 50),
-('pastelDePollo', 'harinaDeTrigo', 80),
-('dedo', 'queso', 40),
-('dedo', 'masa-hojaldre', 60),
-('hojaldra', 'masa-hojaldre', 50);
+('pastelDeCarne', 'harina-Trigo', 80),
+('pastelDePollo', 'harina-Trigo', 80),
+('pastelDePollo', 'pollo', 50);
 
 -- --------------------------------------------------------
 
@@ -169,6 +172,19 @@ CREATE TABLE `recibo` (
   `Fecha` datetime NOT NULL,
   `Cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `recibo`
+--
+
+INSERT INTO `recibo` (`V`, `C`, `P`, `Fecha`, `Cantidad`) VALUES
+(456412, '125489', 'dedo', '2020-11-20 18:39:52', 20),
+(456412, '125489', 'hojaldra', '2020-11-20 18:39:52', 30),
+(456412, '125489', 'pastelDePollo', '2020-11-20 18:39:52', 20),
+(456412, '456888', 'churro', '2020-11-20 19:06:29', 30),
+(456412, '456888', 'dedo', '2020-11-20 19:06:29', 10),
+(456412, '963588', 'churro', '2020-11-20 19:07:22', 30),
+(456412, '963588', 'papaRellena', '2020-11-20 19:07:22', 10);
 
 -- --------------------------------------------------------
 
@@ -185,17 +201,17 @@ CREATE TABLE `vendedores` (
   `correo` varchar(50) NOT NULL,
   `sexo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
---
--- Volcado de datos para la tabla `receta`
---
-INSERT INTO  `vendedores`(`cedula`,`nombre`,`cargo`,`comision`,`Telefono`,`correo`,`sexo`)
-VALUES 
-(456412,'Mario','vendedor',0.12,312353635,'dasda@correo.com'),
-(478798,'Marcus','vendedor',0.12,31055254,'htgr@correo.com'),
-(478541,'Arnold','vendedor',0.11,31425625,'ujki@correo.com'),
-(478544,'Bryan','vendedor',0.13,3124564,'lilo@correo.com'),
-(7884532,'Anton','vendedor',0.14,31324547,'kaka@correo.com');
 
+--
+-- Volcado de datos para la tabla `vendedores`
+--
+
+INSERT INTO `vendedores` (`cedula`, `nombre`, `cargo`, `comision`, `Telefono`, `correo`, `sexo`) VALUES
+(456412, 'Mario', 'vendedor', 0.12, 312353635, 'dasda@correo.com', 'M'),
+(478541, 'Arnold', 'vendedor', 0.11, 31425625, 'ujki@correo.com', 'M'),
+(478544, 'Bryan', 'vendedor', 0.13, 3124564, 'lilo@correo.com', 'M'),
+(478798, 'Marcus', 'vendedor', 0.12, 31055254, 'htgr@correo.com', 'M'),
+(7884532, 'Anton', 'vendedor', 0.14, 31324547, 'kaka@correo.com', 'M');
 
 --
 -- Índices para tablas volcadas
