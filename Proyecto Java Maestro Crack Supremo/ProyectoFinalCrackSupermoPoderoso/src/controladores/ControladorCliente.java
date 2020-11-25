@@ -2,6 +2,8 @@
 
 package controladores;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import vistas.VistaCliente;
 
@@ -11,9 +13,27 @@ public class ControladorCliente {
     
     public ControladorCliente(VistaCliente vistaC){
         this.VC = vistaC;
-        this.VC.setVisible(true);        
+        this.VC.setVisible(true);       
+        
+        
     }
-    public void funcion(){
-        JOptionPane.showMessageDialog(null, "funcion controlador de vendedor");
+    
+    
+    class ProgramaListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            if(e.getActionCommand().equalsIgnoreCase("nuevo")){
+                
+            }else if(e.getActionCommand().equalsIgnoreCase("cancelar")){
+                
+            }else if(e.getActionCommand().equalsIgnoreCase("modificar")){
+                
+            }else if(e.getActionCommand().equalsIgnoreCase("salir")){
+                
+            }
+        }
+
     }
 }
