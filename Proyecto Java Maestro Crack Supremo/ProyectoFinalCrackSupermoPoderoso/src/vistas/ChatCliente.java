@@ -23,7 +23,7 @@ public class ChatCliente extends JFrame implements ActionListener{
 	private void initialize() {
 		setTitle( "Cliente" );
 		setBounds(100, 100, 450, 337);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		
@@ -47,11 +47,11 @@ public class ChatCliente extends JFrame implements ActionListener{
 		
 		
 		textArea = new JTextArea();
-        //textArea.setBounds(10, 43, 424, 223);
-        //getContentPane().add(textArea);
-        scroll = new JScrollPane(textArea);
-        scroll.setBounds(2, 31, 432, 247);
-        getContentPane().add(scroll);
+                 //textArea.setBounds(10, 43, 424, 223);
+                //getContentPane().add(textArea);
+                scroll = new JScrollPane(textArea);
+                scroll.setBounds(2, 31, 432, 247);
+                getContentPane().add(scroll);
         
 		txtMensaje = new JTextField();
 		txtMensaje.setBounds(2, 277, 344, 22);
@@ -65,6 +65,12 @@ public class ChatCliente extends JFrame implements ActionListener{
 		
 		btnSend.addActionListener(this);
 		txtMensaje.addActionListener(this);
+                addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        guardarChat();
+                    }
+                });
 		setVisible(true);
 	}
 	
@@ -120,6 +126,7 @@ public class ChatCliente extends JFrame implements ActionListener{
 				paqueteVendedor = (PaqueteDeDatos)entrada.readObject();
 				nameVendedor = paqueteVendedor.getNameCliente();
 				mensaje = paqueteVendedor.getMensaje();
+                                mensajeToSave += "\n" + nameVendedor + "\n" + mensaje + "\n";
 				showMessage("\n" + nameVendedor + "\n" + mensaje + "\n");
 			}
 			catch(ClassNotFoundException e) {
@@ -153,7 +160,7 @@ public class ChatCliente extends JFrame implements ActionListener{
 			
 			salida.writeObject(datagramaCliente);
 			//salida.flush();
-			
+			mensajeToSave += nameCliente + "\n" + message + "\n";
 			showMessage(nameCliente + "\n" + message + "\n");
 		}
 		catch(IOException e) {
@@ -177,6 +184,35 @@ public class ChatCliente extends JFrame implements ActionListener{
 			txtMensaje.setText("");
 		}
 	}
+        
+        public void guardarChat() {
+            
+            int opcion = JOptionPane.showConfirmDialog(null, "¡¿Deseas guardar registro de la conversación?!",
+                    "Mensaje", JOptionPane.OK_CANCEL_OPTION);
+            
+            if(opcion == JOptionPane.OK_OPTION) {
+                try {
+                    
+                    JFileChooser selectFile = new JFileChooser();
+                    selectFile.showSaveDialog(this);
+                    File archivo = selectFile.getSelectedFile();
+                
+                    if(archivo != null) {
+                        FileWriter writeToFile = new FileWriter(archivo + ".txt");
+                        writeToFile.write(mensajeToSave);
+                        writeToFile.close();
+                    }
+                }
+                catch(IOException e) {
+                    JOptionPane.showMessageDialog(null, "No se pudo guardar su archivo", "Error", JOptionPane.WARNING_MESSAGE);
+                }
+                finally {
+                    System.exit(0);
+                }
+            }
+            else
+                System.exit(0);
+        }
 
 	public static void main(String[] args) {
 		ChatCliente cliente = new ChatCliente("Tsubaki", "127.0.0.1");
@@ -195,5 +231,6 @@ public class ChatCliente extends JFrame implements ActionListener{
 	private String direccionIP;
 	private Socket cliente;
 	private JScrollPane scroll;
+        private String mensajeToSave;
 }
 
