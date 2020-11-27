@@ -1,6 +1,7 @@
+package vistas;
 import java.io.Serializable;
 
-class PaqueteDeDatos implements Serializable{
+public class PaqueteDeDatos implements Serializable{
 	private String nameCliente;
 	private String mensaje;
 	
