@@ -1,4 +1,5 @@
 package vistas;
+import modelo.PaqueteDeDatos;
 import javax.swing.*;
 import java.io.*;
 import java.net.*;
@@ -17,9 +18,9 @@ public class ChatCliente extends JFrame implements ActionListener{
 		nameCliente = cliente;
 		direccionIP = direccion;
 		initialize();
-        txtMensaje.setEditable(false);
-        btnSend.setEnabled(false);
-        iniciarCliente();
+            txtMensaje.setEditable(false);
+            btnSend.setEnabled(false);
+            iniciarCliente();
 	}
 
 	private void initialize() {

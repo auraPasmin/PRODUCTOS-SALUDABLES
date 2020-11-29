@@ -1,4 +1,5 @@
 package vistas;
+import modelo.PaqueteDeDatos;
 import javax.swing.*;
 import java.io.*;
 import java.net.*;
@@ -37,7 +38,7 @@ public class ChatServidor extends JFrame implements ActionListener{
 		icono.setBackground(Color.WHITE);
 		icono.setBounds(10, 0, 30, 30);
 		menu.add(icono);
-		icono.setIcon(new ImageIcon(getClass().getResource("/recurso/user.png")));
+		//icono.setIcon(new ImageIcon(getClass().getResource("/recurso/user.png")));
 		
 		lblNombreUsuario = new JLabel(nameVendedor);
 		lblNombreUsuario.setForeground(Color.RED);
