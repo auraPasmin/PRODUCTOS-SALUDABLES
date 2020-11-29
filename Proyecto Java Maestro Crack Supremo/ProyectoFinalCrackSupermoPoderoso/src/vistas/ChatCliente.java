@@ -42,7 +42,7 @@ public class ChatCliente extends JFrame implements ActionListener{
 		
 		lblNombreUsuario = new JLabel(nameCliente);
 		lblNombreUsuario.setForeground(Color.RED);
-		lblNombreUsuario.setBounds(50, 11, 48, 14);
+		lblNombreUsuario.setBounds(50, 11, 60, 14);
 		menu.add(lblNombreUsuario);
 		
 		
@@ -95,6 +95,7 @@ public class ChatCliente extends JFrame implements ActionListener{
 		showMessage("Iniciando conexion\n");
 		try {
 			cliente = new Socket(InetAddress.getByName(direccionIP), 9009);
+                        showMessage("conexion Lista\n");
 		}
 		catch(IOException e) {
 			showMessage("Error no se ha podido establecer la conexion");
@@ -108,7 +109,7 @@ public class ChatCliente extends JFrame implements ActionListener{
 			salida.flush();
 			
 			entrada = new ObjectInputStream(cliente.getInputStream());
-			showMessage("Flujos de entrada/salida listos\n");
+			showMessage("Output/Input -> ready\n");
 		}
 		catch(IOException e) {
 			showMessage(e.getMessage());
@@ -116,18 +117,16 @@ public class ChatCliente extends JFrame implements ActionListener{
 	}
 	
 	public void process() throws IOException{
-		String nameVendedor;
-		String mensaje;
 		txtMensaje.setEditable(true);
 		btnSend.setEnabled(true);
+                
 		do {
 			try {
 				PaqueteDeDatos paqueteVendedor;
 				paqueteVendedor = (PaqueteDeDatos)entrada.readObject();
-				nameVendedor = paqueteVendedor.getNameCliente();
-				mensaje = paqueteVendedor.getMensaje();
-                                mensajeToSave += "\n" + nameVendedor + "\n" + mensaje + "\n";
-				showMessage("\n" + nameVendedor + "\n" + mensaje + "\n");
+				
+                                mensajeToSave += printPaquete(paqueteVendedor);
+				showMessage(printPaquete(paqueteVendedor));
 			}
 			catch(ClassNotFoundException e) {
 				showMessage("Ten cuidado con quien hablas");
@@ -135,9 +134,9 @@ public class ChatCliente extends JFrame implements ActionListener{
 			
 		}while(cliente.isConnected());
 	}
-	
+        
 	public void closeCliente() {
-		showMessage("Se ha cerrado la conexion\n");
+		showMessage("Fin del Chat\n");
 		txtMensaje.setEditable(false);
 		btnSend.setEnabled(false);
 		
@@ -152,21 +151,30 @@ public class ChatCliente extends JFrame implements ActionListener{
 	}
 	
 	public void sendMessages(String message) {
-		PaqueteDeDatos datagramaCliente = null;
+		PaqueteDeDatos paqueteCliente = null;
 		try {
-			datagramaCliente = new PaqueteDeDatos();
-			datagramaCliente.setNameCliente(nameCliente);
-			datagramaCliente.setMensaje(message);
+			paqueteCliente = new PaqueteDeDatos();
+			paqueteCliente.setNameUser(nameCliente);
+			paqueteCliente.setMensaje(message);
 			
-			salida.writeObject(datagramaCliente);
+			salida.writeObject(paqueteCliente);
 			//salida.flush();
-			mensajeToSave += nameCliente + "\n" + message + "\n";
-			showMessage(nameCliente + "\n" + message + "\n");
+			mensajeToSave += printPaquete(paqueteCliente);
+			showMessage(printPaquete(paqueteCliente));
 		}
 		catch(IOException e) {
 			showMessage("No se pudo escribir el mensaje\n\n");
 		}
 	}
+        
+        public String printPaquete(PaqueteDeDatos paquete) {
+            String nameVendedor = "";
+            String mensaje = "";
+            
+            nameVendedor = paquete.getNameUser();
+            mensaje = paquete.getMensaje();
+            return ("\n" + nameVendedor + "\n" + mensaje + "\n");
+        }
 	
 	public void showMessage(String message) {
 		textArea.append(message);
@@ -199,6 +207,7 @@ public class ChatCliente extends JFrame implements ActionListener{
                 
                     if(archivo != null) {
                         FileWriter writeToFile = new FileWriter(archivo + ".txt");
+                        //System.out.print(mensajeToSave);
                         writeToFile.write(mensajeToSave);
                         writeToFile.close();
                     }
@@ -231,6 +240,6 @@ public class ChatCliente extends JFrame implements ActionListener{
 	private String direccionIP;
 	private Socket cliente;
 	private JScrollPane scroll;
-        private String mensajeToSave;
+        private String mensajeToSave = "";
 }
 
