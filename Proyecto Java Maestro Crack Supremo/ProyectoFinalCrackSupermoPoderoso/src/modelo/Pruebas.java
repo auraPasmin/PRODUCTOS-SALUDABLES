@@ -23,7 +23,7 @@ public class Pruebas {
         * /*/
         
         // Prueba Santiago
-        ControladorCCliente cc = new ControladorCCliente("master", "localhost");
+        ControladorCVendedor cc = new ControladorCVendedor("master");
                 
         
     }

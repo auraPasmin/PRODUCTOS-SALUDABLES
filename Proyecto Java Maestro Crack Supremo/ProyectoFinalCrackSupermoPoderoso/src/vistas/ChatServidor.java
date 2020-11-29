@@ -17,6 +17,7 @@ public class ChatServidor extends JFrame {
 		initialize();
             txtMensaje.setEditable(true);
             btnSend.setEnabled(true);
+            btnSend.setFocusable(true);
 	}
 
 	private void initialize() {

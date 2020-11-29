@@ -6,7 +6,7 @@ import modelo.CVendedor;
 import vistas.ChatServidor;
 
 public class ControladorCVendedor {
-        CVendedor chatVendedor;
+    CVendedor chatVendedor;
     ChatServidor vista;
 
     public ControladorCVendedor(String cliente) {
