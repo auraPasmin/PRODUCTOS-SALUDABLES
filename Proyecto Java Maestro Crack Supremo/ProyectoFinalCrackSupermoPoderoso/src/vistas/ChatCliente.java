@@ -107,7 +107,6 @@ public class ChatCliente extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(null, "Parece que no hay vendedores disponibles", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
                         continuar = false;
                         dispose();
-                        System.out.println(e.getMessage());
 		}
 	}
 	
@@ -120,7 +119,7 @@ public class ChatCliente extends JFrame implements ActionListener{
 			showMessage("Output/Input -> ready\n");
 		}
 		catch(IOException | NullPointerException e) {
-			System.out.println("soy outputinput");
+			e.getMessage();
 		}
 	}
 	
@@ -137,7 +136,7 @@ public class ChatCliente extends JFrame implements ActionListener{
 				showMessage(printPaquete(paqueteVendedor));
 			}
 			catch(ClassNotFoundException | NullPointerException e) {
-				System.out.println("soy process");
+				e.getMessage();
 			}
 			
 		}while(cliente.isConnected());
@@ -154,7 +153,6 @@ public class ChatCliente extends JFrame implements ActionListener{
 			cliente.close();
 		}
 		catch(IOException e) {
-                    System.out.println("soy yo perras");
 			e.getCause();
 		}
 	}
@@ -225,18 +223,16 @@ public class ChatCliente extends JFrame implements ActionListener{
                     JOptionPane.showMessageDialog(null, "No se pudo guardar su archivo", "Error", JOptionPane.WARNING_MESSAGE);
                 }
                 finally {
-                    //System.exit(0);
                     dispose();
                 }
             }
             else
-                //System.exit(0);
                 dispose();
         }
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		ChatCliente cliente = new ChatCliente("Tsubaki", "127.0.0.1");
-	}
+	}*/
 	
 	private JTextField txtMensaje;
 	private JTextArea textArea;
