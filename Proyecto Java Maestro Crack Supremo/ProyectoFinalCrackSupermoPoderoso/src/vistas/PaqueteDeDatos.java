@@ -2,20 +2,20 @@ package vistas;
 import java.io.Serializable;
 
 public class PaqueteDeDatos implements Serializable{
-	private String nameCliente;
+	private String nameUser;
 	private String mensaje;
 	
 	public PaqueteDeDatos() {
-		nameCliente = "";
+		nameUser = "";
 		mensaje = "";
 	}
 
-	public String getNameCliente() {
-		return nameCliente;
+	public String getNameUser() {
+		return nameUser;
 	}
 
-	public void setNameCliente(String nameCliente) {
-		this.nameCliente = nameCliente;
+	public void setNameUser(String nameUser) {
+		this.nameUser = nameUser;
 	}
 
 	public String getMensaje() {
