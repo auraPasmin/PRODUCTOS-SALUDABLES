@@ -1,4 +1,4 @@
-package modelo;
+package vistas;
 import java.io.Serializable;
 
 public class PaqueteDeDatos implements Serializable{
