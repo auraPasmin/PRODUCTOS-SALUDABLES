@@ -28,7 +28,8 @@ public class ControladorCliente {
         VC = new VistaCliente();
         VC.btnChatActionPerformed(new ProgramaListener());
         VC.btnMostrarActionPerformed(new ProgramaListener());
-        VC.setVisible(true);    
+        VC.setVisible(true);
+        VC.setjtaDatospersonales("Datos personales: \n" + cliente.getNIT() + "\n" + cliente.getNombre() + "\n" + cliente.getDireccion());
         this.mostrarTabla();
     }
     private void mostrarTabla(){

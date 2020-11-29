@@ -212,7 +212,9 @@ public class VistaCliente extends javax.swing.JFrame {
     public JTable getJtFacturas() {
         return jtFacturas;
     }
-    
+    public void setjtaDatospersonales(String data){
+        jtaDatospersonales.setText(data);
+    }
     public void btnMostrarActionPerformed(ActionListener al){
         btnMostrar.addActionListener(al);
     }
