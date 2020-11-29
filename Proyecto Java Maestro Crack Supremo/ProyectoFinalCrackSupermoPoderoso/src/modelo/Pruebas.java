@@ -1,6 +1,7 @@
 package modelo;
 
 
+import controladores.ControladorCliente;
 import controladores.ControladorLogin;
 import vistas.*;
 import hilos.AutomaticFillerMP;
@@ -32,6 +33,11 @@ public class Pruebas {
         
         // Prueba Santiago
         
+        
+        VistaCliente VC = new VistaCliente();
+        ClienteDAO CDAO = new ClienteDAO();
+        ControladorCliente CC = new ControladorCliente(VC, CDAO);
+                
         
     }
 }

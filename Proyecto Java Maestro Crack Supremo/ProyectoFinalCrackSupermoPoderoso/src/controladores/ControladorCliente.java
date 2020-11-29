@@ -19,9 +19,11 @@ public class ControladorCliente {
     private ClienteDAO cdao = null;
     private Cliente cliente = null;
     private ReciboDAO RDAO = new ReciboDAO();
-    
-    public ControladorCliente(){
-        VC = new VistaCliente();
+  
+    public ControladorCliente(VistaCliente VC, ClienteDAO cdao){
+        this.VC = VC; 
+        this.cdao = cdao;
+        //VC = new VistaCliente();
         VC.btnChatActionPerformed(new ProgramaListener());
         VC.setVisible(true);    
         this.mostrarTabla();
