@@ -61,6 +61,7 @@ public class ControladorLogin {
                 VistaVendedor n = new VistaVendedor();
                 n.setVisible(true);
                 vista.dispose();
+                return;
             } catch (NEDException | NumberFormatException ex) {
                 V = null;
             }
@@ -68,6 +69,7 @@ public class ControladorLogin {
                 C = c.cargarCliente(cad);
                 ControladorCliente controlador = new ControladorCliente(C);
                 vista.dispose();
+                return;
             } catch (NEDException ex) {
                 C = null;
             }

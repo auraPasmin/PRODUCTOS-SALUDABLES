@@ -29,7 +29,7 @@ public class ControladorCliente {
         VC.btnChatActionPerformed(new ProgramaListener());
         VC.btnMostrarActionPerformed(new ProgramaListener());
         VC.setVisible(true);
-        VC.setjtaDatospersonales("Datos personales: \n" + cliente.getNIT() + "\n" + cliente.getNombre() + "\n" + cliente.getDireccion());
+        VC.setjtaDatospersonales("Datos personales: \nNIT: " + cliente.getNIT() + "\nNombre:" + cliente.getNombre() + "\nDireccion: " + cliente.getDireccion());
         this.mostrarTabla();
     }
     private void mostrarTabla(){
