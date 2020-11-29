@@ -20,11 +20,10 @@ public class CCliente extends Thread{
         public void run(){
             iniciarCliente();
         }
-	public CCliente(String cliente, String direccion) {
-		nameCliente = cliente;
-		direccionIP = direccion;
-
-        
+	public CCliente(String cliente, String direccion,JTextArea text) {
+            texto = text;
+            nameCliente = cliente;
+            direccionIP = direccion;
 	}
 
 
