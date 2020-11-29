@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ChatCliente extends JFrame implements ActionListener{
+    
+    private boolean continuar = true;
 	
 	/**
 	 * Create the application.
@@ -77,16 +79,20 @@ public class ChatCliente extends JFrame implements ActionListener{
 	public void iniciarCliente() {
 		try {
 			startClienteConexion();
-			OutputInputOfData();
-			process();
+                        if(continuar) {
+                            OutputInputOfData();
+			    process();
+                        }
 		}
 		catch(EOFException e) {
 			showMessage("Se termino la seccion");
 		}
-		catch(IOException e) {
-			e.getMessage();
+		catch(IOException | NullPointerException e) {
+                    System.out.println("this 1");
+                    this.dispose();
 		}
 		finally {
+                    if(continuar)
 			closeCliente();
 		}
 	}
@@ -97,9 +103,11 @@ public class ChatCliente extends JFrame implements ActionListener{
 			cliente = new Socket(InetAddress.getByName(direccionIP), 9009);
                         showMessage("conexion Lista\n");
 		}
-		catch(IOException e) {
-			showMessage("Error no se ha podido establecer la conexion");
-			showMessage(e.getMessage());
+		catch(IOException | NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Parece que no hay vendedores disponibles", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                        continuar = false;
+                        dispose();
+                        System.out.println(e.getMessage());
 		}
 	}
 	
@@ -111,8 +119,8 @@ public class ChatCliente extends JFrame implements ActionListener{
 			entrada = new ObjectInputStream(cliente.getInputStream());
 			showMessage("Output/Input -> ready\n");
 		}
-		catch(IOException e) {
-			showMessage(e.getMessage());
+		catch(IOException | NullPointerException e) {
+			System.out.println("soy outputinput");
 		}
 	}
 	
@@ -128,8 +136,8 @@ public class ChatCliente extends JFrame implements ActionListener{
                                 mensajeToSave += printPaquete(paqueteVendedor);
 				showMessage(printPaquete(paqueteVendedor));
 			}
-			catch(ClassNotFoundException e) {
-				showMessage("Ten cuidado con quien hablas");
+			catch(ClassNotFoundException | NullPointerException e) {
+				System.out.println("soy process");
 			}
 			
 		}while(cliente.isConnected());
@@ -146,6 +154,7 @@ public class ChatCliente extends JFrame implements ActionListener{
 			cliente.close();
 		}
 		catch(IOException e) {
+                    System.out.println("soy yo perras");
 			e.getCause();
 		}
 	}
@@ -216,11 +225,13 @@ public class ChatCliente extends JFrame implements ActionListener{
                     JOptionPane.showMessageDialog(null, "No se pudo guardar su archivo", "Error", JOptionPane.WARNING_MESSAGE);
                 }
                 finally {
-                    System.exit(0);
+                    //System.exit(0);
+                    dispose();
                 }
             }
             else
-                System.exit(0);
+                //System.exit(0);
+                dispose();
         }
 
 	public static void main(String[] args) {

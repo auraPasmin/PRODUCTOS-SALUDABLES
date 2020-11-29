@@ -5,6 +5,9 @@
  */
 package vistas;
 
+import modelo.*;
+import vistas.*;
+
 import controladores.ControladorLogin;
 
 /**
@@ -13,6 +16,7 @@ import controladores.ControladorLogin;
  */
 public class Execute {
     public static void main(String[]args){
+        
         ControladorLogin c = new ControladorLogin();
     }
 }

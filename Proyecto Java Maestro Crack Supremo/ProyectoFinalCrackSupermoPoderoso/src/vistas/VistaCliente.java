@@ -6,6 +6,7 @@
 package vistas;
 
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.*;
 
 /**
  *
@@ -80,11 +81,11 @@ public class VistaCliente extends javax.swing.JFrame {
         lblDatospersonales.setText("datos personales registrados");
 
         btnChat.setText("iniciar Chat");
-        btnChat.addActionListener(new java.awt.event.ActionListener() {
+        /*btnChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChatActionPerformed(evt);
             }
-        });
+        });*/
 
         lblAsesor.setText("hablar con un asesor");
 
@@ -186,6 +187,9 @@ public class VistaCliente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    public void btnChatActionPerformed(ActionListener listener) {
+        btnChat.addActionListener(listener);
+    }
     private void btnChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnChatActionPerformed

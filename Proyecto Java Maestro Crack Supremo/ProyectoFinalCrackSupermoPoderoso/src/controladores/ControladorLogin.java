@@ -1,5 +1,6 @@
 package controladores;
 
+import controladores.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -65,8 +66,7 @@ public class ControladorLogin {
             }
             try {
                 C = c.cargarCliente(cad);
-                VistaCliente n = new VistaCliente();
-                n.setVisible(true);
+                ControladorCliente controlador = new ControladorCliente();
                 vista.dispose();
             } catch (NEDException ex) {
                 C = null;

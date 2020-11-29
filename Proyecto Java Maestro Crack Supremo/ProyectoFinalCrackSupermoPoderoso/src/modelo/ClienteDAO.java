@@ -136,7 +136,7 @@ public class ClienteDAO {
             }
         }
         catch(SQLException e) {
-            // Do something ...
+            System.out.println("error: " + e.getMessage());
         }
         finally {
             try {
@@ -148,7 +148,7 @@ public class ClienteDAO {
                 }
             }
             catch(SQLException ex) {
-                // Do something ...
+                System.out.println("Error 2: " + ex.getMessage());
             }
         }
         return cliente;
