@@ -204,7 +204,7 @@ public class ReciboDAO {
         return resultado;
     }
     
-    public String generarRecibo(int cedula, String NIT, LocalDate day){    
+    public Object[][] generarRecibo(int cedula, String NIT, LocalDate day){    
         Connection conexion = null;
         PreparedStatement instruccion = null;
         ResultSet resultado = null;
@@ -256,7 +256,7 @@ public class ReciboDAO {
                 // Do something ...
             }
         }
-        return data.trim();
+        return d;
 
     }
     
