@@ -1,11 +1,11 @@
 package vistas;
+
 import javax.swing.*;
 import java.io.*;
 import java.net.*;
 import java.awt.*;
-import java.awt.event.*;
 
-public class ChatCliente extends JFrame implements ActionListener{
+public class ChatCliente extends JFrame{
     
     private boolean continuar = true;
 	
@@ -13,13 +13,12 @@ public class ChatCliente extends JFrame implements ActionListener{
 	 * Create the application.
 	 */
 	public ChatCliente(String cliente, String direccion) {
-		setResizable(false);
-		nameCliente = cliente;
-		direccionIP = direccion;
-		initialize();
-        txtMensaje.setEditable(false);
-        btnSend.setEnabled(false);
-        iniciarCliente();
+            setResizable(false);
+            nameCliente = cliente;
+            direccionIP = direccion;
+            initialize();
+            txtMensaje.setEditable(false);
+            btnSend.setEnabled(false);
 	}
 
 	private void initialize() {
@@ -65,174 +64,55 @@ public class ChatCliente extends JFrame implements ActionListener{
 		btnSend.setBounds(345, 276, 94, 23);
 		getContentPane().add(btnSend);
 		
-		btnSend.addActionListener(this);
-		txtMensaje.addActionListener(this);
-                addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        guardarChat();
-                    }
-                });
+
 		setVisible(true);
 	}
 	
-	public void iniciarCliente() {
-		try {
-			startClienteConexion();
-                        if(continuar) {
-                            OutputInputOfData();
-			    process();
-                        }
-		}
-		catch(EOFException e) {
-			showMessage("Se termino la seccion");
-		}
-		catch(IOException | NullPointerException e) {
-                    //this.dispose();
-                    e.getMessage();
-		}
-		finally {
-                    if(continuar)
-			closeCliente();
-		}
-	}
-	
-	public void startClienteConexion() {
-		showMessage("Iniciando conexion\n");
-		try {
-			cliente = new Socket(InetAddress.getByName(direccionIP), 9009);
-                        showMessage("conexion Lista\n");
-		}
-		catch(IOException | NullPointerException e) {
-			JOptionPane.showMessageDialog(null, "Parece que no hay vendedores disponibles", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
-                        continuar = false;
-                        dispose();
-		}
-	}
-	
-	public void OutputInputOfData() {
-		try {
-			salida = new ObjectOutputStream(cliente.getOutputStream());
-			salida.flush();
-			
-			entrada = new ObjectInputStream(cliente.getInputStream());
-			showMessage("Output/Input -> ready\n");
-		}
-		catch(IOException | NullPointerException e) {
-			e.getMessage();
-		}
-	}
-	
-	public void process() throws IOException{
-		txtMensaje.setEditable(true);
-		btnSend.setEnabled(true);
-                
-		do {
-			try {
-				PaqueteDeDatos paqueteVendedor;
-				paqueteVendedor = (PaqueteDeDatos)entrada.readObject();
-				
-                                mensajeToSave += printPaquete(paqueteVendedor);
-				showMessage(printPaquete(paqueteVendedor));
-			}
-			catch(ClassNotFoundException | NullPointerException e) {
-				e.getMessage();
-			}
-			
-		}while(cliente.isConnected());
-	}
-        
-	public void closeCliente() {
-		showMessage("Fin del Chat\n");
-		txtMensaje.setEditable(false);
-		btnSend.setEnabled(false);
-		
-		try {
-			entrada.close();
-			salida.close();
-			cliente.close();
-		}
-		catch(IOException e) {
-			e.getCause();
-		}
-	}
-	
-	public void sendMessages(String message) {
-		PaqueteDeDatos paqueteCliente = null;
-		try {
-			paqueteCliente = new PaqueteDeDatos();
-			paqueteCliente.setNameUser(nameCliente);
-			paqueteCliente.setMensaje(message);
-			
-			salida.writeObject(paqueteCliente);
-			//salida.flush();
-			mensajeToSave += printPaquete(paqueteCliente);
-			showMessage(printPaquete(paqueteCliente));
-		}
-		catch(IOException e) {
-			showMessage("No se pudo escribir el mensaje\n\n");
-		}
-	}
-        
-        public String printPaquete(PaqueteDeDatos paquete) {
-            String nameVendedor = "";
-            String mensaje = "";
-            
-            nameVendedor = paquete.getNameUser();
-            mensaje = paquete.getMensaje();
-            return ("\n" + nameVendedor + "\n" + mensaje + "\n");
-        }
-	
-	public void showMessage(String message) {
-		textArea.append(message);
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent event) {
-		mensajeaEnviar = txtMensaje.getText();
-		sendMessages(mensajeaEnviar);
-		txtMensaje.setText("");
-		
-		if(event.getSource() == "enviar") {
-			mensajeaEnviar = txtMensaje.getText();
-			sendMessages(mensajeaEnviar);
-			txtMensaje.setText("");
-		}
-	}
-        
-        public void guardarChat() {
-            
-            int opcion = JOptionPane.showConfirmDialog(null, "¡¿Deseas guardar registro de la conversación?!",
-                    "Mensaje", JOptionPane.OK_CANCEL_OPTION);
-            
-            if(opcion == JOptionPane.OK_OPTION) {
-                try {
-                    
-                    JFileChooser selectFile = new JFileChooser();
-                    selectFile.showSaveDialog(this);
-                    File archivo = selectFile.getSelectedFile();
-                
-                    if(archivo != null) {
-                        FileWriter writeToFile = new FileWriter(archivo + ".txt");
-                        //System.out.print(mensajeToSave);
-                        writeToFile.write(mensajeToSave);
-                        writeToFile.close();
-                    }
-                }
-                catch(IOException e) {
-                    JOptionPane.showMessageDialog(null, "No se pudo guardar su archivo", "Error", JOptionPane.WARNING_MESSAGE);
-                }
-                finally {
-                    dispose();
-                }
-            }
-            else
-                dispose();
-        }
 
-	public static void main(String[] args) {
-		ChatCliente cliente = new ChatCliente("Tsubaki", "127.0.0.1");
-	}
+	
+//	@Override
+//	public void actionPerformed(ActionEvent event) {
+//		mensajeaEnviar = txtMensaje.getText();
+//		sendMessages(mensajeaEnviar);
+//		txtMensaje.setText("");
+//		
+//		if(event.getSource() == "enviar") {
+//			mensajeaEnviar = txtMensaje.getText();
+//			sendMessages(mensajeaEnviar);
+//			txtMensaje.setText("");
+//		}
+//	}
+//        
+//        public void guardarChat() {
+//            
+//            int opcion = JOptionPane.showConfirmDialog(null, "¡¿Deseas guardar registro de la conversación?!",
+//                    "Mensaje", JOptionPane.OK_CANCEL_OPTION);
+//            
+//            if(opcion == JOptionPane.OK_OPTION) {
+//                try {
+//                    
+//                    JFileChooser selectFile = new JFileChooser();
+//                    selectFile.showSaveDialog(this);
+//                    File archivo = selectFile.getSelectedFile();
+//                
+//                    if(archivo != null) {
+//                        FileWriter writeToFile = new FileWriter(archivo + ".txt");
+//                        //System.out.print(mensajeToSave);
+//                        writeToFile.write(mensajeToSave);
+//                        writeToFile.close();
+//                    }
+//                }
+//                catch(IOException e) {
+//                    JOptionPane.showMessageDialog(null, "No se pudo guardar su archivo", "Error", JOptionPane.WARNING_MESSAGE);
+//                }
+//                finally {
+//                    dispose();
+//                }
+//            }
+//            else
+//                dispose();
+//        }
+
 	
 	private JTextField txtMensaje;
 	private JTextArea textArea;
