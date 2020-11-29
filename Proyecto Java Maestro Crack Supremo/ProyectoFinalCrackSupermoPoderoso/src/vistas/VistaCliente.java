@@ -59,7 +59,7 @@ public class VistaCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "producto", "vendedor", "fecha", "cantidad"
+                "Vendedor", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(jtFacturas);

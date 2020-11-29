@@ -20,10 +20,10 @@ public class ControladorCliente {
     private Cliente cliente = null;
     private ReciboDAO RDAO = new ReciboDAO();
   
-    public ControladorCliente(VistaCliente VC, ClienteDAO cdao){
+    public ControladorCliente(){
         this.VC = VC; 
-        this.cdao = cdao;
-        //VC = new VistaCliente();
+        this.cdao = new ClienteDAO();
+        VC = new VistaCliente();
         VC.btnChatActionPerformed(new ProgramaListener());
         VC.setVisible(true);    
         this.mostrarTabla();

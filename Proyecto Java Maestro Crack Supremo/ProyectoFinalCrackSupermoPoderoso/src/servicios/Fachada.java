@@ -21,10 +21,12 @@ public class Fachada {
                 //Recupera los parámetros de conexión del archivo 
                 //jdbc.properties
 
-                ResourceBundle resource = ResourceBundle.getBundle("servicios.jdbc");
-                String driver = resource.getString("driver");
-                String url = resource.getString("url");
-                String usr = resource.getString("usr");
+                //ResourceBundle resource = ResourceBundle.getBundle("servicios.jdbc");
+                String driver = "com.mysql.jdbc.Driver";
+                //resource.getString("driver");
+                String url = "jdbc:mysql://localhost:3306/proyectomaestrocracksupremo";
+                        //resource.getString("url");
+                String usr = "root";
                 String pwd = "";
                 
                 Class.forName(driver);

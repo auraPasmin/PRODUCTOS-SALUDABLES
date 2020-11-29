@@ -33,10 +33,7 @@ public class Pruebas {
         
         // Prueba Santiago
         
-        
-        VistaCliente VC = new VistaCliente();
-        ClienteDAO CDAO = new ClienteDAO();
-        ControladorCliente CC = new ControladorCliente(VC, CDAO);
+        ControladorCliente CC = new ControladorCliente();
                 
         
     }
