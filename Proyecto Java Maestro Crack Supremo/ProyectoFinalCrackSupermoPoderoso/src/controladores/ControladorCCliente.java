@@ -1,14 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controladores;
 
-/**
- *
- * @author Reynell
- */
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import modelo.*;
+import vistas.ChatCliente;
+
 public class ControladorCCliente {
+    CCliente chatCliente;
+    ChatCliente vista;
+
+    public ControladorCCliente(String cliente, String direccion) {
+        vista = new ChatCliente(cliente, direccion);
+        chatCliente = new CCliente(cliente, direccion);
+        chatCliente.start();
+    }
+    class ChatController implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            
+            System.out.println(ae.getActionCommand());
+        }
+    
+    }
     
 }
