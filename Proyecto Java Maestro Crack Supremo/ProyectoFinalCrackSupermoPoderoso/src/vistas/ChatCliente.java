@@ -112,7 +112,9 @@ public class ChatCliente extends JFrame{
 //            else
 //                dispose();
 //        }
-
+        public JTextArea getText(){
+            return textArea;
+        }
 	
 	private JTextField txtMensaje;
 	private JTextArea textArea;
