@@ -11,7 +11,7 @@ public class ControladorCCliente {
 
     public ControladorCCliente(String cliente, String direccion) {
         vista = new ChatCliente(cliente, direccion);
-        chatCliente = new CCliente(cliente, direccion);
+        chatCliente = new CCliente(cliente, direccion, vista.getText());
         chatCliente.start();
     }
     class ChatController implements ActionListener{
