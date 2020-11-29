@@ -32,8 +32,8 @@ public class Pruebas {
         * /*/
         
         // Prueba Santiago
-        
-        ControladorCliente CC = new ControladorCliente();
+        ClienteDAO cd = new ClienteDAO();
+        ControladorCliente CC = new ControladorCliente(cd.cargarCliente("125489"));
                 
         
     }
