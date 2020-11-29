@@ -20,9 +20,9 @@ public class ChatServidor extends JFrame implements ActionListener{
 	}
 
 	private void initialize() {
-		setTitle( "Vendedor" );
+                setTitle( "Vendedor" );
 		setBounds(100, 100, 450, 337);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		
@@ -41,16 +41,16 @@ public class ChatServidor extends JFrame implements ActionListener{
 		
 		lblNombreUsuario = new JLabel(nameVendedor);
 		lblNombreUsuario.setForeground(Color.RED);
-		lblNombreUsuario.setBounds(50, 11, 48, 14);
+		lblNombreUsuario.setBounds(50, 11, 100, 14);
 		menu.add(lblNombreUsuario);
 		
 		
 		textArea = new JTextArea();
-        //textArea.setBounds(10, 43, 424, 223);
-        //getContentPane().add(textArea);
-        scroll = new JScrollPane(textArea);
-        scroll.setBounds(2, 31, 432, 247);
-        getContentPane().add(scroll);
+                //textArea.setBounds(10, 43, 424, 223);
+                //getContentPane().add(textArea);
+                scroll = new JScrollPane(textArea);
+                scroll.setBounds(2, 31, 432, 247);
+                getContentPane().add(scroll);
         
 		txtMensaje = new JTextField();
 		txtMensaje.setBounds(2, 277, 344, 22);
@@ -64,6 +64,12 @@ public class ChatServidor extends JFrame implements ActionListener{
 		
 		btnSend.addActionListener(this);
 		txtMensaje.addActionListener(this);
+                addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        guardarChat();
+                    }
+                });
 		setVisible(true);
 	}
 	
@@ -117,8 +123,6 @@ public class ChatServidor extends JFrame implements ActionListener{
 	}
 	
 	public void process() throws IOException{
-		String nameCliente;
-		String mensaje;
 		txtMensaje.setEditable(true);
 		btnSend.setEnabled(true);
 		showMessage("Conexion exitosa\n");
@@ -127,10 +131,8 @@ public class ChatServidor extends JFrame implements ActionListener{
 			try {
 				PaqueteDeDatos paqueteCliente;
 				paqueteCliente = (PaqueteDeDatos)entrada.readObject();
-				nameCliente = paqueteCliente.getNameCliente();
-				mensaje = paqueteCliente.getMensaje();
-				
-				showMessage("\n" + nameCliente + "\n" + mensaje + "\n");
+				mensajeToSave += printPaquete(paqueteCliente);
+				showMessage(printPaquete(paqueteCliente));
 			}
 			catch(ClassNotFoundException e) {
 				showMessage("Ten cuidado con quien hablas");
@@ -158,19 +160,28 @@ public class ChatServidor extends JFrame implements ActionListener{
 		PaqueteDeDatos datagramaCliente = null;
 		try {
 			datagramaCliente = new PaqueteDeDatos();
-			datagramaCliente.setNameCliente(nameVendedor);
+			datagramaCliente.setNameUser(nameVendedor);
 			datagramaCliente.setMensaje(message);
 			
 			salida.writeObject(datagramaCliente);
 			//salida.flush();
-			
-			showMessage(nameVendedor + "\n" + message + "\n");
+			mensajeToSave += printPaquete(datagramaCliente);
+			showMessage(printPaquete(datagramaCliente));
 		}
 		catch(IOException e) {
 			showMessage("No se pudo escribir el mensaje\n\n");
 		}
 	}
 	
+        public String printPaquete(PaqueteDeDatos paquete) {
+            String nameVendedor = "";
+            String mensaje = "";
+            
+            nameVendedor = paquete.getNameUser();
+            mensaje = paquete.getMensaje();
+            return ("\n" + nameVendedor + "\n" + mensaje + "\n");
+        }
+        
 	public void showMessage(String message) {
 		textArea.append(message);
 	}
@@ -187,6 +198,36 @@ public class ChatServidor extends JFrame implements ActionListener{
 			txtMensaje.setText("");
 		}
 	}
+        
+        
+        public void guardarChat() {
+            
+            int opcion = JOptionPane.showConfirmDialog(null, "¡¿Deseas guardar registro de la conversación?!",
+                    "Mensaje", JOptionPane.OK_CANCEL_OPTION);
+            
+            if(opcion == JOptionPane.OK_OPTION) {
+                try {
+                    
+                    JFileChooser selectFile = new JFileChooser();
+                    selectFile.showSaveDialog(this);
+                    File archivo = selectFile.getSelectedFile();
+                
+                    if(archivo != null) {
+                        FileWriter writeToFile = new FileWriter(archivo + ".txt");
+                        writeToFile.write(mensajeToSave);
+                        writeToFile.close();
+                    }
+                }
+                catch(IOException e) {
+                    JOptionPane.showMessageDialog(null, "No se pudo guardar su archivo", "Error", JOptionPane.WARNING_MESSAGE);
+                }
+                finally {
+                    System.exit(0);
+                }
+            }
+            else
+                System.exit(0);
+        }
 
 	public static void main(String[] args) {
 		ChatServidor server = new ChatServidor("helicoptero de batalla");
@@ -201,9 +242,9 @@ public class ChatServidor extends JFrame implements ActionListener{
 	private ObjectOutputStream salida;
 	private ObjectInputStream entrada;
 	private String mensajeaEnviar = "";
+        private String mensajeToSave = "";
 	private String nameVendedor;
 	private ServerSocket servidor;
 	private Socket socket;
 	private JScrollPane scroll;
 }
-
