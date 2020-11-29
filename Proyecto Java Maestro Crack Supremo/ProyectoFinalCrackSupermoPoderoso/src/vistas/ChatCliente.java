@@ -88,8 +88,8 @@ public class ChatCliente extends JFrame implements ActionListener{
 			showMessage("Se termino la seccion");
 		}
 		catch(IOException | NullPointerException e) {
-                    System.out.println("this 1");
-                    this.dispose();
+                    //this.dispose();
+                    e.getMessage();
 		}
 		finally {
                     if(continuar)
@@ -230,9 +230,9 @@ public class ChatCliente extends JFrame implements ActionListener{
                 dispose();
         }
 
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		ChatCliente cliente = new ChatCliente("Tsubaki", "127.0.0.1");
-	}*/
+	}
 	
 	private JTextField txtMensaje;
 	private JTextArea textArea;
