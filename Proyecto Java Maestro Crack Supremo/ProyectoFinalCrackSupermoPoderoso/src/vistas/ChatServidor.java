@@ -15,8 +15,8 @@ public class ChatServidor extends JFrame {
 		setResizable(false);
 		nameVendedor = vendedor;
 		initialize();
-            txtMensaje.setEditable(false);
-            btnSend.setEnabled(false);
+            txtMensaje.setEditable(true);
+            btnSend.setEnabled(true);
 	}
 
 	private void initialize() {
@@ -68,6 +68,13 @@ public class ChatServidor extends JFrame {
         public JTextArea getText(){
             return textArea;
         }
+        public String getMessage(){
+            return txtMensaje.getText();
+        }
+	public void addListenerbtn(ActionListener al){
+            btnSend.addActionListener(al);
+        }
+        
 	
 
 	

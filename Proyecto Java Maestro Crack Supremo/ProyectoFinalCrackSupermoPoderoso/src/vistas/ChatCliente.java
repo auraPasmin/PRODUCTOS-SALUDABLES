@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.io.*;
 import java.net.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class ChatCliente extends JFrame{
     
@@ -17,8 +18,9 @@ public class ChatCliente extends JFrame{
             nameCliente = cliente;
             direccionIP = direccion;
             initialize();
-            txtMensaje.setEditable(false);
-            btnSend.setEnabled(false);
+            txtMensaje.setEditable(true);
+            btnSend.setEnabled(true);
+            btnSend.setFocusable(true);
 	}
 
 	private void initialize() {
@@ -115,7 +117,12 @@ public class ChatCliente extends JFrame{
         public JTextArea getText(){
             return textArea;
         }
-	
+        public String getMessage(){
+            return txtMensaje.getText();
+        }
+	public void addListenerbtn(ActionListener al){
+            btnSend.addActionListener(al);
+        }
 	private JTextField txtMensaje;
 	private JTextArea textArea;
 	private JLabel lblNombreUsuario;

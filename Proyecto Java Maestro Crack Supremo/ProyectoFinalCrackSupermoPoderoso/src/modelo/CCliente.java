@@ -11,6 +11,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
@@ -18,7 +21,11 @@ public class CCliente extends Thread{
     
     private boolean continuar = true;
         public void run(){
-            iniciarCliente();
+            try {
+                iniciarCliente();
+            } catch (IOException ex) {
+                System.out.println("no hay vendedores");
+            }
         }
 	public CCliente(String cliente, String direccion,JTextArea text) {
             texto = text;
@@ -28,38 +35,25 @@ public class CCliente extends Thread{
 
 
 	
-	public void iniciarCliente() {
-		try {
+	public void iniciarCliente() throws IOException {
+
 			startClienteConexion();
                         if(continuar) {
                             OutputInputOfData();
 			    process();
                         }
-		}
-		catch(EOFException e) {
-			showMessage("Se termino la seccion");
-		}
-		catch(IOException | NullPointerException e) {
-                    //this.dispose();
-                    e.getMessage();
-		}
-		finally {
+
                     if(continuar)
 			closeCliente();
-		}
+		
 	}
 	
-	public void startClienteConexion() {
+	public void startClienteConexion() throws UnknownHostException, IOException {
 		showMessage("Iniciando conexion\n");
-		try {
+
 			cliente = new Socket(InetAddress.getByName(direccionIP), 9009);
                         showMessage("conexion Lista\n");
-		}
-		catch(IOException | NullPointerException e) {
-			JOptionPane.showMessageDialog(null, "Parece que no hay vendedores disponibles", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
-                        continuar = false;
 
-		}
 	}
 	
 	public void OutputInputOfData() {
