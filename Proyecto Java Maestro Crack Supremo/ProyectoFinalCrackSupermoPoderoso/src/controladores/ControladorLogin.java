@@ -66,7 +66,7 @@ public class ControladorLogin {
             }
             try {
                 C = c.cargarCliente(cad);
-                ControladorCliente controlador = new ControladorCliente();
+                ControladorCliente controlador = new ControladorCliente(C);
                 vista.dispose();
             } catch (NEDException ex) {
                 C = null;
