@@ -3,6 +3,7 @@ package modelo;
 
 import controladores.ControladorCCliente;
 import controladores.ControladorCVendedor;
+import controladores.ControladorGVenta;
 
 
 public class Pruebas {
@@ -24,7 +25,8 @@ public class Pruebas {
         
         // Prueba Santiago
         //ControladorCVendedor cv = new ControladorCVendedor("master");
-        ControladorCCliente cc = new ControladorCCliente("tsubaki","localhost");        
+        VendedorDAO v = new VendedorDAO();
+        ControladorGVenta cc = new ControladorGVenta(v.cargarVendedor(456412));        
         
     }
 }

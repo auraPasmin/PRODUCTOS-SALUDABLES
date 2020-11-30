@@ -26,25 +26,28 @@ public class ReciboDAO {
         String sqlStatement;
 
         try {
+            
+            
+            VendedorDAO v = new VendedorDAO();
+            v.cargarVendedor(recibo.getV());
+            ClienteDAO c = new ClienteDAO();
+            c.cargarCliente(recibo.getC());
+            ProductoDAO p = new ProductoDAO();
+            p.cargarProducto(recibo.getP());
             conexion = Fachada.startConnection();
             sqlStatement = "INSERT INTO recibo VALUES (?, ?, ?, ?, ?)";
             instruccion = conexion.prepareStatement(sqlStatement);
-//            VendedorDAO v = new VendedorDAO();
-//            v.cargarVendedor(recibo.getV());
-//            ClienteDAO c = new ClienteDAO();
-//            c.buscarNIT(recibo.getC());
-//            ProductoDAO p = new ProductoDAO();
-//            p.cargarProducto(recibo.getP());
-            
             instruccion.setInt(1, recibo.getV());
             instruccion.setString(2, recibo.getC());
             instruccion.setString(3, recibo.getP());
             instruccion.setTimestamp(4, java.sql.Timestamp.valueOf(recibo.getFecha()));
             instruccion.setInt(5, recibo.getCantidad());
-
+            
+            
             resultado = instruccion.executeUpdate();
         }
         catch(SQLException e) {
+            System.out.println("aca me petie");
             System.out.println(e.getMessage());
         }
         finally {

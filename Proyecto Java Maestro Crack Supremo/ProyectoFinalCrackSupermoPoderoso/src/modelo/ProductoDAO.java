@@ -76,7 +76,7 @@ public class ProductoDAO {
         try {
             listarProducto = new ArrayList<>();
             conexion = Fachada.startConnection();
-            sqlStatement = "SELECT * FROM producto ORDER BY P";
+            sqlStatement = "SELECT * FROM producto";
             instruccion = conexion.prepareStatement(sqlStatement);
             resultado = instruccion.executeQuery();
 
@@ -92,7 +92,7 @@ public class ProductoDAO {
             }
         }
         catch(SQLException e) {
-            // Do something
+            System.out.println(e);
         }
         finally {
             try {
