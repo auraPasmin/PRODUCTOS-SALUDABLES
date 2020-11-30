@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import modelo.ProductoDAO;
+import modelo.Vendedor;
 import modelo.VendedorDAO;
 import vistas.ChatCliente;
 import vistas.VistaGVenta;
@@ -15,8 +16,19 @@ public class ControladorVendedor {
     protected VistaVendedor VV = null;
     protected VendedorDAO VDAO = null;
     protected ProductoDAO PDAO = null;
-    
-    public ControladorVendedor(VistaVendedor vistaV , VendedorDAO VDAO, ProductoDAO PDAO ){
+    Vendedor v;
+    public ControladorVendedor(Vendedor v){
+        this.v = v;
+        this.VV = new VistaVendedor();
+        this.VDAO = new VendedorDAO();
+        this.PDAO = new ProductoDAO();
+        this.VV.setVisible(true);
+        
+        this.VV.addListenerBtnGenearVenta(new ProgramaListener() );
+        this.VV.addListenerBtnChat(new ProgramaListener());
+    }
+    public ControladorVendedor(VistaVendedor vistaV , VendedorDAO VDAO, ProductoDAO PDAO , Vendedor v){
+        this.v = v;
         this.VV = vistaV;
         this.VDAO = VDAO;
         this.PDAO = PDAO;
@@ -40,7 +52,7 @@ public class ControladorVendedor {
         private void generarVenta(){
             //llama otra vista que recibira todos los datos y creacion de Cliente y Recibo 
             //VistaGVenta VGV = new VistaGVenta();
-            ControladorGVenta CGV = new ControladorGVenta();
+            ControladorGVenta CGV = new ControladorGVenta(v);
         }
         
     }

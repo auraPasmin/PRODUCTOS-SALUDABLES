@@ -2,29 +2,39 @@ package controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+
+import modelo.NEDException;
+import modelo.ReciboDAO;
+import modelo.Vendedor;
+import vistas.VistaGVenta;
 
 
 public class ControladorGVenta {
-    
-    
-    public ControladorGVenta(){
-        
-        
+    VistaGVenta vista;
+    ReciboDAO r;
+    Vendedor v;
+    public ControladorGVenta(Vendedor v){
+        this.v = v;
+        vista = new VistaGVenta();
+        r = new ReciboDAO();
+        vista.setVisible(true);
     }
     class ProgramaListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equalsIgnoreCase("Generar venta")) {
-                
-            }else if(e.getActionCommand().equalsIgnoreCase("Chat")){
-                
-            }  
+            if(e.getActionCommand().equalsIgnoreCase("Generar")) {
+                generarVenta();
+            }
 
         }
         private void generarVenta(){
-            //llama otra vista que recibira todos los datos y creacion de Cliente y Recibo 
-            
+            try {
+                r.crearRecibo(v.getCedula(), vista.getNIT(), LocalDateTime.now(), vista.getProductos(), vista.getCantidad());
+            } catch (NEDException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         
     }

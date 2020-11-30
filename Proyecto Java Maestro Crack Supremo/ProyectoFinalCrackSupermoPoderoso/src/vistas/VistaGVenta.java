@@ -5,6 +5,8 @@
  */
 package vistas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author msp
@@ -17,7 +19,23 @@ public class VistaGVenta extends javax.swing.JFrame {
     public VistaGVenta() {
         initComponents();
     }
-
+    public String getNIT(){
+        return jTextField1.getText();
+    }
+    public ArrayList<String> getProductos(){
+       ArrayList<String> prod = new ArrayList<>();
+        for(int i = 0 ; i < jTable1.getModel().getRowCount() ; ++i){
+            prod.add((String) jTable1.getModel().getValueAt(i, 0));
+        }
+        return prod;
+    }
+    public ArrayList<Integer> getCantidad(){
+        ArrayList<Integer> cant = new ArrayList<>();
+        for(int i = 0 ; i < jTable1.getModel().getRowCount() ; ++i){
+            cant.add((Integer) jTable1.getModel().getValueAt(i, 1));
+        }
+        return cant;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
