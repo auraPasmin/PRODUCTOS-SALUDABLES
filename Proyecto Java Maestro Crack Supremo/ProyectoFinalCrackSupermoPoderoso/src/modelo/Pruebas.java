@@ -23,8 +23,8 @@ public class Pruebas {
         * /*/
         
         // Prueba Santiago
-        ControladorCVendedor cc = new ControladorCVendedor("master");
-                
+        //ControladorCVendedor cv = new ControladorCVendedor("master");
+        ControladorCCliente cc = new ControladorCCliente("tsubaki","localhost");        
         
     }
 }
