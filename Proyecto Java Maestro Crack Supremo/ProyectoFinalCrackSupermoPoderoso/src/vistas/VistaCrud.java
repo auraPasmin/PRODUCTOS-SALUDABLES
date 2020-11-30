@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package vistas;
+import java.awt.event.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -98,9 +101,7 @@ public class VistaCrud extends javax.swing.JFrame {
         tabla.setMinimumSize(new java.awt.Dimension(16, 16));
 
         tablaMateria.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null}
-            },
+            null,
             new String [] {
                 "Nombre", "Cantidad", "Fecha de vencimiento", "Proveedor", "Costo"
             }
@@ -108,13 +109,13 @@ public class VistaCrud extends javax.swing.JFrame {
         tablaMateria.setCellSelectionEnabled(true);
         scrollMateria.setViewportView(tablaMateria);
 
-        btnCrear.setText("Crear");
+        btnCrear.setText("Crear Materia");
 
-        btnListar.setText("Listar");
+        btnListar.setText("Listar Materia");
 
-        btnModificar.setText("Modificar");
+        btnModificar.setText("Modificar Materia");
 
-        btnEliminar.setText("Eliminar");
+        btnEliminar.setText("Eliminar Materia");
 
         javax.swing.GroupLayout jpMateriaLayout = new javax.swing.GroupLayout(jpMateria);
         jpMateria.setLayout(jpMateriaLayout);
@@ -162,13 +163,13 @@ public class VistaCrud extends javax.swing.JFrame {
         ));
         scrollReceta.setViewportView(tablaReceta);
 
-        btnCrear1.setText("Crear");
+        btnCrear1.setText("Crear Receta");
 
-        btnListar1.setText("Listar");
+        btnListar1.setText("Listar Receta");
 
-        btnModificar1.setText("Modificar");
+        btnModificar1.setText("Modificar Receta");
 
-        btnEliminar1.setText("Eliminar");
+        btnEliminar1.setText("Eliminar Receta");
 
         javax.swing.GroupLayout jpRecetaLayout = new javax.swing.GroupLayout(jpReceta);
         jpReceta.setLayout(jpRecetaLayout);
@@ -216,13 +217,13 @@ public class VistaCrud extends javax.swing.JFrame {
         ));
         scrollProducto.setViewportView(tablaProducto);
 
-        btnCrear2.setText("Crear");
+        btnCrear2.setText("Crear Producto");
 
-        btnListar2.setText("Listar");
+        btnListar2.setText("Listar Producto");
 
-        btnModificar2.setText("Modificar");
+        btnModificar2.setText("Modificar Producto");
 
-        btnEliminar2.setText("Eliminar");
+        btnEliminar2.setText("Eliminar Producto");
 
         javax.swing.GroupLayout jpProductoLayout = new javax.swing.GroupLayout(jpProducto);
         jpProducto.setLayout(jpProductoLayout);
@@ -270,13 +271,13 @@ public class VistaCrud extends javax.swing.JFrame {
         ));
         scrollProveedor.setViewportView(tablaProveedor);
 
-        btnCrear3.setText("Crear");
+        btnCrear3.setText("Crear Proveedor");
 
-        btnListar3.setText("Listar");
+        btnListar3.setText("Listar Proveedor");
 
-        btnModificar3.setText("Modificar");
+        btnModificar3.setText("Modificar Proveedor");
 
-        btnEliminar3.setText("Eliminar");
+        btnEliminar3.setText("Eliminar Proveedor");
 
         javax.swing.GroupLayout jpProveedorLayout = new javax.swing.GroupLayout(jpProveedor);
         jpProveedor.setLayout(jpProveedorLayout);
@@ -324,13 +325,13 @@ public class VistaCrud extends javax.swing.JFrame {
         ));
         scrollRecibo.setViewportView(tablaRecibo);
 
-        btnCrear4.setText("Crear");
+        btnCrear4.setText("Crear Recibo");
 
-        btnListar4.setText("Listar");
+        btnListar4.setText("Listar Recibo");
 
-        btnModificar4.setText("Modificar");
+        btnModificar4.setText("Modificar Recibo");
 
-        btnEliminar4.setText("Eliminar");
+        btnEliminar4.setText("Eliminar Recibo");
 
         javax.swing.GroupLayout jpReciboLayout = new javax.swing.GroupLayout(jpRecibo);
         jpRecibo.setLayout(jpReciboLayout);
@@ -378,13 +379,13 @@ public class VistaCrud extends javax.swing.JFrame {
         ));
         scrollCliente.setViewportView(tablaCliente);
 
-        btnCrear5.setText("Crear");
+        btnCrear5.setText("Crear Cliente");
 
-        btnListar5.setText("Listar");
+        btnListar5.setText("Listar Cliente");
 
-        btnModificar5.setText("Modificar");
+        btnModificar5.setText("Modificar Cliente");
 
-        btnEliminar5.setText("Eliminar");
+        btnEliminar5.setText("Eliminar Cliente");
 
         javax.swing.GroupLayout jpClienteLayout = new javax.swing.GroupLayout(jpCliente);
         jpCliente.setLayout(jpClienteLayout);
@@ -432,13 +433,13 @@ public class VistaCrud extends javax.swing.JFrame {
         ));
         scrollVendedor.setViewportView(tablaVendedor);
 
-        btnCrear6.setText("Crear");
+        btnCrear6.setText("Crear Vendedor");
 
-        btnListar6.setText("Listar");
+        btnListar6.setText("Listar Vendedor");
 
-        btnModificar6.setText("Modificar");
+        btnModificar6.setText("Modificar Vendedor");
 
-        btnEliminar6.setText("Eliminar");
+        btnEliminar6.setText("Eliminar Vendedor");
 
         javax.swing.GroupLayout jpVendedorLayout = new javax.swing.GroupLayout(jpVendedor);
         jpVendedor.setLayout(jpVendedorLayout);
@@ -496,7 +497,37 @@ public class VistaCrud extends javax.swing.JFrame {
         );
 
         pack();
+        modelo = (DefaultTableModel) tablaMateria.getModel();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void addActionBtnCrear(ActionListener listen) {
+        btnCrear.addActionListener(listen);
+        btnCrear1.addActionListener(listen);
+        btnCrear2.addActionListener(listen);
+        btnCrear3.addActionListener(listen);
+        btnCrear4.addActionListener(listen);
+        btnCrear5.addActionListener(listen);
+        btnCrear6.addActionListener(listen);
+    }
+
+    public void addActionBtnListar(ActionListener listen) {
+        btnListar.addActionListener(listen);
+        btnListar1.addActionListener(listen);
+        btnListar2.addActionListener(listen);
+        btnListar3.addActionListener(listen);
+        btnListar4.addActionListener(listen);
+        btnListar5.addActionListener(listen);
+        btnListar6.addActionListener(listen);
+    }
+    
+    public void tableMateria(Object[] n) {
+        modelo.addRow(n);
+    }
+    
+    public void delete() {
+        int number = modelo.getRowCount() - 1;
+        System.out.println(number);
+    }
 
     /**
      * @param args the command line arguments
@@ -532,6 +563,7 @@ public class VistaCrud extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
@@ -585,5 +617,6 @@ public class VistaCrud extends javax.swing.JFrame {
     private javax.swing.JTable tablaReceta;
     private javax.swing.JTable tablaRecibo;
     private javax.swing.JTable tablaVendedor;
+    private DefaultTableModel modelo;
     // End of variables declaration//GEN-END:variables
 }
