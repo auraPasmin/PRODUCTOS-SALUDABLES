@@ -250,7 +250,7 @@ public class ClienteDAO {
             conexion = Fachada.startConnection();
             sqlStatement =  "SELECT DISTINCT V, Fecha FROM recibo WHERE C = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
-            instruccion.setString(1, c.getNombre());
+            instruccion.setString(1, c.getNIT());
             System.out.println(instruccion);
             resultado = instruccion.executeQuery();
             if(resultado.next()){
@@ -261,7 +261,7 @@ public class ClienteDAO {
                 resultado.beforeFirst();
                 while(resultado.next()) {
                     d[i][0] = resultado.getString(1);
-                    d[i][1] = resultado.getInt(2);
+                    d[i][1] = resultado.getDate(2).toString();
                     ++i;
                 }
             }  

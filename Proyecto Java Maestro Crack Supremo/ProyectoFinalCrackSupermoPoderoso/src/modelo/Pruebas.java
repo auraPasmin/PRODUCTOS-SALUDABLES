@@ -1,18 +1,9 @@
 package modelo;
 
 
-import controladores.ControladorCliente;
-import controladores.ControladorLogin;
-import vistas.*;
-import hilos.AutomaticFillerMP;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import controladores.ControladorCCliente;
+import controladores.ControladorCVendedor;
+
 
 public class Pruebas {
     public static void main(String[]args) throws NEDException{
@@ -32,9 +23,8 @@ public class Pruebas {
         * /*/
         
         // Prueba Santiago
-        
-        ControladorCliente CC = new ControladorCliente();
-                
+        //ControladorCVendedor cv = new ControladorCVendedor("master");
+        ControladorCCliente cc = new ControladorCCliente("tsubaki","localhost");        
         
     }
 }
