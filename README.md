@@ -14,6 +14,6 @@ Se debe simular la localización y el recorrido efectuado por los diferentes ven
 ## Authors
 * **Aura pasmin** - [auraPasmin](https://github.com/auraPasm)
 * **Santiago Ramirez** - [tsubakijuju13](https://github.com/tsubakijuju13)
-* **Matheo Franco ** - [mrHann69](https://github.com/mrHann69?tab=repositories)
+* **Matheo Franco** - [mrHann69](https://github.com/mrHann69?tab=repositories)
 * **Reynell Quevedo** - [ReynellQ](https://github.com/ReynellQ?tab=repositories)
 
