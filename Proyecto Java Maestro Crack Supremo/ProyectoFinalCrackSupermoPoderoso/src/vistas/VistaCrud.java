@@ -99,15 +99,13 @@ public class VistaCrud extends javax.swing.JFrame {
 
         tablaMateria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Cantidad", "Fecha de vencimiento", "Proveedor", "Costo"
             }
         ));
+        tablaMateria.setCellSelectionEnabled(true);
         scrollMateria.setViewportView(tablaMateria);
 
         btnCrear.setText("Crear");
@@ -152,19 +150,14 @@ public class VistaCrud extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnCrear.getAccessibleContext().setAccessibleName("Crear");
-
         tabla.addTab("Materia Prima", jpMateria);
 
         tablaReceta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Producto", "Materia", "Cantidad"
             }
         ));
         scrollReceta.setViewportView(tablaReceta);
@@ -215,13 +208,10 @@ public class VistaCrud extends javax.swing.JFrame {
 
         tablaProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Cantidad", "Precio", "Fecha de vencimiento"
             }
         ));
         scrollProducto.setViewportView(tablaProducto);
@@ -272,13 +262,10 @@ public class VistaCrud extends javax.swing.JFrame {
 
         tablaProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "NIT", "Nombre", "Ubicacion", "Telefono", "Email"
             }
         ));
         scrollProveedor.setViewportView(tablaProveedor);
@@ -329,13 +316,10 @@ public class VistaCrud extends javax.swing.JFrame {
 
         tablaRecibo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Vendedor", "Cliente", "Producto", "Fecha", "Cantidad"
             }
         ));
         scrollRecibo.setViewportView(tablaRecibo);
@@ -386,13 +370,10 @@ public class VistaCrud extends javax.swing.JFrame {
 
         tablaCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "NIT", "Nombre", "Direccion", "Longitud", "Latitud"
             }
         ));
         scrollCliente.setViewportView(tablaCliente);
@@ -443,13 +424,10 @@ public class VistaCrud extends javax.swing.JFrame {
 
         tablaVendedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Cedula", "Cargo", "Comision", "Telefono", "Correo", "Sexo"
             }
         ));
         scrollVendedor.setViewportView(tablaVendedor);
