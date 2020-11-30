@@ -4,6 +4,7 @@ package controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.ProductoDAO;
 import modelo.Vendedor;
 import modelo.VendedorDAO;
@@ -37,7 +38,14 @@ public class ControladorVendedor {
         this.VV.addListenerBtnGenearVenta(new ProgramaListener() );
         this.VV.addListenerBtnChat(new ProgramaListener());
     }
-    
+    private void listarStock(){
+        DefaultTableModel modelo =  (DefaultTableModel) this.VV.getJtStock().getModel();
+        String[][] listado = PDAO.mostrarStock();
+        
+        for(int r=0; r < listado.length ;r++){
+                modelo.addRow(listado[r]);
+        }
+    }
     class ProgramaListener implements ActionListener{
 
         @Override
@@ -46,7 +54,7 @@ public class ControladorVendedor {
                 this.generarVenta();
             }else if(e.getActionCommand().equalsIgnoreCase("Chat")){
                 
-            }  
+            }   
 
         }
         private void generarVenta(){
