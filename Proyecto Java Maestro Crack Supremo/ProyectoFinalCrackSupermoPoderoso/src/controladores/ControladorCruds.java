@@ -35,7 +35,7 @@ public class ControladorCruds {
         @Override
         public void actionPerformed(ActionEvent event) {
             if(event.getActionCommand().equalsIgnoreCase("Listar Materia")) {
-                crud.delete();
+                crud.clearTable();
                 ArrayList<Materia_Prima> l = null;
                 Object[] o = null;
                 try {
@@ -59,8 +59,7 @@ public class ControladorCruds {
                 }
                 
             }
-            if(event.getActionCommand().equalsIgnoreCase("Crear Receta")) {
-                JOptionPane.showMessageDialog(null, "Receta", "XXX", JOptionPane.INFORMATION_MESSAGE);
+            if(event.getActionCommand().equalsIgnoreCase("Crear Materia")) {
             }
         }
     }
