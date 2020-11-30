@@ -1,6 +1,6 @@
  🥦🥒 # PRODUCTOS-SALUDABLE 🥦🥒
 
-![mC:\Users\aurap\OneDrive\Documents\GIT\PRODUCTOS-SALUDABLES\Imagenes\fondo.jpg]
+![Alt text](https://imgur.com/a/vGdfSu9)
 
 ## Descripción: 🍑
 Se requiere construir una aplicación que contenga los CRUDs para cada entidad de la base de datos, como también poder efectuar las transacciones: compra de materia prima, producción de productos, venta de productos, pago de comisión a vendedores, ventas registradas en mostrador, consulta de los inventarios de materia prima y producto terminado
