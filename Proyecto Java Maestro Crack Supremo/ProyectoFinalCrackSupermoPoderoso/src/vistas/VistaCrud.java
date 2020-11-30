@@ -525,7 +525,7 @@ public class VistaCrud extends javax.swing.JFrame {
     }
     
     public void delete() {
-        int number = modelo.getRowCount() - 1;
+        int number = modelo.getRowCount() - 10;
         System.out.println(number);
     }
 

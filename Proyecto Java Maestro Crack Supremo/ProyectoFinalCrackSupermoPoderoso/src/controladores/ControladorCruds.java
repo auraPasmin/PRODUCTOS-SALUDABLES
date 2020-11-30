@@ -6,6 +6,13 @@
 package controladores;
 
 import vistas.VistaCrud;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import javax.swing.*;
+import modelo.*;
+
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,25 +21,66 @@ import vistas.VistaCrud;
 public class ControladorCruds {
     private VistaCrud crud = null;
     
-    public controlador() {
+    public ControladorCruds() {
         crud = new VistaCrud();
+        crud.setVisible(true);
         
         // Metodos escucha de crear
-        crud.addActionBtnCrear(new buttonEvent);
-        crud.addActionBtnCrear1(new buttonEvent);
-        crud.addActionBtnCrear2(new buttonEvent);
-        crud.addActionBtnCrear3(new buttonEvent);
-        crud.addActionBtnCrear4(new buttonEvent);
-        crud.addActionBtnCrear5(new buttonEvent);
-        crud.addActionBtnCrear6(new buttonEvent);
-        
-        // Metodos escucha de Eliminar
-        crud.addActionBtnEliminar(new buttonEvent);
-        crud.addActionBtnEliminar1(new buttonEvent);
-        crud.addActionBtnEliminar2(new buttonEvent);
-        crud.addActionBtnEliminar3(new buttonEvent);
-        crud.addActionBtnEliminar4(new buttonEvent);
-        crud.addActionBtnEliminar5(new buttonEvent);
-        crud.addActionBtnEliminar6(new buttonEvent);
+        crud.addActionBtnCrear(new buttonEvent());
+        // Metodo escucha de listar
+        crud.addActionBtnListar(new buttonEvent());
+    }
+
+    class buttonEvent implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            if(event.getActionCommand().equalsIgnoreCase("Listar Materia")) {
+                crud.delete();
+                ArrayList<Materia_Prima> l = null;
+                Object[] o = null;
+                try {
+                    listarMateria thread = new listarMateria();
+                    o = new Object[5];
+                    thread.execute();
+                    l = thread.get();
+                    
+                    for(int n = 0; n < l.size(); n++) {
+                        o[0] = l.get(n).getNombre();
+                        o[1] = l.get(n).getCantidad();
+                        o[2] = l.get(n).getFechaCaducidad();
+                        o[3] = l.get(n).getNit_proveedor();
+                        o[4] = l.get(n).getValor_unitario();
+                        
+                        crud.tableMateria(o);
+                    }
+                }
+                catch(InterruptedException | ExecutionException e) {
+                    e.getMessage();
+                }
+                
+            }
+            if(event.getActionCommand().equalsIgnoreCase("Crear Receta")) {
+                JOptionPane.showMessageDialog(null, "Receta", "XXX", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+}
+
+class listarMateria extends SwingWorker<ArrayList<Materia_Prima>, Object> {
+    
+    private Materia_PrimaDAO materiaDao;
+    
+    public listarMateria() {
+        materiaDao = new Materia_PrimaDAO();
+    }
+    
+    @Override
+    public ArrayList<Materia_Prima> doInBackground() {
+        return materiaDao.readMateriaPrima();
+    }
+    
+    @Override
+    protected void done() {
+        // ...
     }
 }
