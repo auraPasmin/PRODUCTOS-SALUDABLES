@@ -11,6 +11,16 @@ Además la aplicación deberá permitir establecer un chat entre el cliente y la
 
 Se debe simular la localización y el recorrido efectuado por los diferentes vendedores. (Geolocalización)
 
+## Mockups: 🍒
+
+# figma:
+ 
+![Alt text](https://i.imgur.com/KQK4xgd.png)
+
+![Alt text](https://i.imgur.com/5wU8m44.png)
+
+
+
 ## Authors
 * **Aura pasmin** - [auraPasmin](https://github.com/auraPasm)
 * **Santiago Ramirez** - [tsubakijuju13](https://github.com/tsubakijuju13)
