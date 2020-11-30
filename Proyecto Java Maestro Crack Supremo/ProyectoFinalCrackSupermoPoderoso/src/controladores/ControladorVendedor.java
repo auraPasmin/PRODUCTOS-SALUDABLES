@@ -18,6 +18,7 @@ public class ControladorVendedor {
     protected VendedorDAO VDAO = null;
     protected ProductoDAO PDAO = null;
     Vendedor v;
+    
     public ControladorVendedor(Vendedor v){
         this.v = v;
         this.VV = new VistaVendedor();
@@ -27,16 +28,20 @@ public class ControladorVendedor {
         
         this.VV.addListenerBtnGenearVenta(new ProgramaListener() );
         this.VV.addListenerBtnChat(new ProgramaListener());
+        this.listarStock();
+        this.listarRecibos();
     }
-    public ControladorVendedor(VistaVendedor vistaV , VendedorDAO VDAO, ProductoDAO PDAO , Vendedor v){
+    public ControladorVendedor(VistaVendedor vistaV , VendedorDAO VDAO , Vendedor v){
         this.v = v;
         this.VV = vistaV;
         this.VDAO = VDAO;
-        this.PDAO = PDAO;
+        this.PDAO = new ProductoDAO();
         this.VV.setVisible(true);
         
         this.VV.addListenerBtnGenearVenta(new ProgramaListener() );
         this.VV.addListenerBtnChat(new ProgramaListener());
+        this.listarStock();
+        this.listarRecibos();
     }
     private void listarStock(){
         DefaultTableModel modelo =  (DefaultTableModel) this.VV.getJtStock().getModel();
@@ -45,6 +50,13 @@ public class ControladorVendedor {
         for(int r=0; r < listado.length ;r++){
                 modelo.addRow(listado[r]);
         }
+    }
+    private void listarRecibos(){
+        DefaultTableModel modelo =  (DefaultTableModel) this.VV.getJtRecibos().getModel();
+        String[][] listado = (String[][]) VDAO.generarRecibos(v);
+            for(int i=0;i<listado.length-1;i++){
+                modelo.addRow(listado[i]);
+            }                 
     }
     class ProgramaListener implements ActionListener{
 

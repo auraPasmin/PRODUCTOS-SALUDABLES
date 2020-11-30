@@ -6,6 +6,7 @@
 package vistas;
 
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -13,7 +14,7 @@ import javax.swing.JTable;
  * @author msp
  */
 public class VistaVendedor extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form VistaVendedor
      */
@@ -48,7 +49,7 @@ public class VistaVendedor extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
         btnChat = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblBienvenida = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
@@ -88,26 +89,20 @@ public class VistaVendedor extends javax.swing.JFrame {
 
         jtStock.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Producto", "Cantidad"
             }
         ));
         jScrollPane3.setViewportView(jtStock);
 
         jtRecibos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Vendedor", "Cliente"
             }
         ));
         jScrollPane4.setViewportView(jtRecibos);
@@ -168,6 +163,11 @@ public class VistaVendedor extends javax.swing.JFrame {
         );
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         btnChat.setText("Chat");
         btnChat.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +176,7 @@ public class VistaVendedor extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Bienvenido Vendedor");
+        lblBienvenida.setText("Bienvenido Vendedor");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,7 +189,7 @@ public class VistaVendedor extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel1)
+                .addComponent(lblBienvenida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnChat)
                 .addGap(28, 28, 28)
@@ -208,7 +208,7 @@ public class VistaVendedor extends javax.swing.JFrame {
                             .addComponent(btnChat)))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)))
+                        .addComponent(lblBienvenida)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -239,6 +239,14 @@ public class VistaVendedor extends javax.swing.JFrame {
     private void btnChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnChatActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        int res = JOptionPane.showConfirmDialog(null, "Quiere Salir?","advertencia",JOptionPane.YES_NO_OPTION);
+        if(res == 0){
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,7 +289,6 @@ public class VistaVendedor extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -291,6 +298,7 @@ public class VistaVendedor extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable jtRecibos;
     private javax.swing.JTable jtStock;
+    private javax.swing.JLabel lblBienvenida;
     private java.awt.Panel panel1;
     private java.awt.PopupMenu popupMenu1;
     private java.awt.PopupMenu popupMenu2;
