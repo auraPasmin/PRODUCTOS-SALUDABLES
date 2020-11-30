@@ -64,8 +64,11 @@ public class VistaCliente extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtFacturas);
 
+        lblSesion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblSesion.setForeground(new java.awt.Color(51, 51, 255));
         lblSesion.setText("sesion Cliente");
 
+        btnSalir.setBackground(new java.awt.Color(204, 0, 0));
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,8 +84,11 @@ public class VistaCliente extends javax.swing.JFrame {
         jtaDatospersonales.setRows(5);
         jScrollPane2.setViewportView(jtaDatospersonales);
 
+        lblDatospersonales.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblDatospersonales.setText("datos personales registrados");
 
+        btnChat.setBackground(new java.awt.Color(51, 51, 255));
+        btnChat.setForeground(new java.awt.Color(51, 51, 255));
         btnChat.setText("iniciar Chat");
         btnChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +98,7 @@ public class VistaCliente extends javax.swing.JFrame {
 
         lblAsesor.setText("hablar con un asesor");
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(240, 38, 33));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -105,6 +111,8 @@ public class VistaCliente extends javax.swing.JFrame {
             .addGap(0, 33, Short.MAX_VALUE)
         );
 
+        btnMostrar.setBackground(new java.awt.Color(240, 38, 33));
+        btnMostrar.setForeground(new java.awt.Color(240, 38, 33));
         btnMostrar.setText("mostrar");
         btnMostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +120,8 @@ public class VistaCliente extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(240, 38, 33));
         jLabel1.setText("Bienvenido ");
 
         txtNombreU.setEditable(false);
@@ -138,26 +148,22 @@ public class VistaCliente extends javax.swing.JFrame {
                         .addComponent(lblTotalcomprado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTotalcomprado, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(btnMostrar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMostrar)
+                        .addGap(18, 18, 18)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSesion)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblAsesor)
-                                    .addComponent(lblDatospersonales))
-                                .addGap(18, 18, 18)
-                                .addComponent(btnChat)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSalir)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblSesion)
-                        .addGap(38, 38, 38))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblAsesor)
+                            .addComponent(lblDatospersonales))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnChat)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalir))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 59, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
