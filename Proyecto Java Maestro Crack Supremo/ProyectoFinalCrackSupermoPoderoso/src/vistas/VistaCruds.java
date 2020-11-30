@@ -146,13 +146,10 @@ public class VistaCruds extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Cantidad", "Fecha de Vencimiento", "Proveedor", "Valor"
             }
         ));
         jScrollPane3.setViewportView(jTable3);
@@ -233,13 +230,10 @@ public class VistaCruds extends javax.swing.JFrame {
 
         jTable9.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Producto", "Materia", "Cantidad"
             }
         ));
         jScrollPane9.setViewportView(jTable9);
@@ -320,13 +314,10 @@ public class VistaCruds extends javax.swing.JFrame {
 
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Cantidad", "Precio", "Fecha de vencimiento"
             }
         ));
         jScrollPane6.setViewportView(jTable6);
@@ -407,13 +398,10 @@ public class VistaCruds extends javax.swing.JFrame {
 
         jTable8.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "NIT", "Nombre", "Ubicacion", "Telefono", "Email"
             }
         ));
         jScrollPane8.setViewportView(jTable8);
@@ -589,13 +577,10 @@ public class VistaCruds extends javax.swing.JFrame {
 
         jTable14.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Vendedor", "Cliente", "Producto", "Fecha", "Cantidad"
             }
         ));
         jScrollPane14.setViewportView(jTable14);
@@ -771,13 +756,10 @@ public class VistaCruds extends javax.swing.JFrame {
 
         jTable18.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "NIT", "Nombre", "Direccion", "Longitud", "Latitud"
             }
         ));
         jScrollPane18.setViewportView(jTable18);
@@ -858,13 +840,10 @@ public class VistaCruds extends javax.swing.JFrame {
 
         jTable20.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Cedula", "Nombre", "Cargo", "Comision", "Telefono", "Correo", "Sexo"
             }
         ));
         jScrollPane20.setViewportView(jTable20);
