@@ -33,7 +33,7 @@ public class CCliente extends Thread{
             direccionIP = direccion;
 	}
         
-        public void iniciarCliente() throw IOEception {
+        public void iniciarCliente() throws IOException {
             try {
                 startClienteConexion();
                 if(continuar) {
@@ -159,9 +159,9 @@ public class CCliente extends Thread{
             return ("\n" + nameVendedor + "\n" + mensaje + "\n");
         }
 	
-	/*public void showMessage(String message) {
+	public void showMessage(String message) {
 		texto.append(message);
-	}*/
+	}
 	
 //	@Override
 //	public void actionPerformed(ActionEvent event) {
