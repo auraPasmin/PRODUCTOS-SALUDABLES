@@ -18,6 +18,6 @@ import controladores.ControladorLogin;
 public class Execute {
     public static void main(String[]args){
         
-        ControladorCruds controler = new ControladorCruds();
+        ControladorLogin a = new ControladorLogin();
     }
 }

@@ -1,5 +1,5 @@
 package vistas;
-import modelo.PaqueteDeDatos;
+import modelo.*;
 import javax.swing.*;
 import java.io.*;
 import java.net.*;
@@ -75,10 +75,6 @@ public class ChatServidor extends JFrame {
 	public void addListenerbtn(ActionListener al){
             btnSend.addActionListener(al);
         }
-        
-	
-
-	
 
 	private JTextField txtMensaje;
 	private JTextArea textArea;

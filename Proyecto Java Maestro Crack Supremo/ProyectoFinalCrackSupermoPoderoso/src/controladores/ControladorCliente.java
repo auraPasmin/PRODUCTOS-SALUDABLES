@@ -10,9 +10,8 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import vistas.ChatCliente;
-import vistas.VistaCliente;
 import modelo.*;
+import vistas.*;
 
 
 
@@ -54,8 +53,9 @@ public class ControladorCliente {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("iniciar Chat")) {
-                ChatCliente chat = new ChatCliente("Tsubaki", "127.0.0.1");
-            }else if(e.getActionCommand().equalsIgnoreCase("mostrar")){
+                ControladorCCliente lo = new ControladorCCliente("Tusu", "12222");
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("mostrar")){
                 System.out.println("");
                 mostrarRecibo();
             }
