@@ -53,7 +53,8 @@ public class ControladorVendedor {
             if(e.getActionCommand().equalsIgnoreCase("Generar venta")) {
                 this.generarVenta();
             }else if(e.getActionCommand().equalsIgnoreCase("Chat")){
-                
+                System.out.println(e.getActionCommand());
+                ControladorCVendedor chat = new ControladorCVendedor(v.getNombre());
             }   
 
         }

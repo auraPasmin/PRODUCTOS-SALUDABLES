@@ -54,7 +54,7 @@ public class ControladorCliente {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("iniciar Chat")) {
-                ChatCliente chat = new ChatCliente("Tsubaki", "127.0.0.1");
+                ControladorCCliente c = new ControladorCCliente(cliente.getNombre(), "localhost");
             }else if(e.getActionCommand().equalsIgnoreCase("mostrar")){
                 System.out.println("");
                 mostrarRecibo();

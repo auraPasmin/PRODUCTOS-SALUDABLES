@@ -23,7 +23,7 @@ public class ChatServidor extends JFrame {
 	private void initialize() {
                 setTitle( "Vendedor" );
 		setBounds(100, 100, 450, 337);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		
