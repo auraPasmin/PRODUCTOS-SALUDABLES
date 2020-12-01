@@ -59,7 +59,55 @@ public class ControladorCruds {
                 }
                 
             }
+            
             if(event.getActionCommand().equalsIgnoreCase("Crear Materia")) {
+            }
+            
+            if(event.getActionCommand().equalsIgnoreCase("Listar Receta")) {
+                crud.clearTableReceta();
+                ArrayList<Receta> r = null;
+                Object[] objetoReceta = null;
+                try {
+                    ListarReceta recetas = new ListarReceta();
+                    recetas.execute();
+                    r = recetas.get();
+                    objetoReceta = new Object[3];
+                    
+                    for(int n = 0; n < r.size(); n++) {
+                        objetoReceta[0] = r.get(n).getP();
+                        objetoReceta[1] = r.get(n).getM();
+                        objetoReceta[2] = r.get(n).getCantidad();
+                        
+                        crud.tablaReceta(objetoReceta);
+                    }
+                }
+                catch(ExecutionException | InterruptedException e) {
+                    e.getMessage();
+                }
+            }
+            
+            if(event.getActionCommand().equalsIgnoreCase("Listar Producto")) {
+                crud.clearTableProducto();
+                ArrayList<Producto> p = null;
+                Object[] objetoProducto = null;
+                try {
+                    ListarProducto productos = new ListarProducto();
+                    productos.execute();
+                    p = productos.get();
+                    objetoProducto = new Object[4];
+                    
+                    for(int n = 0; n < p.size(); n++) {
+                        objetoProducto[0] = p.get(n).getNombre();
+                        objetoProducto[1] = p.get(n).getCantidad();
+                        objetoProducto[2] = p.get(n).getFechaCaducidad();
+                        objetoProducto[3] = p.get(n).getPrecio();
+                        
+                        crud.tablaProducto(objetoProducto);
+                    }
+                }
+                catch(ExecutionException | InterruptedException e) {
+                    e.getMessage();
+                }
             }
         }
     }
@@ -82,4 +130,36 @@ class listarMateria extends SwingWorker<ArrayList<Materia_Prima>, Object> {
     protected void done() {
         // ...
     }
+}
+
+class ListarReceta extends SwingWorker<ArrayList<Receta>, Object> {
+    private RecetaDAO recetaDao;
+    
+    public ListarReceta() {
+        recetaDao = new RecetaDAO();
+    }
+    
+    @Override
+    public ArrayList<Receta> doInBackground() {
+        return recetaDao.readRecetas();
+    }
+    
+    @Override
+    public void done() {}
+}
+
+class ListarProducto extends SwingWorker<ArrayList<Producto>, Object> {
+    private ProductoDAO productoDao;
+    
+    public ListarProducto() {
+        productoDao = new ProductoDAO();
+    }
+    
+    @Override
+    public ArrayList<Producto> doInBackground() {
+        return productoDao.readProducto();
+    }
+    
+    @Override
+    public void done() {}
 }

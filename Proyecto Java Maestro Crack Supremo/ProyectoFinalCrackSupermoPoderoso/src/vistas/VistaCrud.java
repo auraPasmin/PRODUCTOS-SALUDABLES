@@ -498,6 +498,12 @@ public class VistaCrud extends javax.swing.JFrame {
 
         pack();
         modelo = (DefaultTableModel) tablaMateria.getModel();
+        modeloReceta = (DefaultTableModel) tablaReceta.getModel();
+        modeloProducto = (DefaultTableModel) tablaProducto.getModel();
+        modeloProveedor = (DefaultTableModel) tablaProveedor.getModel();
+        modeloRecibo = (DefaultTableModel) tablaRecibo.getModel();
+        modeloCliente = (DefaultTableModel) tablaCliente.getModel();
+        modeloVendedor = (DefaultTableModel) tablaVendedor.getModel();
     }// </editor-fold>//GEN-END:initComponents
 
     public void addActionBtnCrear(ActionListener listen) {
@@ -520,14 +526,116 @@ public class VistaCrud extends javax.swing.JFrame {
         btnListar6.addActionListener(listen);
     }
     
+    /**
+     * Tabla Materia Prima
+     * ========================================== 
+     */
     public void tableMateria(Object[] n) {
         modelo.addRow(n);
     }
     
-    public void delete() {
-        int number = modelo.getRowCount() - 10;
-        System.out.println(number);
+    public void clearTable() {
+        if(modelo.getRowCount() != 0) {
+            int number = modelo.getRowCount();
+            for(int n = number - 1; n >= 0; n--) {
+                modelo.removeRow(n);
+            }
+        }
+    }//=============================================
+    
+    /**
+     * Tabla Receta
+     * =============================================
+     */
+    public void tablaReceta(Object[] objeto) {
+        modeloReceta.addRow(objeto);
     }
+
+    public void clearTableReceta() {
+        if(modeloReceta.getRowCount() != 0) {
+            int number = modeloReceta.getRowCount();
+            for(int n = number - 1; n >= 0; n--)
+                modeloReceta.removeRow(n);
+        }
+    }//==============================================
+    
+    /**
+     * Tabla Producto
+     * ==============================================
+     */
+    public void tablaProducto(Object[] objeto) {
+        modeloProducto.addRow(objeto);
+    }
+
+    public void clearTableProducto() {
+        if(modeloProducto.getRowCount() != 0) {
+            int number = modeloProducto.getRowCount();
+            for(int n = number - 1; n >= 0; n--)
+                modeloProducto.removeRow(n);
+        }
+    }//==============================================
+
+    /**
+     * Tabla Proveedor
+     * ==============================================
+     */
+    public void tablaProveedor(Object[] objeto) {
+        modeloProveedor.addRow(objeto);
+    }
+
+    public void clearTableProveedor() {
+        if(modeloProveedor.getRowCount() != 0) {
+            int number = modeloProveedor.getRowCount();
+            for(int n = number - 1; n >= 0; n--)
+                modeloProveedor.removeRow(n);
+        }
+    }//==============================================
+
+    /**
+     * Tabla Recibo
+     * ==============================================
+     */
+    public void tablaRecibo(Object[] objeto) {
+        modeloRecibo.addRow(objeto);
+    }
+
+    public void clearTableRecibo() {
+        if(modeloRecibo.getRowCount() != 0) {
+            int number = modeloRecibo.getRowCount();
+            for(int n = number - 1; n >= 0; n--)
+                modeloRecibo.removeRow(n);
+        }
+    }//==============================================
+
+    /**
+     * Tabla Cliente
+     */
+    public void tablaCliente(Object[] objeto) {
+        modeloCliente.addRow(objeto);
+    }
+
+    public void clearTableCliente() {
+        if(modeloCliente.getRowCount() != 0) {
+            int number = modeloCliente.getRowCount();
+            for(int n = number - 1; n >= 0; n--)
+                modeloCliente.removeRow(n);
+        }
+    }//==============================================
+
+    /**
+     * Tabla Vendedor
+     */
+    public void tablaVendedor(Object[] objeto) {
+        modeloVendedor.addRow(objeto);
+    }
+
+    public void clearTableVendedor() {
+        if(modeloVendedor.getRowCount() != 0) {
+            int number = modeloVendedor.getRowCount();
+            for(int n = number - 1; n >= 0; n--)
+                modeloVendedor.removeRow(n);
+        }
+    }//==============================================
 
     /**
      * @param args the command line arguments
@@ -618,5 +726,11 @@ public class VistaCrud extends javax.swing.JFrame {
     private javax.swing.JTable tablaRecibo;
     private javax.swing.JTable tablaVendedor;
     private DefaultTableModel modelo;
+    private DefaultTableModel modeloReceta;
+    private DefaultTableModel modeloProducto;
+    private DefaultTableModel modeloProveedor;
+    private DefaultTableModel modeloRecibo;
+    private DefaultTableModel modeloCliente;
+    private DefaultTableModel modeloVendedor;
     // End of variables declaration//GEN-END:variables
 }
