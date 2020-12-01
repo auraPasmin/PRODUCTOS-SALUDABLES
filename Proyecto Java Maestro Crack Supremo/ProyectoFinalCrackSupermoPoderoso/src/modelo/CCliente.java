@@ -175,11 +175,6 @@ public class CCliente extends Thread{
 //			txtMensaje.setText("");
 //		}
 //	}
-        
-
-
-	
-
 	private ObjectOutputStream salida;
 	private ObjectInputStream entrada;
 	private String mensajeaEnviar = "";

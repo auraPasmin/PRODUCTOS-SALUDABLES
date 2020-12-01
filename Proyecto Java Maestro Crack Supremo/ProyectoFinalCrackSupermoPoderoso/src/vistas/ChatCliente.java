@@ -13,10 +13,9 @@ public class ChatCliente extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public ChatCliente(String cliente, String direccion) {
+	public ChatCliente(String cliente) {
             setResizable(false);
             nameCliente = cliente;
-            direccionIP = direccion;
             initialize();
             txtMensaje.setEditable(true);
             btnSend.setEnabled(true);
@@ -26,7 +25,7 @@ public class ChatCliente extends JFrame{
 	private void initialize() {
 		setTitle( "Cliente" );
 		setBounds(100, 100, 450, 337);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(null);
 		
@@ -62,15 +61,6 @@ public class ChatCliente extends JFrame{
 		btnSend = new JButton("enviar");
 		btnSend.setBackground(Color.GREEN);
 		btnSend.setBounds(345, 276, 94, 23);
-		getContentPane().add(btnSend);
-                
-                addWindowEvent(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        JOptionPane.showMessageDialog(null, "Hola");
-                        dispose();
-                    }
-                });
 		setVisible(true);
 	}
 	
