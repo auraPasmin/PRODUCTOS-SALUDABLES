@@ -32,10 +32,25 @@ public class CCliente extends Thread{
             nameCliente = cliente;
             direccionIP = direccion;
 	}
-
-
+        
+        public void iniciarCliente() throws IOException {
+            try {
+                startClienteConexion();
+                if(continuar) {
+                    outputInputOfData();
+                    process();
+                }
+            }
+            catch(EOFException e) {
+                e.getMessage();
+            }
+            finally {
+                if(continuar)
+                    closeCliente();
+            }
+        }
 	
-	public void iniciarCliente() throws IOException {
+	/*public void iniciarCliente() throws IOException {
 
 			startClienteConexion();
                         if(continuar) {
@@ -46,17 +61,31 @@ public class CCliente extends Thread{
                     if(continuar)
 			closeCliente();
 		
-	}
+	}*/
 	
-	public void startClienteConexion() throws UnknownHostException, IOException {
+        public void startClienteConexion() throws UnknownHostException, IOException {
+            cliente = new Socket(InetAddress.getByName(direccionIP), 9009);
+        }
+	/*public void startClienteConexion() throws UnknownHostException, IOException {
 		showMessage("Iniciando conexion\n");
 
 			cliente = new Socket(InetAddress.getByName(direccionIP), 9009);
                         showMessage("conexion Lista\n");
 
-	}
-	
-	public void OutputInputOfData() {
+	}*/
+	public void outputInputOfData() {
+            try {
+                salida = new ObjectOutputStream(cliente.getOutputStream());
+                salida.flush();
+                
+                entrada = new ObjectInputStream(cliente.getInputStream());
+            }
+            catch(IOException | NullPointerException e) {
+                e.getMessage();
+            }
+        }
+        
+	/*public void outputInputOfData() {
 		try {
 			salida = new ObjectOutputStream(cliente.getOutputStream());
 			salida.flush();
@@ -67,9 +96,19 @@ public class CCliente extends Thread{
 		catch(IOException | NullPointerException e) {
 			e.getMessage();
 		}
-	}
-	
-	public void process() throws IOException{
+	}*/
+	public void process() throws IOException {
+            do {
+                try {
+                    PaqueteDeDatos paqueteVendedor = (PaqueteDeDatos)entrada.readObject();
+                    mensajeToSave += printPaquete(paqueteVendedor);
+                }
+                catch(ClassNotFoundException | NullPointerException e) {
+                    e.getMessage();
+		}
+            }while(cliente.isConnected());
+        }
+	/*public void process() throws IOException{
 		do {
 			try {
 				PaqueteDeDatos paqueteVendedor;
@@ -83,18 +122,18 @@ public class CCliente extends Thread{
 			}
 			
 		}while(cliente.isConnected());
-	}
+	}*/
         
 	public void closeCliente() {
-		showMessage("Fin del Chat\n");
-		try {
-			entrada.close();
-			salida.close();
-			cliente.close();
-		}
-		catch(IOException e) {
-			e.getCause();
-		}
+            showMessage("Fin del Chat\n");
+            try {
+                entrada.close();
+                salida.close();
+                cliente.close();
+            }
+            catch(IOException e) {
+		e.getCause();
+            }
 	}
 	
 	public void sendMessages(String message) {
@@ -105,7 +144,6 @@ public class CCliente extends Thread{
 			paqueteCliente.setMensaje(message);
 			salida.writeObject(paqueteCliente);
 			mensajeToSave += printPaquete(paqueteCliente);
-			showMessage(printPaquete(paqueteCliente));
 		}
 		catch(IOException e) {
 			showMessage("No se pudo escribir el mensaje\n\n");
@@ -137,11 +175,6 @@ public class CCliente extends Thread{
 //			txtMensaje.setText("");
 //		}
 //	}
-        
-
-
-	
-
 	private ObjectOutputStream salida;
 	private ObjectInputStream entrada;
 	private String mensajeaEnviar = "";

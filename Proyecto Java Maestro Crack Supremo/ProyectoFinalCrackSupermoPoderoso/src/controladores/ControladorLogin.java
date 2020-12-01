@@ -1,11 +1,8 @@
 package controladores;
 
-import controladores.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 import modelo.ClienteDAO;
@@ -59,9 +56,13 @@ public class ControladorLogin {
         }else{
             try {
                 V = v.cargarVendedor(Integer.parseInt(cad));
+<<<<<<< HEAD
                 VistaVendedor n = new VistaVendedor();
                 ControladorVendedor CV = new ControladorVendedor(n, v, V);
                 n.setVisible(true);
+=======
+                ControladorVendedor controlador = new ControladorVendedor(V);
+>>>>>>> master
                 vista.dispose();
                 return;
             } catch (NEDException | NumberFormatException ex) {

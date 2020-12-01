@@ -14,6 +14,7 @@ public class ControladorCVendedor {
         chatVendedor = new CVendedor(cliente, vista.getText());
         chatVendedor.start();
         vista.addListenerbtn(new ChatController());
+        vista.setVisible(true);
     }
     class ChatController implements ActionListener{
 

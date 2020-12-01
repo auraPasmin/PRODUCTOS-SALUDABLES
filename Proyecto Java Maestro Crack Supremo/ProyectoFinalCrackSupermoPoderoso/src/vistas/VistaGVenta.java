@@ -105,6 +105,10 @@ public class VistaGVenta extends javax.swing.JFrame {
             .addGap(0, 24, Short.MAX_VALUE)
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton1.setBackground(new java.awt.Color(240, 38, 33));
+        jButton1.setForeground(new java.awt.Color(240, 38, 33));
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,8 +116,10 @@ public class VistaGVenta extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(15, 101, 163));
         jButton2.setText("Limpiar");
 
+        btnGenerar.setBackground(new java.awt.Color(15, 101, 163));
         btnGenerar.setText("Generar");
 
         jLabel2.setText("NIT");
@@ -128,6 +134,7 @@ public class VistaGVenta extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton4.setBackground(new java.awt.Color(240, 38, 33));
         jButton4.setText("eliminar");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -136,6 +143,7 @@ public class VistaGVenta extends javax.swing.JFrame {
 
         jLabel10.setText("Cantidad");
 
+        btnIngresar.setBackground(new java.awt.Color(15, 101, 163));
         btnIngresar.setText("ingresar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
