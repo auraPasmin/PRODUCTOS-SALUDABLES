@@ -47,6 +47,12 @@ public class ControladorCruds {
             head = new String[]{"cedula","nombre","cargo","comision","Telefono","correo","sexo"};
         }
         crud.setModeloTabla(head,null);
+        crud.addWindowsEvent(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                crud.dispose();
+            }
+        });
         cargarDatos();
         crud.setVisible(true);
     }
@@ -285,7 +291,7 @@ private void ingresarVendedor(){
             vend.setSexo(JOptionPane.showInputDialog("ingrese Longitud"));
             ((VendedorDAO) CRUDS[ind]).createVendedor(vend); 
     }
-    
+
     class buttonEvent implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {

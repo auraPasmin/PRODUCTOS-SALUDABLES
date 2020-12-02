@@ -149,15 +149,13 @@ public class VistaCruds extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent event) {
-                System.out.println("hola");
-            }
-        });
+        
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void addWindowsEvent(WindowAdapter listen) {
+        addWindowListener(listen);
+    }
     /**
      * @param args the command line arguments
      */
