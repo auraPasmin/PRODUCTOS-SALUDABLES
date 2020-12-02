@@ -27,6 +27,7 @@ public class ControladorCruds {
     private String[] head;
     private Object[] CRUDS = {new ClienteDAO(), new Materia_PrimaDAO(), new ProductoDAO(), new ProveedorDAO(), new RecetaDAO(), new ReciboDAO(),
     new VendedorDAO()};
+    
     public ControladorCruds(int ind) {
         this.ind = ind;
         crud = new VistaCruds();
@@ -37,12 +38,10 @@ public class ControladorCruds {
         }else if(CRUDS[ind] instanceof ProductoDAO){
             head = new String[]{"nombre","cantidad","precio","fechaCaducidad"};
         }else if(CRUDS[ind] instanceof ProveedorDAO){
-        
             head = new String[]{"NIT","nombre","ubicacion","telefono","email"};
         }else if(CRUDS[ind] instanceof RecetaDAO){
             head = new String[]{"Producto","MateriaPrima","cantidad"};
         }else if(CRUDS[ind] instanceof ReciboDAO){
-
             head = new String[]{"Vendedor","Cliente","Producto","fecha","cantidad"};
         }else{
             head = new String[]{"cedula","nombre","cargo","comision","Telefono","correo","sexo"};

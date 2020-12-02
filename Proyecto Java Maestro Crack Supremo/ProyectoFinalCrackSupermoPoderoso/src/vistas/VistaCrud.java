@@ -47,7 +47,7 @@ public class VistaCrud extends javax.swing.JFrame {
         btnEliminar5 = new javax.swing.JButton();
         labelTabla = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(240, 38, 84));
 
@@ -78,6 +78,13 @@ public class VistaCrud extends javax.swing.JFrame {
         btnModificar5.setText("Modificar");
 
         btnEliminar5.setText("Eliminar");
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                System.out.println("hola");
+            }
+        });
 
         javax.swing.GroupLayout jpClienteLayout = new javax.swing.GroupLayout(jpCliente);
         jpCliente.setLayout(jpClienteLayout);

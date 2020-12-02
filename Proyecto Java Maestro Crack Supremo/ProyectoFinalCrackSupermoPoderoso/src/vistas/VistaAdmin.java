@@ -5,6 +5,8 @@
  */
 package vistas;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author msp
@@ -130,7 +132,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         });
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/fondo.jpg"))); // NOI18N
+        //jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("fondo.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
@@ -237,6 +239,16 @@ public class VistaAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void addListenerBotones(ActionListener listen) {
+        jBcrudsClientes.addActionListener(listen);
+        jBCrudsProducto.addActionListener(listen);
+        jBCrudsRecibo.addActionListener(listen);
+        jBCrudsVendedor.addActionListener(listen);
+        jBcrudsMP.addActionListener(listen);
+        jBcrudsReceta.addActionListener(listen);
+        jBcrudsPro.addActionListener(listen);
+    }
+    
     private void jBcrudsClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcrudsClientesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBcrudsClientesActionPerformed
