@@ -47,7 +47,7 @@ public class VistaCruds extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         labelTitle = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(240, 38, 33));
 
@@ -78,7 +78,7 @@ public class VistaCruds extends javax.swing.JFrame {
 
         jButton3.setText("eliminar");
 
-        jButton4.setText("cancelar");
+        jButton4.setText("listar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -149,7 +149,6 @@ public class VistaCruds extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        
         pack();
     }// </editor-fold>//GEN-END:initComponents
 

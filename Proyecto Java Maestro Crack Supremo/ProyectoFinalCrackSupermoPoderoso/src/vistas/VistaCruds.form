@@ -177,7 +177,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="cancelar"/>
+            <Property name="text" type="java.lang.String" value="listar"/>
           </Properties>
         </Component>
       </SubComponents>
