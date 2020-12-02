@@ -27,7 +27,7 @@ public class ControladorSCliente {
             vista = new VistaSVendedor(ub[0],ub[1]);
             vista.setVisible(true);
         } catch (NEDException ex) {
-            Logger.getLogger(ControladorSCliente.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("este careximba no tiene datos");
         }
         
     }
