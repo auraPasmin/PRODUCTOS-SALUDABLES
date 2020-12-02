@@ -20,6 +20,13 @@ public class VistaCrud extends javax.swing.JFrame {
     public VistaCrud() {
         initComponents();
     }
+    public void setModeloTabla(String[] head){
+         tablaCRUD.setModel(new DefaultTableModel(
+            new Object [][] {
+            },
+            head
+        ));    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,56 +38,14 @@ public class VistaCrud extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        tabla = new javax.swing.JTabbedPane();
-        jpMateria = new javax.swing.JPanel();
-        scrollMateria = new javax.swing.JScrollPane();
-        tablaMateria = new javax.swing.JTable();
-        btnCrear = new javax.swing.JButton();
-        btnListar = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        jpReceta = new javax.swing.JPanel();
-        scrollReceta = new javax.swing.JScrollPane();
-        tablaReceta = new javax.swing.JTable();
-        btnCrear1 = new javax.swing.JButton();
-        btnListar1 = new javax.swing.JButton();
-        btnModificar1 = new javax.swing.JButton();
-        btnEliminar1 = new javax.swing.JButton();
-        jpProducto = new javax.swing.JPanel();
-        scrollProducto = new javax.swing.JScrollPane();
-        tablaProducto = new javax.swing.JTable();
-        btnCrear2 = new javax.swing.JButton();
-        btnListar2 = new javax.swing.JButton();
-        btnModificar2 = new javax.swing.JButton();
-        btnEliminar2 = new javax.swing.JButton();
-        jpProveedor = new javax.swing.JPanel();
-        scrollProveedor = new javax.swing.JScrollPane();
-        tablaProveedor = new javax.swing.JTable();
-        btnCrear3 = new javax.swing.JButton();
-        btnListar3 = new javax.swing.JButton();
-        btnModificar3 = new javax.swing.JButton();
-        btnEliminar3 = new javax.swing.JButton();
-        jpRecibo = new javax.swing.JPanel();
-        scrollRecibo = new javax.swing.JScrollPane();
-        tablaRecibo = new javax.swing.JTable();
-        btnCrear4 = new javax.swing.JButton();
-        btnListar4 = new javax.swing.JButton();
-        btnModificar4 = new javax.swing.JButton();
-        btnEliminar4 = new javax.swing.JButton();
         jpCliente = new javax.swing.JPanel();
         scrollCliente = new javax.swing.JScrollPane();
-        tablaCliente = new javax.swing.JTable();
+        tablaCRUD = new javax.swing.JTable();
         btnCrear5 = new javax.swing.JButton();
         btnListar5 = new javax.swing.JButton();
         btnModificar5 = new javax.swing.JButton();
         btnEliminar5 = new javax.swing.JButton();
-        jpVendedor = new javax.swing.JPanel();
-        scrollVendedor = new javax.swing.JScrollPane();
-        tablaVendedor = new javax.swing.JTable();
-        btnCrear6 = new javax.swing.JButton();
-        btnListar6 = new javax.swing.JButton();
-        btnModificar6 = new javax.swing.JButton();
-        btnEliminar6 = new javax.swing.JButton();
+        labelTabla = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,302 +55,29 @@ public class VistaCrud extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 718, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 37, Short.MAX_VALUE)
         );
 
-        tabla.setMaximumSize(new java.awt.Dimension(2147483647, 80));
-        tabla.setMinimumSize(new java.awt.Dimension(16, 16));
-
-        tablaMateria.setModel(new javax.swing.table.DefaultTableModel(
-            null,
-            new String [] {
-                "Nombre", "Cantidad", "Fecha de vencimiento", "Proveedor", "Costo"
-            }
-        ));
-        tablaMateria.setCellSelectionEnabled(true);
-        scrollMateria.setViewportView(tablaMateria);
-
-        btnCrear.setText("Crear Materia");
-
-        btnListar.setText("Listar Materia");
-
-        btnModificar.setText("Modificar Materia");
-
-        btnEliminar.setText("Eliminar Materia");
-
-        javax.swing.GroupLayout jpMateriaLayout = new javax.swing.GroupLayout(jpMateria);
-        jpMateria.setLayout(jpMateriaLayout);
-        jpMateriaLayout.setHorizontalGroup(
-            jpMateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpMateriaLayout.createSequentialGroup()
-                .addGroup(jpMateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpMateriaLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(scrollMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpMateriaLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(btnCrear)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnListar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar)))
-                .addContainerGap(459, Short.MAX_VALUE))
-        );
-        jpMateriaLayout.setVerticalGroup(
-            jpMateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMateriaLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(jpMateriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrear)
-                    .addComponent(btnListar)
-                    .addComponent(btnModificar)
-                    .addComponent(btnEliminar))
-                .addGap(18, 18, 18)
-                .addComponent(scrollMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        tabla.addTab("Materia Prima", jpMateria);
-
-        tablaReceta.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCRUD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
             },
             new String [] {
-                "Producto", "Materia", "Cantidad"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        scrollReceta.setViewportView(tablaReceta);
+        scrollCliente.setViewportView(tablaCRUD);
 
-        btnCrear1.setText("Crear Receta");
+        btnCrear5.setText("Crear");
 
-        btnListar1.setText("Listar Receta");
+        btnListar5.setText("Listar");
 
-        btnModificar1.setText("Modificar Receta");
+        btnModificar5.setText("Modificar");
 
-        btnEliminar1.setText("Eliminar Receta");
-
-        javax.swing.GroupLayout jpRecetaLayout = new javax.swing.GroupLayout(jpReceta);
-        jpReceta.setLayout(jpRecetaLayout);
-        jpRecetaLayout.setHorizontalGroup(
-            jpRecetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpRecetaLayout.createSequentialGroup()
-                .addGroup(jpRecetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpRecetaLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(scrollReceta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpRecetaLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(btnCrear1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnListar1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificar1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar1)))
-                .addContainerGap(459, Short.MAX_VALUE))
-        );
-        jpRecetaLayout.setVerticalGroup(
-            jpRecetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpRecetaLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(jpRecetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrear1)
-                    .addComponent(btnListar1)
-                    .addComponent(btnModificar1)
-                    .addComponent(btnEliminar1))
-                .addGap(18, 18, 18)
-                .addComponent(scrollReceta, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        tabla.addTab("Receta", jpReceta);
-
-        tablaProducto.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null}
-            },
-            new String [] {
-                "Nombre", "Cantidad", "Precio", "Fecha de vencimiento"
-            }
-        ));
-        scrollProducto.setViewportView(tablaProducto);
-
-        btnCrear2.setText("Crear Producto");
-
-        btnListar2.setText("Listar Producto");
-
-        btnModificar2.setText("Modificar Producto");
-
-        btnEliminar2.setText("Eliminar Producto");
-
-        javax.swing.GroupLayout jpProductoLayout = new javax.swing.GroupLayout(jpProducto);
-        jpProducto.setLayout(jpProductoLayout);
-        jpProductoLayout.setHorizontalGroup(
-            jpProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpProductoLayout.createSequentialGroup()
-                .addGroup(jpProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpProductoLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(scrollProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpProductoLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(btnCrear2)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnListar2)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificar2)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar2)))
-                .addContainerGap(459, Short.MAX_VALUE))
-        );
-        jpProductoLayout.setVerticalGroup(
-            jpProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpProductoLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(jpProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrear2)
-                    .addComponent(btnListar2)
-                    .addComponent(btnModificar2)
-                    .addComponent(btnEliminar2))
-                .addGap(18, 18, 18)
-                .addComponent(scrollProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        tabla.addTab("Producto", jpProducto);
-
-        tablaProveedor.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "NIT", "Nombre", "Ubicacion", "Telefono", "Email"
-            }
-        ));
-        scrollProveedor.setViewportView(tablaProveedor);
-
-        btnCrear3.setText("Crear Proveedor");
-
-        btnListar3.setText("Listar Proveedor");
-
-        btnModificar3.setText("Modificar Proveedor");
-
-        btnEliminar3.setText("Eliminar Proveedor");
-
-        javax.swing.GroupLayout jpProveedorLayout = new javax.swing.GroupLayout(jpProveedor);
-        jpProveedor.setLayout(jpProveedorLayout);
-        jpProveedorLayout.setHorizontalGroup(
-            jpProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpProveedorLayout.createSequentialGroup()
-                .addGroup(jpProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpProveedorLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(scrollProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpProveedorLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(btnCrear3)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnListar3)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificar3)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar3)))
-                .addContainerGap(459, Short.MAX_VALUE))
-        );
-        jpProveedorLayout.setVerticalGroup(
-            jpProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpProveedorLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(jpProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrear3)
-                    .addComponent(btnListar3)
-                    .addComponent(btnModificar3)
-                    .addComponent(btnEliminar3))
-                .addGap(18, 18, 18)
-                .addComponent(scrollProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        tabla.addTab("Proveedor", jpProveedor);
-
-        tablaRecibo.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Vendedor", "Cliente", "Producto", "Fecha", "Cantidad"
-            }
-        ));
-        scrollRecibo.setViewportView(tablaRecibo);
-
-        btnCrear4.setText("Crear Recibo");
-
-        btnListar4.setText("Listar Recibo");
-
-        btnModificar4.setText("Modificar Recibo");
-
-        btnEliminar4.setText("Eliminar Recibo");
-
-        javax.swing.GroupLayout jpReciboLayout = new javax.swing.GroupLayout(jpRecibo);
-        jpRecibo.setLayout(jpReciboLayout);
-        jpReciboLayout.setHorizontalGroup(
-            jpReciboLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpReciboLayout.createSequentialGroup()
-                .addGroup(jpReciboLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpReciboLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(scrollRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpReciboLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(btnCrear4)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnListar4)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificar4)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar4)))
-                .addContainerGap(459, Short.MAX_VALUE))
-        );
-        jpReciboLayout.setVerticalGroup(
-            jpReciboLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpReciboLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(jpReciboLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrear4)
-                    .addComponent(btnListar4)
-                    .addComponent(btnModificar4)
-                    .addComponent(btnEliminar4))
-                .addGap(18, 18, 18)
-                .addComponent(scrollRecibo, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        tabla.addTab("Recibo", jpRecibo);
-
-        tablaCliente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "NIT", "Nombre", "Direccion", "Longitud", "Latitud"
-            }
-        ));
-        scrollCliente.setViewportView(tablaCliente);
-
-        btnCrear5.setText("Crear Cliente");
-
-        btnListar5.setText("Listar Cliente");
-
-        btnModificar5.setText("Modificar Cliente");
-
-        btnEliminar5.setText("Eliminar Cliente");
+        btnEliminar5.setText("Eliminar");
 
         javax.swing.GroupLayout jpClienteLayout = new javax.swing.GroupLayout(jpCliente);
         jpCliente.setLayout(jpClienteLayout);
@@ -394,9 +86,6 @@ public class VistaCrud extends javax.swing.JFrame {
             .addGroup(jpClienteLayout.createSequentialGroup()
                 .addGroup(jpClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpClienteLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(scrollCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpClienteLayout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(btnCrear5)
                         .addGap(18, 18, 18)
@@ -404,78 +93,27 @@ public class VistaCrud extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnModificar5)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminar5)))
-                .addContainerGap(459, Short.MAX_VALUE))
+                        .addComponent(btnEliminar5))
+                    .addGroup(jpClienteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(scrollCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         jpClienteLayout.setVerticalGroup(
             jpClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpClienteLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrear5)
                     .addComponent(btnListar5)
                     .addComponent(btnModificar5)
                     .addComponent(btnEliminar5))
                 .addGap(18, 18, 18)
-                .addComponent(scrollCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(scrollCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
 
-        tabla.addTab("Cliente", jpCliente);
-
-        tablaVendedor.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Nombre", "Cedula", "Cargo", "Comision", "Telefono", "Correo", "Sexo"
-            }
-        ));
-        scrollVendedor.setViewportView(tablaVendedor);
-
-        btnCrear6.setText("Crear Vendedor");
-
-        btnListar6.setText("Listar Vendedor");
-
-        btnModificar6.setText("Modificar Vendedor");
-
-        btnEliminar6.setText("Eliminar Vendedor");
-
-        javax.swing.GroupLayout jpVendedorLayout = new javax.swing.GroupLayout(jpVendedor);
-        jpVendedor.setLayout(jpVendedorLayout);
-        jpVendedorLayout.setHorizontalGroup(
-            jpVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpVendedorLayout.createSequentialGroup()
-                .addGroup(jpVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpVendedorLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(scrollVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpVendedorLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(btnCrear6)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnListar6)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificar6)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar6)))
-                .addContainerGap(459, Short.MAX_VALUE))
-        );
-        jpVendedorLayout.setVerticalGroup(
-            jpVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpVendedorLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(jpVendedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrear6)
-                    .addComponent(btnListar6)
-                    .addComponent(btnModificar6)
-                    .addComponent(btnEliminar6))
-                .addGap(18, 18, 18)
-                .addComponent(scrollVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        tabla.addTab("Vendedor", jpVendedor);
+        labelTabla.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -483,159 +121,35 @@ public class VistaCrud extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jpCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(330, 330, 330)
+                        .addComponent(labelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(tabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labelTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
-        modelo = (DefaultTableModel) tablaMateria.getModel();
-        modeloReceta = (DefaultTableModel) tablaReceta.getModel();
-        modeloProducto = (DefaultTableModel) tablaProducto.getModel();
-        modeloProveedor = (DefaultTableModel) tablaProveedor.getModel();
-        modeloRecibo = (DefaultTableModel) tablaRecibo.getModel();
-        modeloCliente = (DefaultTableModel) tablaCliente.getModel();
-        modeloVendedor = (DefaultTableModel) tablaVendedor.getModel();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void addActionBtnCrear(ActionListener listen) {
-        btnCrear.addActionListener(listen);
-        btnCrear1.addActionListener(listen);
-        btnCrear2.addActionListener(listen);
-        btnCrear3.addActionListener(listen);
-        btnCrear4.addActionListener(listen);
-        btnCrear5.addActionListener(listen);
-        btnCrear6.addActionListener(listen);
-    }
 
-    public void addActionBtnListar(ActionListener listen) {
-        btnListar.addActionListener(listen);
-        btnListar1.addActionListener(listen);
-        btnListar2.addActionListener(listen);
-        btnListar3.addActionListener(listen);
-        btnListar4.addActionListener(listen);
-        btnListar5.addActionListener(listen);
-        btnListar6.addActionListener(listen);
-    }
     
     /**
      * Tabla Materia Prima
      * ========================================== 
      */
-    public void tableMateria(Object[] n) {
-        modelo.addRow(n);
-    }
-    
-    public void clearTable() {
-        if(modelo.getRowCount() != 0) {
-            int number = modelo.getRowCount();
-            for(int n = number - 1; n >= 0; n--) {
-                modelo.removeRow(n);
-            }
-        }
-    }//=============================================
-    
-    /**
-     * Tabla Receta
-     * =============================================
-     */
-    public void tablaReceta(Object[] objeto) {
-        modeloReceta.addRow(objeto);
-    }
-
-    public void clearTableReceta() {
-        if(modeloReceta.getRowCount() != 0) {
-            int number = modeloReceta.getRowCount();
-            for(int n = number - 1; n >= 0; n--)
-                modeloReceta.removeRow(n);
-        }
-    }//==============================================
-    
-    /**
-     * Tabla Producto
-     * ==============================================
-     */
-    public void tablaProducto(Object[] objeto) {
-        modeloProducto.addRow(objeto);
-    }
-
-    public void clearTableProducto() {
-        if(modeloProducto.getRowCount() != 0) {
-            int number = modeloProducto.getRowCount();
-            for(int n = number - 1; n >= 0; n--)
-                modeloProducto.removeRow(n);
-        }
-    }//==============================================
-
-    /**
-     * Tabla Proveedor
-     * ==============================================
-     */
-    public void tablaProveedor(Object[] objeto) {
-        modeloProveedor.addRow(objeto);
-    }
-
-    public void clearTableProveedor() {
-        if(modeloProveedor.getRowCount() != 0) {
-            int number = modeloProveedor.getRowCount();
-            for(int n = number - 1; n >= 0; n--)
-                modeloProveedor.removeRow(n);
-        }
-    }//==============================================
-
-    /**
-     * Tabla Recibo
-     * ==============================================
-     */
-    public void tablaRecibo(Object[] objeto) {
-        modeloRecibo.addRow(objeto);
-    }
-
-    public void clearTableRecibo() {
-        if(modeloRecibo.getRowCount() != 0) {
-            int number = modeloRecibo.getRowCount();
-            for(int n = number - 1; n >= 0; n--)
-                modeloRecibo.removeRow(n);
-        }
-    }//==============================================
-
-    /**
-     * Tabla Cliente
-     */
-    public void tablaCliente(Object[] objeto) {
-        modeloCliente.addRow(objeto);
-    }
-
-    public void clearTableCliente() {
-        if(modeloCliente.getRowCount() != 0) {
-            int number = modeloCliente.getRowCount();
-            for(int n = number - 1; n >= 0; n--)
-                modeloCliente.removeRow(n);
-        }
-    }//==============================================
-
-    /**
-     * Tabla Vendedor
-     */
-    public void tablaVendedor(Object[] objeto) {
-        modeloVendedor.addRow(objeto);
-    }
-
-    public void clearTableVendedor() {
-        if(modeloVendedor.getRowCount() != 0) {
-            int number = modeloVendedor.getRowCount();
-            for(int n = number - 1; n >= 0; n--)
-                modeloVendedor.removeRow(n);
-        }
-    }//==============================================
 
     /**
      * @param args the command line arguments
@@ -674,63 +188,14 @@ public class VistaCrud extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCrear;
-    private javax.swing.JButton btnCrear1;
-    private javax.swing.JButton btnCrear2;
-    private javax.swing.JButton btnCrear3;
-    private javax.swing.JButton btnCrear4;
     private javax.swing.JButton btnCrear5;
-    private javax.swing.JButton btnCrear6;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnEliminar1;
-    private javax.swing.JButton btnEliminar2;
-    private javax.swing.JButton btnEliminar3;
-    private javax.swing.JButton btnEliminar4;
     private javax.swing.JButton btnEliminar5;
-    private javax.swing.JButton btnEliminar6;
-    private javax.swing.JButton btnListar;
-    private javax.swing.JButton btnListar1;
-    private javax.swing.JButton btnListar2;
-    private javax.swing.JButton btnListar3;
-    private javax.swing.JButton btnListar4;
     private javax.swing.JButton btnListar5;
-    private javax.swing.JButton btnListar6;
-    private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnModificar1;
-    private javax.swing.JButton btnModificar2;
-    private javax.swing.JButton btnModificar3;
-    private javax.swing.JButton btnModificar4;
     private javax.swing.JButton btnModificar5;
-    private javax.swing.JButton btnModificar6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jpCliente;
-    private javax.swing.JPanel jpMateria;
-    private javax.swing.JPanel jpProducto;
-    private javax.swing.JPanel jpProveedor;
-    private javax.swing.JPanel jpReceta;
-    private javax.swing.JPanel jpRecibo;
-    private javax.swing.JPanel jpVendedor;
+    private javax.swing.JLabel labelTabla;
     private javax.swing.JScrollPane scrollCliente;
-    private javax.swing.JScrollPane scrollMateria;
-    private javax.swing.JScrollPane scrollProducto;
-    private javax.swing.JScrollPane scrollProveedor;
-    private javax.swing.JScrollPane scrollReceta;
-    private javax.swing.JScrollPane scrollRecibo;
-    private javax.swing.JScrollPane scrollVendedor;
-    private javax.swing.JTabbedPane tabla;
-    private javax.swing.JTable tablaCliente;
-    private javax.swing.JTable tablaMateria;
-    private javax.swing.JTable tablaProducto;
-    private javax.swing.JTable tablaProveedor;
-    private javax.swing.JTable tablaReceta;
-    private javax.swing.JTable tablaRecibo;
-    private javax.swing.JTable tablaVendedor;
-    private DefaultTableModel modelo;
-    private DefaultTableModel modeloReceta;
-    private DefaultTableModel modeloProducto;
-    private DefaultTableModel modeloProveedor;
-    private DefaultTableModel modeloRecibo;
-    private DefaultTableModel modeloCliente;
-    private DefaultTableModel modeloVendedor;
+    private javax.swing.JTable tablaCRUD;
     // End of variables declaration//GEN-END:variables
 }
