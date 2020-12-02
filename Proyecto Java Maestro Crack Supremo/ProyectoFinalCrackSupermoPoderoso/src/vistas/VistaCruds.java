@@ -12,17 +12,16 @@ import javax.swing.table.DefaultTableModel;
  * @author aurap
  */
 public class VistaCruds extends javax.swing.JFrame {
-
+    private String[]head;
     /**
      * Creates new form VistaCruds
      */
     public VistaCruds() {
         initComponents();
     }
-    public void setModeloTabla(String[] head){
+    public void setModeloTabla(String[] head, Object[][] data){
          tablaCRUD.setModel(new DefaultTableModel(
-            new Object [][] {
-            },
+            data,
             head
         ));    
     }
