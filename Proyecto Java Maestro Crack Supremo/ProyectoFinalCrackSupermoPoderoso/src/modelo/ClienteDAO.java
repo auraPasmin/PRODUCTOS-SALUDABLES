@@ -84,7 +84,8 @@ public class ClienteDAO {
             }
         }
         catch(SQLException e) {
-            System.out.println(e);
+            System.out.println(e.toString());
+            
         }
         finally {
             try {

@@ -32,6 +32,9 @@ public class VistaCruds extends javax.swing.JFrame {
         public void addListenerBtnEliminar(ActionListener Ls){
             this.btnEliminar.addActionListener(Ls);
         }
+        public void addListenerbtnListar(ActionListener Ls){
+            this.btnListar.addActionListener(Ls);
+        }
     public void setModeloTabla(String[] head, Object[][] data){
          tablaCRUD.setModel(new DefaultTableModel(
             data,
@@ -56,7 +59,7 @@ public class VistaCruds extends javax.swing.JFrame {
         btnCrear = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnListar = new javax.swing.JButton();
         labelTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -90,7 +93,7 @@ public class VistaCruds extends javax.swing.JFrame {
 
         btnEliminar.setText("eliminar");
 
-        jButton4.setText("cancelar");
+        btnListar.setText("listar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -106,7 +109,7 @@ public class VistaCruds extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(btnEliminar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4))
+                        .addComponent(btnListar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,7 +134,7 @@ public class VistaCruds extends javax.swing.JFrame {
                     .addComponent(btnCrear)
                     .addComponent(btnEditar)
                     .addComponent(btnEliminar)
-                    .addComponent(jButton4))
+                    .addComponent(btnListar))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -203,8 +206,8 @@ public class VistaCruds extends javax.swing.JFrame {
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnListar;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane4;

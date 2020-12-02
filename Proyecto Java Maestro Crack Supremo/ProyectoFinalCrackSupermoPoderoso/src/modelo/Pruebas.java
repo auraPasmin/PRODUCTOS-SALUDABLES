@@ -9,7 +9,7 @@ import controladores.ControladorGVenta;
 
 public class Pruebas {
     public static void main(String[]args) throws NEDException{
-        ControladorCruds c = new ControladorCruds(0);
+        ControladorCruds c = new ControladorCruds(1);
         
     }
 }

@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import modelo.*;
 
@@ -30,6 +32,11 @@ public class ControladorCruds {
     public ControladorCruds(int ind) {
         this.ind = ind;
         crud = new VistaCruds();
+        this.crud.addListenerBtnCrear(new programListener());
+        this.crud.addListenerBtnEditar(new programListener());
+        this.crud.addListenerBtnEliminar(new programListener());
+        this.crud.addListenerbtnListar(new programListener());
+        this.crud.setVisible(true);
         if(CRUDS[ind] instanceof ClienteDAO){
             head = new String[]{"NIT","nombre","direccion","X","Y"};
         }else if(CRUDS[ind] instanceof Materia_PrimaDAO){
@@ -83,8 +90,7 @@ public class ControladorCruds {
         }else if(CRUDS[ind] instanceof ReciboDAO){
             try {
                 ((ReciboDAO) CRUDS[ind]).deleteRecibo(Integer.parseInt(n));
-            }
-            catch(NumberFormatException e) {
+            }catch(NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Ingrese un valor numerico", "Error", JOptionPane.WARNING_MESSAGE);
             }
         }else{
@@ -96,7 +102,104 @@ public class ControladorCruds {
             }
         }
     }
-    
+            protected void decide(int ind, String str) throws NEDException{
+            
+            if(CRUDS[ind] instanceof ClienteDAO){
+                crud.setModeloTabla(head, null);
+                crud.getLabelTitle().setText("Cliente");
+                switch(str){
+                    case "crear":
+                        this.ingresarCliente();
+                    case "editar":
+                        //this.editarCliente();
+                    case "eliminar":
+                        this.delete("");
+                    default:
+                        visualizarClientes(((ClienteDAO)CRUDS[ind]));
+                }
+ 
+            }else if(CRUDS[ind] instanceof Materia_PrimaDAO){
+                crud.setModeloTabla(head, null);
+                crud.getLabelTitle().setText("Materia Prima");
+                 switch(str){
+                    case "crear":
+                        this.ingresarMateria();
+                    case "editar":
+                        //this.editarMateria();
+                    case "eliminar":
+                        this.delete("");
+                    default:
+                        visualizarMateriaPrima(((Materia_PrimaDAO)CRUDS[ind]));
+                 }
+            }else if(CRUDS[ind] instanceof ProductoDAO){
+                crud.setModeloTabla(head,null);
+                crud.getLabelTitle().setText("Producto");
+                 switch(str){
+                    case "crear":
+                        this.ingresarProducto();
+                    case "editar":
+                        //this.editarProducto();
+                    case "eliminar":
+                        this.delete("");
+                    default:
+                        visualizarProducto(((ProductoDAO)CRUDS[ind]));
+                 }
+            }else if(CRUDS[ind] instanceof ProveedorDAO){
+                crud.setModeloTabla(head, null);
+                crud.getLabelTitle().setText("Proveedor");
+                 switch(str){
+                    case "crear":
+                        this.ingresarProveedor();
+                    case "editar":
+                         //this.editarProveedor();
+                    case "eliminar":
+                        this.delete("");
+                    default:
+                        visualizarProveedor(((ProveedorDAO)CRUDS[ind]).readProveedor());
+                 }
+            }else if(CRUDS[ind] instanceof RecetaDAO){
+                crud.setModeloTabla(head,null);
+                crud.getLabelTitle().setText("Receta");
+                 switch(str){
+                    case "crear":
+                        this.ingresarReceta();
+                    case "editar":
+                        //this.editarCliente();
+                    case "eliminar":
+                        this.delete("");
+                    default:
+                        visualizarReceta(((RecetaDAO)CRUDS[ind]).readRecetas());
+                 }
+            }else if(CRUDS[ind] instanceof ReciboDAO){
+                crud.setModeloTabla(head,null);
+                crud.getLabelTitle().setText("Recibo");
+                 switch(str){
+                    case "crear":
+                        this.ingresarRecibo();
+                    case "editar":
+                        //this.editarCliente();
+                    case "eliminar":
+                        this.delete("");
+                    default:
+                        visualizarRecibo(((ReciboDAO)CRUDS[ind]).readRecibo());
+                 }
+            }else if(CRUDS[ind] instanceof VendedorDAO){
+                crud.setModeloTabla(head,null);
+                crud.getLabelTitle().setText("Vendedor");
+                 switch(str){
+                    case "crear":
+                        this.ingresarVendedor();
+                        System.out.println("Crear Cliente jeje");
+                    case "editar":
+                        //this.editarVendedor();
+                        System.out.println("Editar Cliente jeje");
+                    case "eliminar":
+                        this.delete("");
+                    default:
+                        visualizarVendedor(((VendedorDAO)CRUDS[ind]).readVendedores());
+                 }
+            }     
+        }
 
     private void visualizarClientes(ClienteDAO C) {
         ArrayList<Cliente> listarClientes = C.listarClientes();
@@ -240,7 +343,7 @@ public class ControladorCruds {
             mat.setFechaCaducidad(LocalDate.now());
             mat.setNit_proveedor(JOptionPane.showInputDialog("ingrese NIT_Proveedor"));
             mat.setValor_unitario(Integer.parseInt(JOptionPane.showInputDialog("ingrese ValorUnitario")));
-            ((Materia_PrimaDAO) CRUDS[ind]).createMateria_Prima(mat);
+            ((Materia_PrimaDAO) CRUDS[ind]).createMateria_Prima(mat);   
     }
     private void ingresarProducto(){
             Producto prod = new Producto();
@@ -255,7 +358,7 @@ public class ControladorCruds {
             prov.setNit(JOptionPane.showInputDialog("ingrese NIT"));
             prov.setNombre(JOptionPane.showInputDialog("ingrese nombre"));
             prov.setUbicacion(JOptionPane.showInputDialog("ingrese ubicacion"));
-            prov.setTelefono(Integer.parseInt(JOptionPane.showInputDialog("ingrese telelfono")));
+            prov.setTelefono(Integer.parseInt(JOptionPane.showInputDialog("ingrese telefono")));
             prov.setEmail(JOptionPane.showInputDialog("ingrese email"));
             ((ProveedorDAO) CRUDS[ind]).createProveedor(prov); 
     }
@@ -264,7 +367,7 @@ public class ControladorCruds {
             rec.setP(JOptionPane.showInputDialog("ingrese Producto"));
             rec.setM(JOptionPane.showInputDialog("ingrese Materia Prima"));
             rec.setCantidad(Integer.parseInt(JOptionPane.showInputDialog("ingrese Cantidad")));
-            ((RecetaDAO) CRUDS[ind]).createReceta(rec);
+            ((RecetaDAO) CRUDS[ind]).createReceta(rec);          
     }
     private void ingresarRecibo() throws NEDException{
             Recibo rb = new Recibo();
@@ -273,36 +376,52 @@ public class ControladorCruds {
             rb.setP(JOptionPane.showInputDialog("ingrese Producto"));
             rb.setFecha(LocalDateTime.now());
             rb.setCantidad(Integer.parseInt(JOptionPane.showInputDialog("ingrese Cantidad")));
-            ((ReciboDAO) CRUDS[ind]).createRecibo(rb);
+            ((ReciboDAO) CRUDS[ind]).createRecibo(rb);     
     }
-private void ingresarVendedor(){
+    private void ingresarVendedor(){
             Vendedor vend = new Vendedor();
-            vend.setCedula(Integer.parseInt(JOptionPane.showInputDialog("ingrese NIT")));
+            vend.setCedula(Integer.parseInt(JOptionPane.showInputDialog("ingrese cedula")));
             vend.setNombre(JOptionPane.showInputDialog("ingrese nombre"));
-            vend.setCargo(JOptionPane.showInputDialog("ingrese direccion"));
-            vend.setComision(Double.parseDouble(JOptionPane.showInputDialog("ingrese Latitud")));
-            vend.setTelefono(Integer.parseInt(JOptionPane.showInputDialog("ingrese Longitud")));
-            vend.setEmail(JOptionPane.showInputDialog("ingrese Longitud"));
-            vend.setSexo(JOptionPane.showInputDialog("ingrese Longitud"));
+            vend.setCargo(JOptionPane.showInputDialog("ingrese cargo"));
+            vend.setComision(Double.parseDouble(JOptionPane.showInputDialog("ingrese comision")));
+            vend.setTelefono(Integer.parseInt(JOptionPane.showInputDialog("ingrese telefono")));
+            vend.setEmail(JOptionPane.showInputDialog("ingrese email"));
+            vend.setSexo(JOptionPane.showInputDialog("ingrese sexo (M o F)"));
             ((VendedorDAO) CRUDS[ind]).createVendedor(vend); 
     }
     
-    class buttonEvent implements ActionListener {
+    class programListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
             if(event.getActionCommand().equalsIgnoreCase("crear")) {
-
+                try {
+                    decide(ind,"crear");//  <-----------------
+                } catch (NEDException ex) {
+                    Logger.getLogger(ControladorCruds.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else
-            if(event.getActionCommand().equalsIgnoreCase("listar")) {
-
-            }else
-            if(event.getActionCommand().equalsIgnoreCase("modificar")) {
-
+            if(event.getActionCommand().equalsIgnoreCase("editar")) {
+                try {
+                    decide(ind,"editar");//  <-----------------
+                } catch (NEDException ex) {
+                    Logger.getLogger(ControladorCruds.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else
             if(event.getActionCommand().equalsIgnoreCase("eliminar")) {
+                try {
+                    decide(ind,"eliminar");//  <-----------------
+                } catch (NEDException ex) {
+                    Logger.getLogger(ControladorCruds.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else if(event.getActionCommand().equalsIgnoreCase("listar")) {
+                try {
+                    decide(ind,"listar");
+                } catch (NEDException ex) {
+                    Logger.getLogger(ControladorCruds.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
             }
         }
-    }
     
+    }
 }
