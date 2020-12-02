@@ -25,6 +25,7 @@ public class ControladorCruds {
     new VendedorDAO()};
     public ControladorCruds(int ind) {
         this.ind = ind;
+        
         crud = new VistaCrud();
         if(CRUDS[ind] instanceof ClienteDAO){
             crud.setModeloTabla(new String[] {"NIT", "Nombre", "Direcion", "Longitud", "Latitud"});
@@ -47,7 +48,34 @@ public class ControladorCruds {
     class buttonEvent implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-
+        }
+    }
+    
+    public void delete(String n) {
+        if(CRUDS[ind] instanceof ClienteDAO){
+            ((ClienteDAO) CRUDS[ind]).borrarCliente(n);
+        }else if(CRUDS[ind] instanceof Materia_PrimaDAO){
+            ((Materia_PrimaDAO) CRUDS[ind]).deleteMateriaPrima(n);
+        }else if(CRUDS[ind] instanceof ProductoDAO){
+            ((ProductoDAO) CRUDS[ind]).deleteProducto(n);
+        }else if(CRUDS[ind] instanceof ProveedorDAO){
+            ((ProveedorDAO) CRUDS[ind]).deleteMateriaPrima(n);
+        }else if(CRUDS[ind] instanceof RecetaDAO){
+            ((RecetaDAO) CRUDS[ind]).deleteReceta(n);
+        }else if(CRUDS[ind] instanceof ReciboDAO){
+            try {
+                ((ReciboDAO) CRUDS[ind]).deleteRecibo(Integer.parseInt(n));
+            }
+            catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Ingrese un valor numerico", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        }else{
+            try {
+                ((VendedorDAO)CRUDS[ind]).deleteVendedor(Integer.parseInt(n));
+            }
+            catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Ingrese un valor numerico", "Error", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 }
