@@ -7,6 +7,8 @@ package vistas;
 
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
+import javax.swing.JLabel;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -148,10 +150,22 @@ public class VistaCruds extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
+        table.getSelectionModel().addListSelectionListener()
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JLabel getLabelTitle() {
+        return labelTitle;
+    }
+    
+    /*public int indexRow() {
+        return tablaCRUD.getSelectedRow();
+    }
+    
+    public void selectionOfList(ListSelectionListener listen) {
+        tablaCRUD.getSelectionModel().addListSelectionListener(listen);
+    }*/
+    
     public void addWindowsEvent(WindowAdapter listen) {
         addWindowListener(listen);
     }
