@@ -6,6 +6,7 @@
 package vistas;
 
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.*;
 
 /**
  *
@@ -46,7 +47,7 @@ public class VistaCruds extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         labelTitle = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(240, 38, 33));
 
@@ -148,6 +149,12 @@ public class VistaCruds extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                System.out.println("hola");
+            }
+        });
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
