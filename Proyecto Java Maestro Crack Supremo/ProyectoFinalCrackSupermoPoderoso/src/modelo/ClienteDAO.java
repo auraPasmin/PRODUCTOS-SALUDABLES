@@ -67,24 +67,23 @@ public class ClienteDAO {
 
         try {
             conexion = Fachada.startConnection();
-            statementSql = "SELECT * FROM cliente";
+            statementSql = "SELECT * FROM cliente ORDER BY NIT";
             instruccion = conexion.prepareStatement(statementSql);
             resultConsulta = instruccion.executeQuery();
 
-            
+            Cliente cliente = new Cliente();
             while(resultConsulta.next()) {
-                Cliente cliente = new Cliente();
                 cliente.setNIT(resultConsulta.getString(1));
                 cliente.setNombre(resultConsulta.getString(2));
                 cliente.setDireccion(resultConsulta.getString(3));
                 cliente.setX(resultConsulta.getDouble(4));
                 cliente.setY(resultConsulta.getDouble(5));
-                
+
                 listaCliente.add(cliente);
             }
         }
         catch(SQLException e) {
-            System.out.println(e);
+            // Do something ...
         }
         finally {
             try {
