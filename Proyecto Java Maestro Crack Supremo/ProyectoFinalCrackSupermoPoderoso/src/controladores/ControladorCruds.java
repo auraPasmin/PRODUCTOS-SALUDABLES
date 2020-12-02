@@ -7,6 +7,8 @@ package controladores;
 
 import vistas.VistaCrud;
 import java.awt.event.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import javax.swing.*;
@@ -222,13 +224,85 @@ public class ControladorCruds {
         crud.setModeloTabla(head,data);
     }
 
+    private void ingresarCliente(){
+            Cliente Cli = new Cliente();
+            Cli.setNIT(JOptionPane.showInputDialog("ingrese NIT"));
+            Cli.setNombre(JOptionPane.showInputDialog("ingrese nombre"));
+            Cli.setDireccion(JOptionPane.showInputDialog("ingrese direccion"));
+            Cli.setX( Double.parseDouble(JOptionPane.showInputDialog("ingrese Latitud")));
+            Cli.setY(Double.parseDouble(JOptionPane.showInputDialog("ingrese Longitud")));
+            ((ClienteDAO) CRUDS[ind]).createCliente(Cli); 
+    }
+    private void ingresarMateria(){
+            Materia_Prima mat = new Materia_Prima();
+            mat.setNombre(JOptionPane.showInputDialog("ingrese nombre"));
+            mat.setCantidad(Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad")));
+            mat.setFechaCaducidad(LocalDate.now());
+            mat.setNit_proveedor(JOptionPane.showInputDialog("ingrese NIT_Proveedor"));
+            mat.setValor_unitario(Integer.parseInt(JOptionPane.showInputDialog("ingrese ValorUnitario")));
+            ((Materia_PrimaDAO) CRUDS[ind]).createMateria_Prima(mat);
+    }
+    private void ingresarProducto(){
+            Producto prod = new Producto();
+            prod.setNombre(JOptionPane.showInputDialog("ingrese nombre"));
+            prod.setCantidad(Integer.parseInt(JOptionPane.showInputDialog("ingrese cantidad")));
+            prod.setFechaCaducidad(LocalDate.now());
+            prod.setPrecio(Double.parseDouble(JOptionPane.showInputDialog("ingrese precio")));
+            ((ProductoDAO) CRUDS[ind]).createProducto(prod); 
+    }
+    private void ingresarProveedor(){
+            Proveedor prov = new Proveedor();
+            prov.setNit(JOptionPane.showInputDialog("ingrese NIT"));
+            prov.setNombre(JOptionPane.showInputDialog("ingrese nombre"));
+            prov.setUbicacion(JOptionPane.showInputDialog("ingrese ubicacion"));
+            prov.setTelefono(Integer.parseInt(JOptionPane.showInputDialog("ingrese telelfono")));
+            prov.setEmail(JOptionPane.showInputDialog("ingrese email"));
+            ((ProveedorDAO) CRUDS[ind]).createProveedor(prov); 
+    }
+    private void ingresarReceta(){
+            Receta rec = new Receta();
+            rec.setP(JOptionPane.showInputDialog("ingrese Producto"));
+            rec.setM(JOptionPane.showInputDialog("ingrese Materia Prima"));
+            rec.setCantidad(Integer.parseInt(JOptionPane.showInputDialog("ingrese Cantidad")));
+            ((RecetaDAO) CRUDS[ind]).createReceta(rec);
+    }
+    private void ingresarRecibo() throws NEDException{
+            Recibo rb = new Recibo();
+            rb.setV(Integer.parseInt(JOptionPane.showInputDialog("ingrese cedula Vendedor")));
+            rb.setC(JOptionPane.showInputDialog("ingrese cedula cliente"));
+            rb.setP(JOptionPane.showInputDialog("ingrese Producto"));
+            rb.setFecha(LocalDateTime.now());
+            rb.setCantidad(Integer.parseInt(JOptionPane.showInputDialog("ingrese Cantidad")));
+            ((ReciboDAO) CRUDS[ind]).createRecibo(rb);
+    }
+private void ingresarVendedor(){
+            Vendedor vend = new Vendedor();
+            vend.setCedula(Integer.parseInt(JOptionPane.showInputDialog("ingrese NIT")));
+            vend.setNombre(JOptionPane.showInputDialog("ingrese nombre"));
+            vend.setCargo(JOptionPane.showInputDialog("ingrese direccion"));
+            vend.setComision(Double.parseDouble(JOptionPane.showInputDialog("ingrese Latitud")));
+            vend.setTelefono(Integer.parseInt(JOptionPane.showInputDialog("ingrese Longitud")));
+            vend.setEmail(JOptionPane.showInputDialog("ingrese Longitud"));
+            vend.setSexo(JOptionPane.showInputDialog("ingrese Longitud"));
+            ((VendedorDAO) CRUDS[ind]).createVendedor(vend); 
+    }
+    
     class buttonEvent implements ActionListener {
-
         @Override
-        public void actionPerformed(ActionEvent ae) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
+        public void actionPerformed(ActionEvent event) {
+            if(event.getActionCommand().equalsIgnoreCase("crear")) {
 
+            }else
+            if(event.getActionCommand().equalsIgnoreCase("listar")) {
+
+            }else
+            if(event.getActionCommand().equalsIgnoreCase("modificar")) {
+
+            }else
+            if(event.getActionCommand().equalsIgnoreCase("eliminar")) {
+
+            }
+        }
     }
     
 }
