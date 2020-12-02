@@ -5,6 +5,8 @@
  */
 package vistas;
 
+import java.awt.event.ActionListener;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,13 +14,24 @@ import javax.swing.table.DefaultTableModel;
  * @author aurap
  */
 public class VistaCruds extends javax.swing.JFrame {
-    private String[]head;
     /**
      * Creates new form VistaCruds
      */
     public VistaCruds() {
         initComponents();
     }
+    public JLabel getLabelTitle(){
+        return labelTitle;
+    }
+        public void addListenerBtnCrear(ActionListener Ls){
+            this.btnCrear.addActionListener(Ls);
+        }
+        public void addListenerBtnEditar(ActionListener Ls){
+            this.btnEditar.addActionListener(Ls);
+        }
+        public void addListenerBtnEliminar(ActionListener Ls){
+            this.btnEliminar.addActionListener(Ls);
+        }
     public void setModeloTabla(String[] head, Object[][] data){
          tablaCRUD.setModel(new DefaultTableModel(
             data,
@@ -40,13 +53,13 @@ public class VistaCruds extends javax.swing.JFrame {
         tablaCRUD = new javax.swing.JTable();
         jTextField2 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnCrear = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         labelTitle = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(240, 38, 33));
 
@@ -71,11 +84,11 @@ public class VistaCruds extends javax.swing.JFrame {
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/lamini.png"))); // NOI18N
 
-        jButton1.setText("crear");
+        btnCrear.setText("crear");
 
-        jButton2.setText("editar");
+        btnEditar.setText("editar");
 
-        jButton3.setText("eliminar");
+        btnEliminar.setText("eliminar");
 
         jButton4.setText("cancelar");
 
@@ -87,11 +100,11 @@ public class VistaCruds extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addComponent(jButton1)
+                        .addComponent(btnCrear)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(btnEditar)
                         .addGap(10, 10, 10)
-                        .addComponent(jButton3)
+                        .addComponent(btnEliminar)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -115,9 +128,9 @@ public class VistaCruds extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
+                    .addComponent(btnCrear)
+                    .addComponent(btnEditar)
+                    .addComponent(btnEliminar)
                     .addComponent(jButton4))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -187,10 +200,10 @@ public class VistaCruds extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
