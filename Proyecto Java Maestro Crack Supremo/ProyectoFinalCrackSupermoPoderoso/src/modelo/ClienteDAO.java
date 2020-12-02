@@ -71,8 +71,9 @@ public class ClienteDAO {
             instruccion = conexion.prepareStatement(statementSql);
             resultConsulta = instruccion.executeQuery();
 
-            Cliente cliente = new Cliente();
+            
             while(resultConsulta.next()) {
+                Cliente cliente = new Cliente();
                 cliente.setNIT(resultConsulta.getString(1));
                 cliente.setNombre(resultConsulta.getString(2));
                 cliente.setDireccion(resultConsulta.getString(3));
