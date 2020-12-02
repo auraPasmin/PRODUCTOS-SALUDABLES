@@ -7,12 +7,9 @@ package controladores;
 
 import vistas.VistaCrud;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-import javax.swing.*;
 import modelo.*;
 
-import javax.swing.JOptionPane;
+
 
 /**
  *
