@@ -5,15 +5,41 @@
  */
 package vistas;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author msp
  */
 public class VistaAdmin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VistaAdmin
-     */
+    public void setFieldsjClocalizar(){
+        
+    }
+    public void addListenerjBtnGeolocalizar(ActionListener LS){
+        jBtnGeolocalizar.addActionListener(LS);
+    }
+    public void addListenerBtnClientes(ActionListener LS){
+        jBcrudsClientes.addActionListener(LS);
+    }
+    public void addListenerBtnProducto(ActionListener LS){
+        jBCrudsProducto.addActionListener(LS);
+    }
+    public void addListenerBtnVendedor(ActionListener LS){
+        jBCrudsVendedor.addActionListener(LS);
+    }
+    public void addListenerBtnRecibo(ActionListener LS){
+        jBCrudsRecibo.addActionListener(LS);
+    }
+    public void addListenerBtnMP(ActionListener LS){
+        jBcrudsMP.addActionListener(LS);
+    }
+    public void addListenerBtnProveedor(ActionListener LS){
+        jBcrudsPro.addActionListener(LS);
+    }
+    public void addListenerBtnReceta(ActionListener LS){
+        jBcrudsReceta.addActionListener(LS);
+    }
     public VistaAdmin() {
         initComponents();
     }
