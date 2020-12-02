@@ -129,8 +129,6 @@ public class ChatCliente extends JFrame{
 	private JPanel menu;
 	private JLabel icono;
 	private JButton btnSend;
-	private ObjectOutputStream salida;
-	private ObjectInputStream entrada;
 	private String mensajeaEnviar = "";
 	private String nameCliente;
 	private String direccionIP;

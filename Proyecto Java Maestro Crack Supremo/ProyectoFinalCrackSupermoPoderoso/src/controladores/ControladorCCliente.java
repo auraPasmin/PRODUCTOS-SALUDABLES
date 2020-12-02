@@ -11,9 +11,11 @@ public class ControladorCCliente {
 
     public ControladorCCliente(String cliente, String direccion) {
         vista = new ChatCliente(cliente, direccion);
+        
         chatCliente = new CCliente(cliente, direccion, vista.getText());
-        chatCliente.start();
         vista.addListenerbtn(new ChatController());
+        chatCliente.start();
+        
     }
     class ChatController implements ActionListener{
 
@@ -21,6 +23,7 @@ public class ControladorCCliente {
         public void actionPerformed(ActionEvent ae) {
             if(ae.getActionCommand().equals("enviar")){
                 chatCliente.sendMessages(vista.getMessage());
+                System.out.println("enviando mensaje");
             }
             System.out.println(ae.getActionCommand());
         }

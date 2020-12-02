@@ -5,15 +5,11 @@
  */
 package controladores;
 
-import vistas.VistaCrud;
 import java.awt.event.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.*;
+import java.util.logging.*;
+
 import modelo.*;
 
 import javax.swing.JOptionPane;
@@ -36,6 +32,7 @@ public class ControladorCruds {
         this.crud.addListenerBtnEditar(new programListener());
         this.crud.addListenerBtnEliminar(new programListener());
         this.crud.addListenerbtnListar(new programListener());
+        this.crud.addListenerbtnBuscar(new programListener());
         this.crud.setVisible(true);
         if(CRUDS[ind] instanceof ClienteDAO){
             head = new String[]{"NIT","nombre","direccion","X","Y"};
@@ -75,7 +72,158 @@ public class ControladorCruds {
             visualizarVendedor(((VendedorDAO)CRUDS[ind]).readVendedores());
         }
     }
-    
+    protected void decide(int ind, String str) throws NEDException{
+            String selected = "";
+            try{
+                selected = crud.getData()[0] + "";
+            }catch(ArrayIndexOutOfBoundsException AIOB){
+                JOptionPane.showMessageDialog(null,"No hay nada seleccionado");
+            }catch(NullPointerException e){
+                System.out.println("nada seleccionado");
+            }
+            
+            Object[]data = crud.getData();
+            if(CRUDS[ind] instanceof ClienteDAO){
+                //crud.setModeloTabla(head, null);
+                crud.getLabelTitle().setText("Cliente");
+                switch(str){
+                    case "crear":
+                        this.ingresarCliente();
+                        break;
+                    case "editar":
+                        this.editarCliente(data);
+                        visualizarClientes(((ClienteDAO)CRUDS[ind]));
+                        break;
+                    case "eliminar":
+                        this.delete(selected);
+                        break;
+                    default:
+                        System.out.println("jeje visualizar");
+                        visualizarClientes(((ClienteDAO)CRUDS[ind]));
+                        break;
+                }
+ 
+            }else if(CRUDS[ind] instanceof Materia_PrimaDAO){
+                crud.setModeloTabla(head, null);
+                crud.getLabelTitle().setText("Materia Prima");
+                 switch(str){
+                    case "crear":
+                        this.ingresarMateria();
+                        visualizarMateriaPrima(((Materia_PrimaDAO)CRUDS[ind]));
+                        break;
+                    case "editar":
+                        this.editarMateria_Prima(data);
+                        visualizarMateriaPrima(((Materia_PrimaDAO)CRUDS[ind]));;
+                        break;
+                    case "eliminar":
+                        this.delete(selected);
+                        visualizarMateriaPrima(((Materia_PrimaDAO)CRUDS[ind]));
+                        break;
+                    default:
+                        visualizarMateriaPrima(((Materia_PrimaDAO)CRUDS[ind]));
+                        break;
+                 }
+            }else if(CRUDS[ind] instanceof ProductoDAO){
+                crud.setModeloTabla(head,null);
+                crud.getLabelTitle().setText("Producto");
+                 switch(str){
+                    case "crear":
+                        this.ingresarProducto();
+                        visualizarProducto(((ProductoDAO)CRUDS[ind]));
+                        break;
+                    case "editar":
+                        this.editarProducto(data);
+                        visualizarProducto(((ProductoDAO)CRUDS[ind]));
+                        break;
+                    case "eliminar":
+                        this.delete(selected);
+                        visualizarProducto(((ProductoDAO)CRUDS[ind]));
+                        break;
+                    default:
+                        visualizarProducto(((ProductoDAO)CRUDS[ind]));
+                        break;
+                 }
+            }else if(CRUDS[ind] instanceof ProveedorDAO){
+                crud.setModeloTabla(head, null);
+                crud.getLabelTitle().setText("Proveedor");
+                 switch(str){
+                    case "crear":
+                        this.ingresarProveedor();
+                        visualizarProveedor(((ProveedorDAO)CRUDS[ind]).readProveedor());
+                        break;
+                    case "editar":
+                         this.editarProveedor(data);
+                         visualizarProveedor(((ProveedorDAO)CRUDS[ind]).readProveedor());
+                         break;
+                    case "eliminar":
+                        this.delete(selected);
+                        visualizarProveedor(((ProveedorDAO)CRUDS[ind]).readProveedor());
+                        break;
+                    default:
+                        visualizarProveedor(((ProveedorDAO)CRUDS[ind]).readProveedor());
+                        break;
+                 }
+            }else if(CRUDS[ind] instanceof RecetaDAO){
+                crud.setModeloTabla(head,null);
+                crud.getLabelTitle().setText("Receta");
+                 switch(str){
+                    case "crear":
+                        this.ingresarReceta();
+                        visualizarReceta(((RecetaDAO)CRUDS[ind]).readRecetas());
+                        break;
+                    case "editar":
+                        this.editarReceta(data);
+                        visualizarReceta(((RecetaDAO)CRUDS[ind]).readRecetas());
+                        break;
+                    case "eliminar":
+                        this.delete(selected);
+                        visualizarReceta(((RecetaDAO)CRUDS[ind]).readRecetas());
+                        break;
+                    default:
+                        visualizarReceta(((RecetaDAO)CRUDS[ind]).readRecetas());
+                        break;
+                 }
+            }else if(CRUDS[ind] instanceof ReciboDAO){
+                crud.setModeloTabla(head,null);
+                crud.getLabelTitle().setText("Recibo");
+                 switch(str){
+                    case "crear":
+                        this.ingresarRecibo();
+                        visualizarRecibo(((ReciboDAO)CRUDS[ind]).readRecibo());
+                        break;
+                    case "editar":
+                        this.editarRecibo(data);
+                        visualizarRecibo(((ReciboDAO)CRUDS[ind]).readRecibo());
+                        break;
+                    case "eliminar":
+                        this.delete(selected);
+                        visualizarRecibo(((ReciboDAO)CRUDS[ind]).readRecibo());
+                        break;
+                    default:
+                        visualizarRecibo(((ReciboDAO)CRUDS[ind]).readRecibo());
+                        break;
+                 }
+            }else if(CRUDS[ind] instanceof VendedorDAO){
+                crud.setModeloTabla(head,null);
+                crud.getLabelTitle().setText("Vendedor");
+                 switch(str){
+                    case "crear":
+                        this.ingresarVendedor();
+                        break;
+                    case "editar":
+                        this.editarVendedor(data);
+                        visualizarVendedor(((VendedorDAO)CRUDS[ind]).readVendedores());
+                        break;
+                    case "eliminar":
+                        this.delete(selected);
+                        visualizarVendedor(((VendedorDAO)CRUDS[ind]).readVendedores());
+                        break;
+                    default:
+                        visualizarVendedor(((VendedorDAO)CRUDS[ind]).readVendedores());
+                        break;
+                 }
+            }     
+        }
     public void delete(String n) {
         if(CRUDS[ind] instanceof ClienteDAO){
             ((ClienteDAO) CRUDS[ind]).borrarCliente(n);
@@ -102,104 +250,7 @@ public class ControladorCruds {
             }
         }
     }
-            protected void decide(int ind, String str) throws NEDException{
-            
-            if(CRUDS[ind] instanceof ClienteDAO){
-                crud.setModeloTabla(head, null);
-                crud.getLabelTitle().setText("Cliente");
-                switch(str){
-                    case "crear":
-                        this.ingresarCliente();
-                    case "editar":
-                        //this.editarCliente();
-                    case "eliminar":
-                        this.delete("");
-                    default:
-                        visualizarClientes(((ClienteDAO)CRUDS[ind]));
-                }
- 
-            }else if(CRUDS[ind] instanceof Materia_PrimaDAO){
-                crud.setModeloTabla(head, null);
-                crud.getLabelTitle().setText("Materia Prima");
-                 switch(str){
-                    case "crear":
-                        this.ingresarMateria();
-                    case "editar":
-                        //this.editarMateria();
-                    case "eliminar":
-                        this.delete("");
-                    default:
-                        visualizarMateriaPrima(((Materia_PrimaDAO)CRUDS[ind]));
-                 }
-            }else if(CRUDS[ind] instanceof ProductoDAO){
-                crud.setModeloTabla(head,null);
-                crud.getLabelTitle().setText("Producto");
-                 switch(str){
-                    case "crear":
-                        this.ingresarProducto();
-                    case "editar":
-                        //this.editarProducto();
-                    case "eliminar":
-                        this.delete("");
-                    default:
-                        visualizarProducto(((ProductoDAO)CRUDS[ind]));
-                 }
-            }else if(CRUDS[ind] instanceof ProveedorDAO){
-                crud.setModeloTabla(head, null);
-                crud.getLabelTitle().setText("Proveedor");
-                 switch(str){
-                    case "crear":
-                        this.ingresarProveedor();
-                    case "editar":
-                         //this.editarProveedor();
-                    case "eliminar":
-                        this.delete("");
-                    default:
-                        visualizarProveedor(((ProveedorDAO)CRUDS[ind]).readProveedor());
-                 }
-            }else if(CRUDS[ind] instanceof RecetaDAO){
-                crud.setModeloTabla(head,null);
-                crud.getLabelTitle().setText("Receta");
-                 switch(str){
-                    case "crear":
-                        this.ingresarReceta();
-                    case "editar":
-                        //this.editarCliente();
-                    case "eliminar":
-                        this.delete("");
-                    default:
-                        visualizarReceta(((RecetaDAO)CRUDS[ind]).readRecetas());
-                 }
-            }else if(CRUDS[ind] instanceof ReciboDAO){
-                crud.setModeloTabla(head,null);
-                crud.getLabelTitle().setText("Recibo");
-                 switch(str){
-                    case "crear":
-                        this.ingresarRecibo();
-                    case "editar":
-                        //this.editarCliente();
-                    case "eliminar":
-                        this.delete("");
-                    default:
-                        visualizarRecibo(((ReciboDAO)CRUDS[ind]).readRecibo());
-                 }
-            }else if(CRUDS[ind] instanceof VendedorDAO){
-                crud.setModeloTabla(head,null);
-                crud.getLabelTitle().setText("Vendedor");
-                 switch(str){
-                    case "crear":
-                        this.ingresarVendedor();
-                        System.out.println("Crear Cliente jeje");
-                    case "editar":
-                        //this.editarVendedor();
-                        System.out.println("Editar Cliente jeje");
-                    case "eliminar":
-                        this.delete("");
-                    default:
-                        visualizarVendedor(((VendedorDAO)CRUDS[ind]).readVendedores());
-                 }
-            }     
-        }
+    
 
     private void visualizarClientes(ClienteDAO C) {
         ArrayList<Cliente> listarClientes = C.listarClientes();
@@ -258,8 +309,6 @@ public class ControladorCruds {
         }
         
     }
-    
-
     private void visualizarProducto(ProductoDAO P) {
         ArrayList<Producto> prod = P.readProducto();
         String cad = "".trim();
@@ -274,7 +323,6 @@ public class ControladorCruds {
         }
         crud.setModeloTabla(head,data);
     }
-
     private void visualizarProveedor(ArrayList<Proveedor> prov) {
         Object[][]data = new Object[prov.size()][5];
         for(int i = 0 ; i < prov.size() ; ++i){
@@ -287,7 +335,6 @@ public class ControladorCruds {
         }
         crud.setModeloTabla(head,data);
     }
-
     private void visualizarReceta(ArrayList<Receta> rect) {
         Object[][]data = new Object[rect.size()][3];
         for(int i = 0 ; i < rect.size() ; ++i){
@@ -298,7 +345,6 @@ public class ControladorCruds {
         }
         crud.setModeloTabla(head,data);
     }
-
     private void visualizarRecibo(ArrayList<Recibo> rec) {
         Object[][]data = new Object[rec.size()][5];
         for(int i = 0 ; i < rec.size() ; ++i){
@@ -311,7 +357,6 @@ public class ControladorCruds {
         }
         crud.setModeloTabla(head,data);
     }
-
     private void visualizarVendedor(ArrayList<Vendedor> ven) {
         Object[][]data = new Object[ven.size()][7];
         for(int i = 0 ; i < ven.size() ; ++i){
@@ -389,10 +434,101 @@ public class ControladorCruds {
             vend.setSexo(JOptionPane.showInputDialog("ingrese sexo (M o F)"));
             ((VendedorDAO) CRUDS[ind]).createVendedor(vend); 
     }
+
+
+
+    private void editarCliente(Object[] data) {
+        if(data== null){
+            JOptionPane.showMessageDialog(crud,"Seleccione un registro");
+            return;
+        }
+        Cliente c = new Cliente((String)data[0],(String)data[1],(String)data[2],(double)data[3],(double)data[4]);
+        c.setNombre(JOptionPane.showInputDialog("Digite el nuevo nombre", data[1]));
+        c.setDireccion(JOptionPane.showInputDialog("Digite la nueva direccion", data[2]));
+        c.setX(Double.parseDouble(JOptionPane.showInputDialog("Digite la nueva posición x", data[3])));
+        c.setY(Double.parseDouble(JOptionPane.showInputDialog("Digite la nueva posición x", data[4])));
+        ((ClienteDAO) CRUDS[ind]).modificarCliente(c); 
+        JOptionPane.showMessageDialog(crud,"Cliente modificado");
+    }
+    private void editarMateria_Prima(Object[] data) {
+        if(data== null){
+            JOptionPane.showMessageDialog(crud,"Seleccione un registro");
+            return;
+        }
+        Materia_Prima m = new Materia_Prima((String) data[0],(int) data[1],(LocalDate) data[2],(String) data[3],(int) data[4]);
+        m.setCantidad(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva cantidad",data[1])));
+        m.setFechaCaducidad(LocalDate.parse(JOptionPane.showInputDialog("Ingrese la nueva fecha de caducidad",data[2])));
+        m.setValor_unitario(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo valor unitario",data[4])));
+        ((Materia_PrimaDAO) CRUDS[ind]).updateMateriaPrima(m);
+        JOptionPane.showMessageDialog(crud,"Materia prima modificada");
+    }
+    private void editarProducto(Object[] data) {
+        if(data== null){
+            JOptionPane.showMessageDialog(crud,"Seleccione un registro");
+            return;
+        }
+        Producto p = new Producto((String) data[0],(int) data[1],(double) data[2],(LocalDate) data[3]);
+        p.setCantidad(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva cantidad",data[1])));
+        p.setPrecio(Double.parseDouble(JOptionPane.showInputDialog("Ingrese la nueva cantidad",data[2])));
+        p.setFechaCaducidad(LocalDate.parse(JOptionPane.showInputDialog("Ingrese la nueva fecha de caducidad",data[3]) ));
+        
+        ((ProductoDAO) CRUDS[ind]).updateProducto(p);
+        JOptionPane.showMessageDialog(crud,"Producto modificado");
+    }
+    private void editarProveedor(Object[] data) {
+        if(data== null){
+            JOptionPane.showMessageDialog(crud,"Seleccione un registro");
+            return;
+        }
+        Proveedor p = new Proveedor((String) data[0],(String) data[1],(String) data[2],(int) data[3], (String)data[4]);
+        p.setNombre(JOptionPane.showInputDialog("Ingrese el nuevo nombre",data[1]));
+        p.setUbicacion(JOptionPane.showInputDialog("Ingrese la nueva ubicacion",data[2]));
+        p.setTelefono(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo telefono",data[3])));
+        p.setEmail(JOptionPane.showInputDialog("Ingrese el nuevo email",data[4]));
+        ((ProveedorDAO) CRUDS[ind]).updateProveedor(p);
+        JOptionPane.showMessageDialog(crud,"Proveedor modificado");
+    }
+    private void editarReceta(Object[] data) {
+        if(data== null){
+            JOptionPane.showMessageDialog(crud,"Seleccione un registro");
+            return;
+        }
+        Receta r = new Receta((String) data[0],(String) data[1],(int) data[2]);
+        r.setCantidad(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva cantidad",data[2])));
+        ((RecetaDAO) CRUDS[ind]).updateReceta(r);
+        JOptionPane.showMessageDialog(crud,"Receta modificada");
+    }
+    private void editarRecibo(Object[] data) {
+        if(data== null){
+            JOptionPane.showMessageDialog(crud,"Seleccione un registro");
+            return;
+        }
+        Recibo r = new Recibo((int) data[0],(String) data[1],(String) data[2],(LocalDateTime)data[3],(int)data[4]);
+        r.setCantidad(Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva cantidad",data[4])));
+        ((ReciboDAO) CRUDS[ind]).updateRecibo(r);
+        JOptionPane.showMessageDialog(crud,"Recibo modificado");
+    }
+    private void editarVendedor(Object[] data) {
+        if(data== null){
+            JOptionPane.showMessageDialog(crud,"Seleccione un registro");
+            return;
+        }
+        //(int cedula, String nombre, String cargo, int telefono, String email, double comision, String sexo)
+        Vendedor v = new Vendedor((int) data[0],(String) data[1],(String) data[2],(int)data[3],(String)data[4],(double)data[5],(String)data[6]);
+        v.setNombre(JOptionPane.showInputDialog("Ingrese el nuevo nombre",data[1]));
+        v.setCargo(JOptionPane.showInputDialog("Ingrese el nuevo cargo",data[2]));
+        v.setTelefono(Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo telefono",data[3])));
+        v.setEmail(JOptionPane.showInputDialog("Ingrese el nuevo email",data[4]));
+        v.setComision(Double.parseDouble(JOptionPane.showInputDialog("Ingrese la nueva comision",data[5])));
+        v.setSexo(JOptionPane.showInputDialog("Ingrese el nuevo sexo",data[6]));
+        ((VendedorDAO) CRUDS[ind]).updateVendedor(v);
+        JOptionPane.showMessageDialog(crud,"Vendedor modificado");
+    }
     
     class programListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
+            System.out.println(event.getActionCommand());
             if(event.getActionCommand().equalsIgnoreCase("crear")) {
                 try {
                     decide(ind,"crear");//  <-----------------
@@ -413,7 +549,7 @@ public class ControladorCruds {
                 } catch (NEDException ex) {
                     Logger.getLogger(ControladorCruds.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else if(event.getActionCommand().equalsIgnoreCase("listar")) {
+            }else {
                 try {
                     decide(ind,"listar");
                 } catch (NEDException ex) {

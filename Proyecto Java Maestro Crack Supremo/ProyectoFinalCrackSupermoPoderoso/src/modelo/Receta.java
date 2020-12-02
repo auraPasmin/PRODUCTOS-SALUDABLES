@@ -4,6 +4,16 @@ public class Receta {
     private String p, m;
     private int cantidad;
 
+    public Receta(String p, String m, int cantidad) {
+        this.p = p;
+        this.m = m;
+        this.cantidad = cantidad;
+    }
+
+    public Receta() {
+    }
+    
+    
     public String getP() {
         return p;
     }

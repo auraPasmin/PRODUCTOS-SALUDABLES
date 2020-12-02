@@ -323,6 +323,7 @@ public class VendedorDAO {
             
         }
         catch(SQLException e) {
+            System.out.println("error aca");
             System.out.println(e.toString());
         }
         finally {

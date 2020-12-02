@@ -185,7 +185,7 @@ public class ClienteDAO {
             resultado = instrucciones.executeUpdate();
         }
         catch(SQLException e) {
-            // Do something ...
+            System.out.println(e.toString());
         }
         finally {
             try {

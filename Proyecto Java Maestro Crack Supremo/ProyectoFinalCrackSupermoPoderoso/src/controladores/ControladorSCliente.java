@@ -22,7 +22,7 @@ public class ControladorSCliente {
     public ControladorSCliente(int ven){
         V = new VendedorDAO();
         try {
-            double[][] ub = V.encontrarUbicacion(ven, LocalDate.parse("2020-11-20"));
+            double[][] ub = V.encontrarUbicacion(ven, LocalDate.now());
             
             vista = new VistaSVendedor(ub[0],ub[1]);
             vista.setVisible(true);

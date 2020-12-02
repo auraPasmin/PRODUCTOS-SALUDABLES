@@ -27,6 +27,9 @@ public class ControladorVendedor {
         
         this.VV.addListenerBtnGenearVenta(new ProgramaListener() );
         this.VV.addListenerBtnChat(new ProgramaListener());
+        this.VV.addListenerbtnActualizar(new ProgramaListener());
+        listarStock();
+        listarVentas();
     }
     public ControladorVendedor(VistaVendedor vistaV , VendedorDAO VDAO, ProductoDAO PDAO , Vendedor v){
         this.v = v;
@@ -39,12 +42,22 @@ public class ControladorVendedor {
         this.VV.addListenerBtnChat(new ProgramaListener());
     }
     private void listarStock(){
-        DefaultTableModel modelo =  (DefaultTableModel) this.VV.getJtStock().getModel();
+        DefaultTableModel modelo =  new DefaultTableModel(new Object[][]{},new String[]{"Nombre","Cantidad","Precio","Fecha caducidad"});
         String[][] listado = PDAO.mostrarStock();
-        
+        while(modelo.getRowCount()!=0){
+            modelo.removeRow(0);
+        }
         for(int r=0; r < listado.length ;r++){
                 modelo.addRow(listado[r]);
         }
+        VV.getJtStock().setModel(modelo);
+        System.out.println("alo");
+    }
+
+    private void listarVentas() {
+        DefaultTableModel modelo =  new DefaultTableModel(VDAO.generarRecibos(v),new String[]{"Cliente","Fecha"});
+        VV.getJtRecibos().setModel(modelo);
+
     }
     class ProgramaListener implements ActionListener{
 
@@ -55,6 +68,8 @@ public class ControladorVendedor {
             }else if(e.getActionCommand().equalsIgnoreCase("Chat")){
                 System.out.println(e.getActionCommand());
                 ControladorCVendedor chat = new ControladorCVendedor(v.getNombre());
+            }else if(e.getActionCommand().equalsIgnoreCase("Actualizar venta")){
+                listarVentas();
             }   
 
         }

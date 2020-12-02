@@ -20,11 +20,13 @@ import javax.swing.JTextArea;
 public class CCliente extends Thread{
     
     private boolean continuar = true;
+    @Override
         public void run(){
             try {
+                texto.append("ola");
                 iniciarCliente();
-            } catch (IOException ex) {
-                System.out.println("no hay vendedores");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,"no hay vendedores");
             }
         }
 	public CCliente(String cliente, String direccion,JTextArea text) {
@@ -33,7 +35,7 @@ public class CCliente extends Thread{
             direccionIP = direccion;
 	}
         
-        public void iniciarCliente() throws IOException {
+        public void iniciarCliente() throws Exception {
             try {
                 startClienteConexion();
                 if(continuar) {
@@ -79,6 +81,7 @@ public class CCliente extends Thread{
                 salida.flush();
                 
                 entrada = new ObjectInputStream(cliente.getInputStream());
+                showMessage("Output/Input -> ready\n");
             }
             catch(IOException | NullPointerException e) {
                 e.getMessage();
@@ -102,6 +105,7 @@ public class CCliente extends Thread{
                 try {
                     PaqueteDeDatos paqueteVendedor = (PaqueteDeDatos)entrada.readObject();
                     mensajeToSave += printPaquete(paqueteVendedor);
+                    showMessage(printPaquete(paqueteVendedor));
                 }
                 catch(ClassNotFoundException | NullPointerException e) {
                     e.getMessage();
@@ -144,6 +148,7 @@ public class CCliente extends Thread{
 			paqueteCliente.setMensaje(message);
 			salida.writeObject(paqueteCliente);
 			mensajeToSave += printPaquete(paqueteCliente);
+                        showMessage(printPaquete(paqueteCliente));
 		}
 		catch(IOException e) {
 			showMessage("No se pudo escribir el mensaje\n\n");
@@ -160,21 +165,11 @@ public class CCliente extends Thread{
         }
 	
 	public void showMessage(String message) {
-		texto.append(message);
+            System.out.println("mandando mensaje");
+            texto.append(message);
 	}
 	
-//	@Override
-//	public void actionPerformed(ActionEvent event) {
-//		mensajeaEnviar = txtMensaje.getText();
-//		sendMessages(mensajeaEnviar);
-//		txtMensaje.setText("");
-//		
-//		if(event.getSource() == "enviar") {
-//			mensajeaEnviar = txtMensaje.getText();
-//			sendMessages(mensajeaEnviar);
-//			txtMensaje.setText("");
-//		}
-//	}
+
 	private ObjectOutputStream salida;
 	private ObjectInputStream entrada;
 	private String mensajeaEnviar = "";
