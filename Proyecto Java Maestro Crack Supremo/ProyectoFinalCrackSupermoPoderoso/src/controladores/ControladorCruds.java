@@ -7,13 +7,16 @@ package controladores;
 
 import vistas.VistaCrud;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import javax.swing.*;
 import modelo.*;
 
-
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author つばき
+ * @author 
  */
 public class ControladorCruds {
     private VistaCrud crud = null;
@@ -24,17 +27,17 @@ public class ControladorCruds {
         this.ind = ind;
         crud = new VistaCrud();
         if(CRUDS[ind] instanceof ClienteDAO){
-            System.out.println("true");
+            crud.setModeloTabla(new String[] {"NIT", "Nombre", "Direcion", "Longitud", "Latitud"});
         }else if(CRUDS[ind] instanceof Materia_PrimaDAO){
-            System.out.println(((Materia_PrimaDAO) CRUDS[ind]).readMateriaPrima());
+            crud.setModeloTabla(new String[] {"Nombre", "Cantidad", "Fecha de Vencimiento", "NIT", "Valor"});
         }else if(CRUDS[ind] instanceof ProductoDAO){
-            System.out.println("materia prima");
+            crud.setModeloTabla(new String[] {"Nombre", "Cantidad", "Precio", "Fecha de vencimiento"});
         }else if(CRUDS[ind] instanceof ProveedorDAO){
-            System.out.println("materia prima");
+            crud.setModeloTabla(new String[] {"NIT", "Nombre", "Ubicacion", "Telefono", "Email"});
         }else if(CRUDS[ind] instanceof RecetaDAO){
-            System.out.println("materia prima");
+            crud.setModeloTabla(new String[] {"Producto", "Materia", "Cantidad"});
         }else if(CRUDS[ind] instanceof ReciboDAO){
-            System.out.println("materia prima");
+            crud.setModeloTabla(new String[] {"Vendedor", "Cliente", "Producto", "Fecha", "Cantidad"});
         }else{
             crud.setModeloTabla(new String[]{"cedula","nombre","cargo","comision","Telefono","correo","sexo"});
         }
