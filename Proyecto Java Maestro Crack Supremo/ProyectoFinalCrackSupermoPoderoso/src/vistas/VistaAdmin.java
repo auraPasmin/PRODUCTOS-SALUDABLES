@@ -6,15 +6,25 @@
 package vistas;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import modelo.Vendedor;
 
 /**
  *
  * @author msp
  */
 public class VistaAdmin extends javax.swing.JFrame {
-
-    public void setFieldsjClocalizar(){
-        
+    public String getFieldsjClocalizar(){
+        return (String) jClocalizar.getSelectedItem();
+    }
+    public void setFieldsjClocalizar(ArrayList<Vendedor> v){
+        String[] data = new String[v.size()];
+        for(int i = 0 ; i < v.size() ; ++i){
+            data[i] = v.get(i).getCedula()+"";
+        }
+            jClocalizar.setModel(new DefaultComboBoxModel<>(data));
+            System.out.println("");
     }
     public void addListenerjBtnGeolocalizar(ActionListener LS){
         jBtnGeolocalizar.addActionListener(LS);
@@ -156,7 +166,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         });
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/fondo.jpg"))); // NOI18N
+        //jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/fondo.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
