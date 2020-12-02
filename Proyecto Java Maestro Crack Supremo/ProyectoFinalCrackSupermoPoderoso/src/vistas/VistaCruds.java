@@ -156,6 +156,14 @@ public class VistaCruds extends javax.swing.JFrame {
     public void addWindowsEvent(WindowAdapter listen) {
         addWindowListener(listen);
     }
+    
+    public void addButtonEvent(ActionListener listen) {
+        jButton1.addActionListener(listen);
+        jButton2.addActionListener(listen);
+        jButton3.addActionListener(listen);
+        jButton4.addActionListener(listen);
+    }
+    
     /**
      * @param args the command line arguments
      */
