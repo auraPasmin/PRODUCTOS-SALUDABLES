@@ -66,6 +66,35 @@ public class ControladorCruds {
             visualizarVendedor(((VendedorDAO)CRUDS[ind]).readVendedores());
         }
     }
+    
+    public void delete(String n) {
+        if(CRUDS[ind] instanceof ClienteDAO){
+            ((ClienteDAO) CRUDS[ind]).borrarCliente(n);
+        }else if(CRUDS[ind] instanceof Materia_PrimaDAO){
+            ((Materia_PrimaDAO) CRUDS[ind]).deleteMateriaPrima(n);
+        }else if(CRUDS[ind] instanceof ProductoDAO){
+            ((ProductoDAO) CRUDS[ind]).deleteProducto(n);
+        }else if(CRUDS[ind] instanceof ProveedorDAO){
+            ((ProveedorDAO) CRUDS[ind]).deleteMateriaPrima(n);
+        }else if(CRUDS[ind] instanceof RecetaDAO){
+            ((RecetaDAO) CRUDS[ind]).deleteReceta(n);
+        }else if(CRUDS[ind] instanceof ReciboDAO){
+            try {
+                ((ReciboDAO) CRUDS[ind]).deleteRecibo(Integer.parseInt(n));
+            }
+            catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Ingrese un valor numerico", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        }else{
+            try {
+                ((VendedorDAO)CRUDS[ind]).deleteVendedor(Integer.parseInt(n));
+            }
+            catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Ingrese un valor numerico", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }
+    
 
     private void visualizarClientes(ClienteDAO C) {
         ArrayList<Cliente> listarClientes = C.listarClientes();
@@ -124,6 +153,7 @@ public class ControladorCruds {
         }
         
     }
+    
 
     private void visualizarProducto(ProductoDAO P) {
         ArrayList<Producto> prod = P.readProducto();
