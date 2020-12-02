@@ -326,7 +326,15 @@ public class ControladorCruds {
                                 new RecetaDAO(), 
                                 new ReciboDAO(), 
                                 new VendedorDAO()};
-    
+   
+   String [] cliente = {"NIT","nombre","direccion","X","Y"};
+   String [] Materia_Prima = {"nombre","cantidad","fechaCaducidad","NIT_Proveedor","ValorUnitario"};
+   String [] Producto = {"nombre","cantidad","precio","fechaCaducidad"};
+   String [] Proveedor = {"NIT","nombre","ubicacion","telefono","email"};
+   String [];
+   String [];
+   String [];
+           
     public ControladorCruds(int ind) {
         this.crud = new VistaCruds();
         
