@@ -327,13 +327,13 @@ public class ControladorCruds {
                                 new ReciboDAO(), 
                                 new VendedorDAO()};
    
-   String [] cliente = {"NIT","nombre","direccion","X","Y"};
+   String [] Cliente = {"NIT","nombre","direccion","X","Y"};
    String [] Materia_Prima = {"nombre","cantidad","fechaCaducidad","NIT_Proveedor","ValorUnitario"};
    String [] Producto = {"nombre","cantidad","precio","fechaCaducidad"};
    String [] Proveedor = {"NIT","nombre","ubicacion","telefono","email"};
-   String [];
-   String [];
-   String [];
+   String [] Receta = {"Producto","MateriaPrima","cantidad"};
+   String [] Recibo = {"Vendedor","Cliente","Producto","fecha","cantidad"};
+   String [] Vendedor = {"cedula","nombre","cargo","comision","Telefono","correo","sexo"};
            
     public ControladorCruds(int ind) {
         this.crud = new VistaCruds();
@@ -374,7 +374,12 @@ public class ControladorCruds {
                 }
             }else
             if(event.getActionCommand().equalsIgnoreCase("listar")) {
-                JOptionPane.showMessageDialog(null, "Erroe");
+                try {
+                    decide(ind,"listar");
+                }
+                catch(NEDException ex) {
+                    Logger.getLogger(ControladorCruds.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }//////FIN CLASE PROGRAMA LISTENER
@@ -385,21 +390,22 @@ public class ControladorCruds {
         protected void decide(int ind, String str) throws NEDException{
             
             if(CRUDS[ind] instanceof ClienteDAO){
-                crud.setModeloTabla(new String[]{"NIT","nombre","direccion","X","Y"},null);
+                crud.setModeloTabla(Cliente,null);
                 //crud.getLabelTitle().setText("Cliente");
                 switch(str){
                     case "crear":
                         this.ingresarCliente();
+                        break;
                     case "editar":
                         //this.editarCliente();
                     case "eliminar":
                         //this.eliminarCliente();
                     default:
-                        //System.out.println("hay un error xD");
+                        visualizarClientes((ClienteDAO)CRUDS[ind]);
                 }
  
             }else if(CRUDS[ind] instanceof Materia_PrimaDAO){
-                crud.setModeloTabla(new String[]{"nombre","cantidad","fechaCaducidad","NIT_Proveedor","ValorUnitario"}, null);
+                crud.setModeloTabla(Materia_Prima, null);
                 //crud.getLabelTitle().setText("Materia Prima");
                  switch(str){
                     case "crear":
@@ -412,7 +418,7 @@ public class ControladorCruds {
                         //System.out.println("hay un error xD");
                  }
             }else if(CRUDS[ind] instanceof ProductoDAO){
-                crud.setModeloTabla(new String[]{"nombre","cantidad","precio","fechaCaducidad"}, null);
+                crud.setModeloTabla(Producto, null);
                 //crud.getLabelTitle().setText("Producto");
                  switch(str){
                     case "crear":
@@ -425,7 +431,7 @@ public class ControladorCruds {
                         //System.out.println("hay un error xD");
                  }
             }else if(CRUDS[ind] instanceof ProveedorDAO){
-                crud.setModeloTabla(new String[]{"NIT","nombre","ubicacion","telefono","email"}, null);
+                crud.setModeloTabla(Proveedor, null);
                 //crud.getLabelTitle().setText("Proveedor");
                  switch(str){
                     case "crear":
@@ -438,7 +444,7 @@ public class ControladorCruds {
                         //System.out.println("hay un error xD");
                  }
             }else if(CRUDS[ind] instanceof RecetaDAO){
-                crud.setModeloTabla(new String[]{"Producto","MateriaPrima","cantidad"}, null);
+                crud.setModeloTabla(Receta, null);
                 //crud.getLabelTitle().setText("Receta");
                  switch(str){
                     case "crear":
@@ -451,7 +457,7 @@ public class ControladorCruds {
                         //System.out.println("hay un error xD");
                  }
             }else if(CRUDS[ind] instanceof ReciboDAO){
-                crud.setModeloTabla(new String[]{"Vendedor","Cliente","Producto","fecha","cantidad"}, null);
+                crud.setModeloTabla(Recibo, null);
                 //crud.getLabelTitle().setText("Recibo");
                  switch(str){
                     case "crear":
@@ -464,7 +470,7 @@ public class ControladorCruds {
                         //System.out.println("hay un error xD");
                  }
             }else if(CRUDS[ind] instanceof VendedorDAO){
-                crud.setModeloTabla(new String[]{"cedula","nombre","cargo","comision","Telefono","correo","sexo"}, null);
+                crud.setModeloTabla(Vendedor, null);
                 //crud.getLabelTitle().setText("Vendedor");
                  switch(str){
                     case "crear":
@@ -560,21 +566,21 @@ public class ControladorCruds {
                 data[i][3] = c.getX();
                 data[i][4] = c.getY();
             }
-        crud.setModeloTabla(head,data);
+        crud.setModeloTabla(Cliente,data);
         }else{
             try {
                 c = C.cargarCliente(cad);
                 Object[][]data = {{c.getNIT(),c.getNombre(),c.getDireccion(),c.getX(),c.getY()}};
-                crud.setModeloTabla(head,data);
+                crud.setModeloTabla(Cliente,data);
             } catch (NEDException ex) {
                 JOptionPane.showMessageDialog(null, "No existe ese cliente");
-                crud.setModeloTabla(head,new Object[][]{});
+                crud.setModeloTabla(Cliente,new Object[][]{});
             }
         }
         
     }
 
-    private void visualizarMateriaPrima(Materia_PrimaDAO MP) {
+   /* private void visualizarMateriaPrima(Materia_PrimaDAO MP) {
         ArrayList<Materia_Prima> mat = MP.readMateriaPrima();
         String cad = "".trim();
         Materia_Prima c;
@@ -669,6 +675,6 @@ public class ControladorCruds {
             data[i][6] = c.getSexo();
         }
         crud.setModeloTabla(head,data);
-    }
+    }*/
 }
 
