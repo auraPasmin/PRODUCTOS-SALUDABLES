@@ -17,6 +17,7 @@ public class ControladorGVenta {
     ReciboDAO r;
     ProductoDAO p;
     Vendedor v;
+    
     public ControladorGVenta(Vendedor v){
         this.v = v;
         vista = new VistaGVenta();

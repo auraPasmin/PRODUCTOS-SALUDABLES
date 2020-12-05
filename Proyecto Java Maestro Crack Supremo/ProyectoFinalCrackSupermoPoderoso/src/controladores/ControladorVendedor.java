@@ -18,6 +18,7 @@ public class ControladorVendedor {
     protected VendedorDAO VDAO = null;
     protected ProductoDAO PDAO = null;
     Vendedor v;
+    
     public ControladorVendedor(Vendedor v){
         this.v = v;
         this.VV = new VistaVendedor();
@@ -27,19 +28,26 @@ public class ControladorVendedor {
         
         this.VV.addListenerBtnGenearVenta(new ProgramaListener() );
         this.VV.addListenerBtnChat(new ProgramaListener());
+<<<<<<< HEAD
         this.VV.addListenerbtnActualizar(new ProgramaListener());
         listarStock();
         listarVentas();
+=======
+        this.listarStock();
+        this.listarRecibos();
+>>>>>>> e03677fb19b28683944d678a52a1e6472cdba2d2
     }
-    public ControladorVendedor(VistaVendedor vistaV , VendedorDAO VDAO, ProductoDAO PDAO , Vendedor v){
+    public ControladorVendedor(VistaVendedor vistaV , VendedorDAO VDAO , Vendedor v){
         this.v = v;
         this.VV = vistaV;
         this.VDAO = VDAO;
-        this.PDAO = PDAO;
+        this.PDAO = new ProductoDAO();
         this.VV.setVisible(true);
         
         this.VV.addListenerBtnGenearVenta(new ProgramaListener() );
         this.VV.addListenerBtnChat(new ProgramaListener());
+        this.listarStock();
+        this.listarRecibos();
     }
     private void listarStock(){
         DefaultTableModel modelo =  new DefaultTableModel(new Object[][]{},new String[]{"Nombre","Cantidad","Precio","Fecha caducidad"});
@@ -58,6 +66,13 @@ public class ControladorVendedor {
         DefaultTableModel modelo =  new DefaultTableModel(VDAO.generarRecibos(v),new String[]{"Cliente","Fecha"});
         VV.getJtRecibos().setModel(modelo);
 
+    }
+    private void listarRecibos(){
+        DefaultTableModel modelo =  (DefaultTableModel) this.VV.getJtRecibos().getModel();
+        String[][] listado = (String[][]) VDAO.generarRecibos(v);
+            for(int i=0;i<listado.length-1;i++){
+                modelo.addRow(listado[i]);
+            }                 
     }
     class ProgramaListener implements ActionListener{
 

@@ -7,6 +7,7 @@ package vistas;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Producto;
 
@@ -107,6 +108,11 @@ public class VistaGVenta extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(240, 38, 33));
         jButton1.setForeground(new java.awt.Color(240, 38, 33));
         jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnGenerar.setBackground(new java.awt.Color(15, 101, 163));
         btnGenerar.setText("Generar");
@@ -214,6 +220,14 @@ public class VistaGVenta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int res = JOptionPane.showConfirmDialog(null, "Quiere Salir?","advertencia",JOptionPane.YES_NO_OPTION);
+        if(res == 0){
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

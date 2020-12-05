@@ -18,6 +18,7 @@ public class ControladorLogin {
     private VistaLogin vista;
     private VendedorDAO v;
     private ClienteDAO c;
+    
     public ControladorLogin(){
         vista = new VistaLogin();
         v = new VendedorDAO();
@@ -55,7 +56,13 @@ public class ControladorLogin {
         }else{
             try {
                 V = v.cargarVendedor(Integer.parseInt(cad));
+<<<<<<< HEAD
+                VistaVendedor n = new VistaVendedor();
+                ControladorVendedor CV = new ControladorVendedor(n, v, V);
+                n.setVisible(true);
+=======
                 ControladorVendedor controlador = new ControladorVendedor(V);
+>>>>>>> master
                 vista.dispose();
                 return;
             } catch (NEDException | NumberFormatException ex) {

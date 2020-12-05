@@ -6,6 +6,7 @@
 package vistas;
 
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -13,7 +14,7 @@ import javax.swing.JTable;
  * @author msp
  */
 public class VistaVendedor extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form VistaVendedor
      */
@@ -48,7 +49,7 @@ public class VistaVendedor extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
         btnChat = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblBienvenida = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
@@ -88,26 +89,20 @@ public class VistaVendedor extends javax.swing.JFrame {
 
         jtStock.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Producto", "Cantidad"
             }
         ));
         jScrollPane3.setViewportView(jtStock);
 
         jtRecibos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Vendedor", "Cliente"
             }
         ));
         jScrollPane4.setViewportView(jtRecibos);
@@ -175,6 +170,11 @@ public class VistaVendedor extends javax.swing.JFrame {
 
         btnSalir.setForeground(new java.awt.Color(240, 38, 33));
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         btnChat.setBackground(new java.awt.Color(15, 101, 163));
         btnChat.setForeground(new java.awt.Color(15, 101, 163));
@@ -185,8 +185,12 @@ public class VistaVendedor extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
+        lblBienvenida.setText("Bienvenido Vendedor");
+=======
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Bienvenido Vendedor");
+>>>>>>> master
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,7 +203,7 @@ public class VistaVendedor extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel1)
+                .addComponent(lblBienvenida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnChat, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -213,12 +217,16 @@ public class VistaVendedor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<<<<<<< HEAD
+                        .addComponent(lblBienvenida)))
+=======
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnChat, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                             .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+>>>>>>> master
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -253,14 +261,67 @@ public class VistaVendedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnChatActionPerformed
 
+<<<<<<< HEAD
+=======
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        int res = JOptionPane.showConfirmDialog(null, "Quiere Salir?","advertencia",JOptionPane.YES_NO_OPTION);
+        if(res == 0){
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(VistaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(VistaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(VistaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(VistaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new VistaVendedor().setVisible(true);
+            }
+        });
+    }
+>>>>>>> e03677fb19b28683944d678a52a1e6472cdba2d2
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnChat;
     private javax.swing.JButton btnGenerarVenta;
     private javax.swing.JButton btnSalir;
+<<<<<<< HEAD
+=======
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+<<<<<<< HEAD
+=======
+>>>>>>> e03677fb19b28683944d678a52a1e6472cdba2d2
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+>>>>>>> master
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -270,6 +331,7 @@ public class VistaVendedor extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable jtRecibos;
     private javax.swing.JTable jtStock;
+    private javax.swing.JLabel lblBienvenida;
     private java.awt.Panel panel1;
     private java.awt.PopupMenu popupMenu1;
     private java.awt.PopupMenu popupMenu2;
