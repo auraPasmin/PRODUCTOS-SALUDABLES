@@ -103,6 +103,7 @@ public class VistaCruds extends javax.swing.JFrame {
         jScrollPane4.setViewportView(tablaCRUD);
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/lamini.png"))); // NOI18N
+        btnBuscar.setText("Listar");
 
         btnCrear.setText("crear");
 

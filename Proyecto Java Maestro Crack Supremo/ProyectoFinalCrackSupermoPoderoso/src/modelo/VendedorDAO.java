@@ -316,7 +316,7 @@ public class VendedorDAO {
                 resultado.beforeFirst();
                 while(resultado.next()) {
                     d[i][0] = resultado.getString(1);
-                    d[i][1] = resultado.getString(2);
+                    d[i][1] = resultado.getTimestamp(2).toLocalDateTime();
                     ++i;
                 }
             }

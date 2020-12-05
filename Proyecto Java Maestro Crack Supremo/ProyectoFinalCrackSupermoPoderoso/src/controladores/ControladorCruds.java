@@ -283,7 +283,7 @@ public class ControladorCruds {
 
     private void visualizarMateriaPrima(Materia_PrimaDAO MP) {
         ArrayList<Materia_Prima> mat = MP.readMateriaPrima();
-        String cad = "".trim();
+        String cad = crud.getBusqueda().trim();
         Materia_Prima c;
         if(cad.equals("")){
             Object[][]data = new Object[mat.size()][5];

@@ -45,6 +45,7 @@ public class VistaVendedor extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jtRecibos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        btnVisualizar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
         btnChat = new javax.swing.JButton();
@@ -114,6 +115,9 @@ public class VistaVendedor extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/fondo.jpg"))); // NOI18N
 
+        btnVisualizar.setBackground(new java.awt.Color(15, 101, 163));
+        btnVisualizar.setText("Visualizar venta");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -135,7 +139,8 @@ public class VistaVendedor extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnGenerarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnActualizar))))
+                                    .addComponent(btnActualizar)
+                                    .addComponent(btnVisualizar))))
                         .addGap(10, 10, 10))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -146,12 +151,13 @@ public class VistaVendedor extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnGenerarVenta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnActualizar)
-                        .addGap(29, 29, 29))
+                        .addGap(2, 2, 2)
+                        .addComponent(btnVisualizar))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -236,6 +242,10 @@ public class VistaVendedor extends javax.swing.JFrame {
     public void addListenerbtnActualizar(ActionListener LS){
         this.btnActualizar.addActionListener(LS);
     }
+    
+    public void addListenerbtnVisualizar(ActionListener LS){
+        this.btnVisualizar.addActionListener(LS);
+    }
 
     public JTable getJtRecibos() {
         return jtRecibos;
@@ -259,6 +269,7 @@ public class VistaVendedor extends javax.swing.JFrame {
     private javax.swing.JButton btnChat;
     private javax.swing.JButton btnGenerarVenta;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnVisualizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
