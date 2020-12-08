@@ -24,7 +24,8 @@ public class Fachada {
                 //ResourceBundle resource = ResourceBundle.getBundle("servicios.jdbc");
                 String driver = "com.mysql.jdbc.Driver";
                 //resource.getString("driver");
-                String url = "jdbc:mysql://localhost:3306/proyectomaestrocracksupremo";
+                //String url = "jdbc:mysql://localhost:3306/proyectomaestrocracksupremo";
+                String url = "jdbc:mysql://localhost:3306/BDOP";
                         //resource.getString("url");
                 String usr = "root";
                 String pwd = "";

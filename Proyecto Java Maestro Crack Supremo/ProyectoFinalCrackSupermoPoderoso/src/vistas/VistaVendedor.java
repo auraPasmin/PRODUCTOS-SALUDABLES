@@ -185,12 +185,9 @@ public class VistaVendedor extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
         lblBienvenida.setText("Bienvenido Vendedor");
-=======
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Bienvenido Vendedor");
->>>>>>> master
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -217,19 +214,16 @@ public class VistaVendedor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-<<<<<<< HEAD
                         .addComponent(lblBienvenida)))
-=======
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnChat, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                             .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
->>>>>>> master
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap()
         );
 
         pack();
@@ -261,8 +255,6 @@ public class VistaVendedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnChatActionPerformed
 
-<<<<<<< HEAD
-=======
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         int res = JOptionPane.showConfirmDialog(null, "Quiere Salir?","advertencia",JOptionPane.YES_NO_OPTION);
@@ -305,23 +297,16 @@ public class VistaVendedor extends javax.swing.JFrame {
             }
         });
     }
->>>>>>> e03677fb19b28683944d678a52a1e6472cdba2d2
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnChat;
     private javax.swing.JButton btnGenerarVenta;
     private javax.swing.JButton btnSalir;
-<<<<<<< HEAD
-=======
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-<<<<<<< HEAD
-=======
->>>>>>> e03677fb19b28683944d678a52a1e6472cdba2d2
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
->>>>>>> master
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

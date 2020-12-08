@@ -56,13 +56,12 @@ public class ControladorLogin {
         }else{
             try {
                 V = v.cargarVendedor(Integer.parseInt(cad));
-<<<<<<< HEAD
                 VistaVendedor n = new VistaVendedor();
                 ControladorVendedor CV = new ControladorVendedor(n, v, V);
                 n.setVisible(true);
-=======
-                ControladorVendedor controlador = new ControladorVendedor(V);
->>>>>>> master
+
+               ControladorVendedor controlador = new ControladorVendedor(V);
+
                 vista.dispose();
                 return;
             } catch (NEDException | NumberFormatException ex) {

@@ -28,14 +28,11 @@ public class ControladorVendedor {
         
         this.VV.addListenerBtnGenearVenta(new ProgramaListener() );
         this.VV.addListenerBtnChat(new ProgramaListener());
-<<<<<<< HEAD
         this.VV.addListenerbtnActualizar(new ProgramaListener());
         listarStock();
         listarVentas();
-=======
         this.listarStock();
         this.listarRecibos();
->>>>>>> e03677fb19b28683944d678a52a1e6472cdba2d2
     }
     public ControladorVendedor(VistaVendedor vistaV , VendedorDAO VDAO , Vendedor v){
         this.v = v;

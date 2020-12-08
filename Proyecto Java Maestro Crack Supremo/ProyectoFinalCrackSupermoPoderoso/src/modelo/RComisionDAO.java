@@ -198,7 +198,7 @@ public class RComisionDAO {
         return resultado;
     }
     
-    public Object[][] generarRecibo(int vendedor){    
+    public Object[][] generarComision(int vendedor){    
         Connection conexion = null;
         PreparedStatement instruccion = null;
         ResultSet resultado = null;
