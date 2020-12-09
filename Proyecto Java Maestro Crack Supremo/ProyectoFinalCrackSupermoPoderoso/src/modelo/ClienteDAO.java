@@ -84,7 +84,8 @@ public class ClienteDAO {
             }
         }
         catch(SQLException e) {
-            System.out.println(e);
+            System.out.println(e.toString());
+            
         }
         finally {
             try {
@@ -184,7 +185,7 @@ public class ClienteDAO {
             resultado = instrucciones.executeUpdate();
         }
         catch(SQLException e) {
-            // Do something ...
+            System.out.println(e.toString());
         }
         finally {
             try {
@@ -262,7 +263,7 @@ public class ClienteDAO {
                 resultado.beforeFirst();
                 while(resultado.next()) {
                     d[i][0] = resultado.getString(1);
-                    d[i][1] = resultado.getDate(2).toString();
+                    d[i][1] = resultado.getTimestamp(2).toLocalDateTime();
                     ++i;
                 }
             }  

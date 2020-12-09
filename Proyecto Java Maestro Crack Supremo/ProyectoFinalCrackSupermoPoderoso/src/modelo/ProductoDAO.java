@@ -269,12 +269,15 @@ public class ProductoDAO {
     }
     
     public String[][] mostrarStock(){
-        String[][]stock = null;
-        ArrayList<Producto> productos = this.readProducto();
         
+        ArrayList<Producto> productos = this.readProducto();
+        String[][]stock = new String[productos.size()][4];
+        System.out.println(productos);
         for(int i=0; i<productos.size();i++){
             stock[i][0] = productos.get(i).getNombre();
             stock[i][1] = ""+productos.get(i).getCantidad() ;
+            stock[i][2] = productos.get(i).getPrecio()+"";
+            stock[i][3] = productos.get(i).getFechaCaducidad().toString();
         }
         
         return stock;

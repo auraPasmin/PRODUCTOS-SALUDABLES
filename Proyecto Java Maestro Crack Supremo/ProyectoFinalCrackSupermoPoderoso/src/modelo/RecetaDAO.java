@@ -117,7 +117,7 @@ public class RecetaDAO {
 
         try {
             conexion = Fachada.startConnection();
-            sqlStatement = "UPDATE receta M = ?, Cantidad = ? WHERE P = ?";
+            sqlStatement = "UPDATE receta SET M = ?, Cantidad = ? WHERE P = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
 
             instruccion.setString(1,receta.getM());

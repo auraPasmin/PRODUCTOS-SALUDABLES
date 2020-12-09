@@ -5,6 +5,7 @@ import java.io.*;
 import java.net.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 
 public class ChatCliente extends JFrame{
     
@@ -114,6 +115,7 @@ public class ChatCliente extends JFrame{
 //            else
 //                dispose();
 //        }
+        
         public JTextArea getText(){
             return textArea;
         }
@@ -123,14 +125,16 @@ public class ChatCliente extends JFrame{
 	public void addListenerbtn(ActionListener al){
             btnSend.addActionListener(al);
         }
+        
+        public void addWindowClose(WindowAdapter listen) {
+            addWindowListener(listen);
+        }
 	private JTextField txtMensaje;
 	private JTextArea textArea;
 	private JLabel lblNombreUsuario;
 	private JPanel menu;
 	private JLabel icono;
 	private JButton btnSend;
-	private ObjectOutputStream salida;
-	private ObjectInputStream entrada;
 	private String mensajeaEnviar = "";
 	private String nameCliente;
 	private String direccionIP;

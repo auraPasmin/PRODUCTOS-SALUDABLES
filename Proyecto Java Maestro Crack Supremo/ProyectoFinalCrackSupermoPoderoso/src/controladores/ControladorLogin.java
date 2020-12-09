@@ -49,8 +49,8 @@ public class ControladorLogin {
         Cliente C= null;
         Vendedor V = null;
         if(cad.equals("admin123")){
-            VistaAdmin v = new VistaAdmin();
-            v.setVisible(true);
+            ControladorAdmin v = new ControladorAdmin();
+            
             vista.dispose();
         }else{
             try {
@@ -69,9 +69,10 @@ public class ControladorLogin {
             } catch (NEDException ex) {
                 C = null;
             }
+            if(V== null && C == null){
+                JOptionPane.showMessageDialog(vista, "No existe ese usuario en el sistema");
+            }
         }
-        if(V== null && C == null){
-            JOptionPane.showMessageDialog(vista, "No existe ese usuario en el sistema");
-        }
+        
     }
 }

@@ -243,13 +243,14 @@ public class VendedorDAO {
         return resultado;
     }
     
-    public String encontrarUbicacion(int cedula, LocalDate day) throws NEDException{
+    public double[][] encontrarUbicacion(int cedula, LocalDate day) throws NEDException{
         Connection conexion = null;
         PreparedStatement instruccion = null;
         ResultSet resultado = null;
         String sqlStatement;
         Vendedor v = null;
         String res = "";
+        double[][]ub = null;
         try {
             conexion = Fachada.startConnection();
             sqlStatement = "SELECT DISTINCT c.x, C.y, R.Fecha "
@@ -260,8 +261,19 @@ public class VendedorDAO {
             instruccion.setDate(2, Date.valueOf(day));
             instruccion.setDate(3, Date.valueOf(day.plusDays(1)));
             resultado = instruccion.executeQuery();
+            resultado.last();
+            int l = resultado.getRow();
+            if(l == 0){
+                throw new NEDException(707,cedula+"");
+            }
+            System.out.println(l);
+            resultado.beforeFirst();
+            ub = new double[2][l];
+            int i = 0;
             while(resultado.next()) {
-                res+= resultado.getDouble(1) + ":" + resultado.getDouble(2) +"\n";
+                ub[0][i] = resultado.getDouble(1);
+                ub[1][i] =  resultado.getDouble(2);
+                ++i;
             }
         }
         catch(SQLException e) {
@@ -280,7 +292,7 @@ public class VendedorDAO {
                 // Do something
             }
         }
-        return res.trim();
+        return ub;
     }
     
     public Object[][] generarRecibos(Vendedor v){    
@@ -304,13 +316,14 @@ public class VendedorDAO {
                 resultado.beforeFirst();
                 while(resultado.next()) {
                     d[i][0] = resultado.getString(1);
-                    d[i][1] = resultado.getString(2);
+                    d[i][1] = resultado.getTimestamp(2).toLocalDateTime();
                     ++i;
                 }
             }
             
         }
         catch(SQLException e) {
+            System.out.println("error aca");
             System.out.println(e.toString());
         }
         finally {

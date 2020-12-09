@@ -122,7 +122,7 @@ public class ProveedorDAO {
 
         try {
             conexion = Fachada.startConnection();
-            sqlStatement = "UPDATE proveedor nombre = ?, ubicacion = ?, telefono = ?, email = ? WHERE nit = ?";
+            sqlStatement = "UPDATE proveedor SET nombre = ?, ubicacion = ?, telefono = ?, email = ? WHERE nit = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
 
             instruccion.setString(5,p.getNit());

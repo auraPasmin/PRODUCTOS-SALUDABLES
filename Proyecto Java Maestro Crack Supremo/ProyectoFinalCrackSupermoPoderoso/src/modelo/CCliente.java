@@ -18,163 +18,125 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 public class CCliente extends Thread{
-    
+    private boolean runthread = true;
     private boolean continuar = true;
-        public void run(){
+    
+    public CCliente(String cliente, String direccion, JTextArea text) {
+        texto = text;
+        nameCliente = cliente;
+        direccionIP = direccion;
+    }
+    
+    public void stopThread() {
+        runthread = false;
+    }
+    
+    @Override
+    public void run() {
+        do {
             try {
-                iniciarCliente();
-            } catch (IOException ex) {
-                System.out.println("no hay vendedores");
-            }
-        }
-	public CCliente(String cliente, String direccion,JTextArea text) {
-            texto = text;
-            nameCliente = cliente;
-            direccionIP = direccion;
-	}
-        
-        public void iniciarCliente() throws IOException {
-            try {
-                startClienteConexion();
+                starCliente();
                 if(continuar) {
                     outputInputOfData();
-                    process();
+                    processInformation();
                 }
             }
             catch(EOFException e) {
+                showMessage("Se ha terminado la seccion");
+            }
+            catch(IOException e) {
                 e.getMessage();
             }
             finally {
                 if(continuar)
                     closeCliente();
             }
-        }
-	
-	/*public void iniciarCliente() throws IOException {
-
-			startClienteConexion();
-                        if(continuar) {
-                            OutputInputOfData();
-			    process();
-                        }
-
-                    if(continuar)
-			closeCliente();
-		
-	}*/
-	
-        public void startClienteConexion() throws UnknownHostException, IOException {
+        } while(runthread);
+    }
+    
+    public void starCliente() {
+        try {
             cliente = new Socket(InetAddress.getByName(direccionIP), 9009);
         }
-	/*public void startClienteConexion() throws UnknownHostException, IOException {
-		showMessage("Iniciando conexion\n");
-
-			cliente = new Socket(InetAddress.getByName(direccionIP), 9009);
-                        showMessage("conexion Lista\n");
-
-	}*/
-	public void outputInputOfData() {
+        catch(IOException | NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "No hay vendedores disponibles");
+            runthread = false;
+            continuar = false;
+        }
+    }
+    
+    public void outputInputOfData() {
+        try {
+            salida = new ObjectOutputStream(cliente.getOutputStream());
+            salida.flush();
+            
+            entrada = new ObjectInputStream(cliente.getInputStream());
+            showMessage("¡Bienvenido!, un ascesor lo atendera pronto");
+        }
+        catch(IOException | NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void processInformation() throws IOException{
+        do {
             try {
-                salida = new ObjectOutputStream(cliente.getOutputStream());
-                salida.flush();
-                
-                entrada = new ObjectInputStream(cliente.getInputStream());
+                PaqueteDeDatos paqueteVendedor = (PaqueteDeDatos) entrada.readObject();
+                mensajeToSave += printPaquete(paqueteVendedor);
+                showMessage(printPaquete(paqueteVendedor));
             }
-            catch(IOException | NullPointerException e) {
+            catch(ClassNotFoundException | NullPointerException e) {
                 e.getMessage();
             }
+        } while(cliente.isConnected());
+    }
+    
+    public void closeCliente() {
+        showMessage("Se ha Finalizado el chat");
+        try {
+            cliente.close();
+            entrada.close();
+            salida.close();
+            runthread = false;
         }
-        
-	/*public void outputInputOfData() {
-		try {
-			salida = new ObjectOutputStream(cliente.getOutputStream());
-			salida.flush();
-			
-			entrada = new ObjectInputStream(cliente.getInputStream());
-			showMessage("Output/Input -> ready\n");
-		}
-		catch(IOException | NullPointerException e) {
-			e.getMessage();
-		}
-	}*/
-	public void process() throws IOException {
-            do {
-                try {
-                    PaqueteDeDatos paqueteVendedor = (PaqueteDeDatos)entrada.readObject();
-                    mensajeToSave += printPaquete(paqueteVendedor);
-                }
-                catch(ClassNotFoundException | NullPointerException e) {
-                    e.getMessage();
-		}
-            }while(cliente.isConnected());
+        catch(IOException e) {
+            e.getMessage();
         }
-	/*public void process() throws IOException{
-		do {
-			try {
-				PaqueteDeDatos paqueteVendedor;
-				paqueteVendedor = (PaqueteDeDatos)entrada.readObject();
-				
-                                mensajeToSave += printPaquete(paqueteVendedor);
-				showMessage(printPaquete(paqueteVendedor));
-			}
-			catch(ClassNotFoundException | NullPointerException e) {
-				e.getMessage();
-			}
-			
-		}while(cliente.isConnected());
-	}*/
-        
-	public void closeCliente() {
-            showMessage("Fin del Chat\n");
-            try {
-                entrada.close();
-                salida.close();
-                cliente.close();
-            }
-            catch(IOException e) {
-		e.getCause();
-            }
-	}
-	
-	public void sendMessages(String message) {
-		PaqueteDeDatos paqueteCliente = null;
-		try {
-			paqueteCliente = new PaqueteDeDatos();
-			paqueteCliente.setNameUser(nameCliente);
-			paqueteCliente.setMensaje(message);
-			salida.writeObject(paqueteCliente);
-			mensajeToSave += printPaquete(paqueteCliente);
-		}
-		catch(IOException e) {
-			showMessage("No se pudo escribir el mensaje\n\n");
-		}
-	}
-        
-        public String printPaquete(PaqueteDeDatos paquete) {
-            String nameVendedor = "";
-            String mensaje = "";
+    }
+    
+    public void sendMessages(String message) {
+        PaqueteDeDatos paquetecliente = null;
+        try {
+            paquetecliente = new PaqueteDeDatos();
+            paquetecliente.setNameUser(nameCliente);
+            paquetecliente.setMensaje(message);
+            salida.writeObject(paquetecliente);
             
-            nameVendedor = paquete.getNameUser();
-            mensaje = paquete.getMensaje();
-            return ("\n" + nameVendedor + "\n" + mensaje + "\n");
+            mensajeToSave += printPaquete(paquetecliente);
+            showMessage(printPaquete(paquetecliente));
         }
+        catch(IOException e) {
+            System.out.println("No se pudo escribir el mensaje");
+        }
+    }
+    
+    public String printPaquete(PaqueteDeDatos paquete) {
+        String nameVendedor = "";
+        String mensaje = "";
+        
+        nameVendedor = paquete.getNameUser();
+        mensaje = paquete.getMensaje();
+        return ("\n" + nameVendedor + "\n" + mensaje + "\n");
+    }
+    
+    public void showMessage(String message) {
+        texto.append(message);
+    }
+    
+    public String saveChat() {
+        return mensajeToSave;
+    }
 	
-	public void showMessage(String message) {
-		texto.append(message);
-	}
-	
-//	@Override
-//	public void actionPerformed(ActionEvent event) {
-//		mensajeaEnviar = txtMensaje.getText();
-//		sendMessages(mensajeaEnviar);
-//		txtMensaje.setText("");
-//		
-//		if(event.getSource() == "enviar") {
-//			mensajeaEnviar = txtMensaje.getText();
-//			sendMessages(mensajeaEnviar);
-//			txtMensaje.setText("");
-//		}
-//	}
 	private ObjectOutputStream salida;
 	private ObjectInputStream entrada;
 	private String mensajeaEnviar = "";

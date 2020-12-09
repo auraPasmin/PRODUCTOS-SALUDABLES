@@ -36,7 +36,7 @@ public class Fachada {
         }
         catch(ClassNotFoundException | SQLException ex){
             JOptionPane.showMessageDialog(null,"Error : " + 
-                    ex.getMessage());
+                    ex.toString());
         }
         return con;
     }

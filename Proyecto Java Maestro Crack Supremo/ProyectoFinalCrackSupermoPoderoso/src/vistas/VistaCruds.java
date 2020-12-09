@@ -5,23 +5,53 @@
  */
 package vistas;
 
-import javax.swing.table.DefaultTableModel;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
 import javax.swing.JLabel;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author aurap
  */
 public class VistaCruds extends javax.swing.JFrame {
-    private String[]head;
     /**
      * Creates new form VistaCruds
      */
     public VistaCruds() {
         initComponents();
     }
+    public String getBusqueda(){
+        return txtBusqueda.getText();
+    }
+    public Object[] getData(){
+        int c = tablaCRUD.getColumnCount();
+        Object[] data = new Object[c];
+        if(tablaCRUD.getSelectedRow()==-1)
+            return null;
+        for(int i = 0 ; i < c ; ++i){
+            data[i] = tablaCRUD.getModel().getValueAt(tablaCRUD.getSelectedRow(), i);
+            
+        }
+        return data;
+    }
+    public JLabel getLabelTitle(){
+        return labelTitle;
+    }
+    public void addListenerbtnBuscar(ActionListener LS){
+        this.btnBuscar.addActionListener(LS);
+    }
+        public void addListenerBtnCrear(ActionListener Ls){
+            this.btnCrear.addActionListener(Ls);
+        }
+        public void addListenerBtnEditar(ActionListener Ls){
+            this.btnEditar.addActionListener(Ls);
+        }
+        public void addListenerBtnEliminar(ActionListener Ls){
+            this.btnEliminar.addActionListener(Ls);
+        }
+        public void addListenerbtnListar(ActionListener Ls){
+            this.btnListar.addActionListener(Ls);
+        }
     public void setModeloTabla(String[] head, Object[][] data){
          tablaCRUD.setModel(new DefaultTableModel(
             data,
@@ -41,15 +71,15 @@ public class VistaCruds extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaCRUD = new javax.swing.JTable();
-        jTextField2 = new javax.swing.JTextField();
-        jButton10 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        txtBusqueda = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        btnCrear = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnListar = new javax.swing.JButton();
         labelTitle = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(240, 38, 33));
 
@@ -72,15 +102,16 @@ public class VistaCruds extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tablaCRUD);
 
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/lamini.png"))); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vistas/lamini.png"))); // NOI18N
+        btnBuscar.setText("Listar");
 
-        jButton1.setText("crear");
+        btnCrear.setText("crear");
 
-        jButton2.setText("editar");
+        btnEditar.setText("editar");
 
-        jButton3.setText("eliminar");
+        btnEliminar.setText("eliminar");
 
-        jButton4.setText("listar");
+        btnListar.setText("listar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -90,18 +121,18 @@ public class VistaCruds extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addComponent(jButton1)
+                        .addComponent(btnCrear)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(btnEditar)
                         .addGap(10, 10, 10)
-                        .addComponent(jButton3)
+                        .addComponent(btnEliminar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4))
+                        .addComponent(btnListar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -112,16 +143,16 @@ public class VistaCruds extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btnCrear)
+                    .addComponent(btnEditar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnListar))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -150,79 +181,22 @@ public class VistaCruds extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        table.getSelectionModel().addListSelectionListener()
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public JLabel getLabelTitle() {
-        return labelTitle;
-    }
-    
-    /*public int indexRow() {
-        return tablaCRUD.getSelectedRow();
-    }
-    
-    public void selectionOfList(ListSelectionListener listen) {
-        tablaCRUD.getSelectionModel().addListSelectionListener(listen);
-    }*/
-    
-    public void addWindowsEvent(WindowAdapter listen) {
-        addWindowListener(listen);
-    }
-    
-    public void addButtonEvent(ActionListener listen) {
-        jButton1.addActionListener(listen);
-        jButton2.addActionListener(listen);
-        jButton3.addActionListener(listen);
-        jButton4.addActionListener(listen);
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaCruds.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaCruds.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaCruds.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaCruds.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaCruds().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCrear;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnListar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel labelTitle;
     private javax.swing.JTable tablaCRUD;
+    private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 }

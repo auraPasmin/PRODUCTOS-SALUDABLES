@@ -133,20 +133,20 @@ public class ReciboDAO {
 
         try {
             conexion = Fachada.startConnection();
-            sqlStatement = "UPDATE recibo C = ?, P = ?, Fecha = ?, Cantidad = ?" +
-                    "WHERE V = ?";
+            sqlStatement = "UPDATE recibo SET Cantidad = ? " +
+                    "WHERE V = ? AND C = ? AND P = ? AND Fecha = ?";
             instruccion = conexion.prepareStatement(sqlStatement);
 
-            instruccion.setString(1, recibo.getC());
-            instruccion.setString(2, recibo.getP());
-            instruccion.setTimestamp(3, java.sql.Timestamp.valueOf(recibo.getFecha()));
-            instruccion.setInt(4, recibo.getCantidad());
-            instruccion.setInt(5, recibo.getV());
-
+            instruccion.setString(3, recibo.getC());
+            instruccion.setString(4, recibo.getP());
+            instruccion.setTimestamp(5, java.sql.Timestamp.valueOf(recibo.getFecha()));
+            instruccion.setInt(1, recibo.getCantidad());
+            instruccion.setInt(2, recibo.getV());
+            System.out.println(instruccion);
             resultado = instruccion.executeUpdate();
         }
         catch(SQLException e) {
-            // Do something ...
+            System.out.println(e.toString());
         }
         finally {
             try {

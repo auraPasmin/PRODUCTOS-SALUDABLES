@@ -5,12 +5,11 @@ package controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import vistas.ChatCliente;
 import vistas.VistaCliente;
 import modelo.*;
 
@@ -65,15 +64,12 @@ public class ControladorCliente {
             JTable tabla = VC.getJtFacturas();
             int indice = tabla.getSelectedRow();
             if(indice!=-1){
-                ReciboDAO r = new ReciboDAO();
-                //r.generarRecibo(indice, NIT, LocalDate.MAX)
-                JOptionPane.showMessageDialog(VC, "Vendedor: "+ tabla.getModel().getValueAt(indice, 0)
-                                                + "\nFecha: "+ tabla.getModel().getValueAt(indice, 1)
-                                                + "\nDatos recibo: " + Arrays.deepToString(r.generarRecibo( 
-                                                        Integer.parseInt((String) tabla.getModel().getValueAt(indice, 0)),
-                                                        cliente.getNIT(),
-                                                        LocalDate.parse((String) tabla.getModel().getValueAt(indice, 1))))
-                                            );
+                ControladorRecibo c = new ControladorRecibo(tabla.getModel().getValueAt(indice, 0)+"",
+                        cliente.getNIT(), 
+                        ((LocalDateTime) tabla.getModel().getValueAt(indice, 1)).toLocalDate());
+                c.insertarDatos();
+            }else{
+                JOptionPane.showMessageDialog(null,"Seleccione un recibo");
             }
         }
     }

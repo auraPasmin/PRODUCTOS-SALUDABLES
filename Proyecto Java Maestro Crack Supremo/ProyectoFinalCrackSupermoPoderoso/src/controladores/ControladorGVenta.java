@@ -40,15 +40,26 @@ public class ControladorGVenta {
             if(e.getActionCommand().equalsIgnoreCase("generar")) {
                 generarVenta();
             }else if(e.getActionCommand().equalsIgnoreCase("ingresar")){
-                vista.addProducto(new Object[]{vista.getProducto(),vista.getCantidad()});
+                try{
+                    vista.addProducto(new Object[]{vista.getProducto(),vista.getCantidad()});
+                }catch(NumberFormatException ex){
+                    JOptionPane.showMessageDialog(null, "Introduza una cantidad valida");
+                }
+                
             }
 
         }
         private void generarVenta(){
             try {
-                r.crearRecibo(v.getCedula(), vista.getNIT(), LocalDateTime.now(), vista.getProductos(), vista.getCantidadProd());
+                if(vista.getProductos().isEmpty() && vista.getCantidadProd().isEmpty())
+                    JOptionPane.showMessageDialog(null, "No hay productos");
+                else{
+                    r.crearRecibo(v.getCedula(), vista.getNIT(), LocalDateTime.now(), vista.getProductos(), vista.getCantidadProd());
+                JOptionPane.showMessageDialog(null, "Venta concretada");
+                }
+                
             } catch (NEDException ex) {
-                JOptionPane.showMessageDialog(null,ex.getMessage());
+                JOptionPane.showMessageDialog(null,ex.toString());
             }
         }
         

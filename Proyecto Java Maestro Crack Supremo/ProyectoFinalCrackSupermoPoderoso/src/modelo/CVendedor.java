@@ -8,166 +8,154 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import java.lang.Thread;
 
 
 public class CVendedor extends Thread{
-        @Override
-        public void run(){
+    private boolean runThread = true;
+    
+    public CVendedor(String vendedor, JTextArea text) {
+        nameVendedor = vendedor;
+        textArea = text;
+    }
+    
+    public void stopThread() {
+        runThread = false;
+    }
+    
+    @Override
+    public void run() {
             iniciarVendedor();
-        }
-	public CVendedor(String vendedor, JTextArea text) {
-            nameVendedor = vendedor;
-            textArea = text;
-            
-	}
-
-	public void iniciarVendedor() {
-		try {
-			servidor = new ServerSocket(9009);
-			while(true) {
-				try {
-					startServer();
-					OutputInputOfData();
-					process();
-				}
-				catch(EOFException e) {
-					showMessage("Se termino la seccion");
-				}
-				finally {
-					closeCliente();
-				}
-			}
-		}
-		catch(IOException e) {
-			e.getMessage();
-		}
-		
-	}
-	
-	public void startServer() {
-		showMessage("Iniciando conexion\n");
-		try {
-			showMessage("Esperando ... \n");
-			socket = servidor.accept();
-			showMessage("Se ha establecido la conexion\n");
-		}
-		catch(IOException e) {
-			showMessage("Error no se ha podido establecer la conexion");
-			showMessage(e.getMessage());
-		}
-	}
-	
-	public void OutputInputOfData() {
-		try {
-			salida = new ObjectOutputStream(socket.getOutputStream());
-			salida.flush();
-			
-			entrada = new ObjectInputStream(socket.getInputStream());
-			showMessage("Flujos de entrada/salida listos\n");
-		}
-		catch(IOException e) {
-			showMessage(e.getMessage());
-		}
-	}
-	
-	public void process() throws IOException{
-
-		showMessage("Conexion exitosa\n");
-		
-		do {
-			try {
-				PaqueteDeDatos paqueteCliente;
-				paqueteCliente = (PaqueteDeDatos)entrada.readObject();
-				mensajeToSave += printPaquete(paqueteCliente);
-				showMessage(printPaquete(paqueteCliente));
-			}
-			catch(ClassNotFoundException e) {
-				showMessage("Ten cuidado con quien hablas");
-			}
-			
-		}while(socket.isConnected());
-	}
-	
-	public void closeCliente() {
-		showMessage("Se ha cerrado la conexion\n");
-		try {
-			entrada.close();
-			salida.close();
-			socket.close();
-		}
-		catch(IOException e) {
-			e.getCause();
-		}
-	}
-	
-	public void sendMessages(String message) {
-		PaqueteDeDatos datagramaCliente = null;
-		try {
-			datagramaCliente = new PaqueteDeDatos();
-			datagramaCliente.setNameUser(nameVendedor);
-			datagramaCliente.setMensaje(message);
-			
-			salida.writeObject(datagramaCliente);
-			//salida.flush();
-			mensajeToSave += printPaquete(datagramaCliente);
-			showMessage(printPaquete(datagramaCliente));
-		}
-		catch(IOException e) {
-			showMessage("No se pudo escribir el mensaje\n\n");
-		}
-	}
-	
-        public String printPaquete(PaqueteDeDatos paquete) {
-            String nameVendedor = "";
-            String mensaje = "";
-            
-            nameVendedor = paquete.getNameUser();
-            mensaje = paquete.getMensaje();
-            return ("\n" + nameVendedor + "\n" + mensaje + "\n");
-        }
+    }
+    
+    public void iniciarVendedor() {
         
-	public void showMessage(String message) {
-		textArea.append(message);
-	}
-
-//        
-//        public void guardarChat() {
-//            
-//            int opcion = JOptionPane.showConfirmDialog(null, "¡¿Deseas guardar registro de la conversación?!",
-//                    "Mensaje", JOptionPane.OK_CANCEL_OPTION);
-//            
-//            if(opcion == JOptionPane.OK_OPTION) {
-//                try {
-//                    
-//                    JFileChooser selectFile = new JFileChooser();
-//                    selectFile.showSaveDialog(this);
-//                    File archivo = selectFile.getSelectedFile();
-//                
-//                    if(archivo != null) {
-//                        FileWriter writeToFile = new FileWriter(archivo + ".txt");
-//                        writeToFile.write(mensajeToSave);
-//                        writeToFile.close();
-//                    }
-//                }
-//                catch(IOException e) {
-//                    JOptionPane.showMessageDialog(null, "No se pudo guardar su archivo", "Error", JOptionPane.WARNING_MESSAGE);
-//                }
-//                finally {
-//                    System.exit(0);
-//                }
-//            }
-//            else
-//                System.exit(0);
-//        }
-
-
-	private JTextArea textArea;
-	private ObjectOutputStream salida;
-	private ObjectInputStream entrada;
-	private String mensajeaEnviar = "";
-        private String mensajeToSave = "";
-	private String nameVendedor;
-	private ServerSocket servidor;
-	private Socket socket;
+        try {
+            servidor = new ServerSocket(9009);
+            while (runThread) {
+                try {
+                    starServer();
+                    outputInputOfData();
+                    processInformation();
+                }
+                catch(EOFException ex) {
+                    showMessage("El cliente se ha salido");
+                }
+                catch(NullPointerException e) {
+                    e.getMessage();
+                }
+                finally {
+                    closeVendedor();
+                    break;
+                }
+            }
+        }
+        catch(IOException e) {
+            System.out.println(e.getMessage() + "\n" + e.getLocalizedMessage());
+        }
+    }
+    
+    public void starServer() {
+        showMessage("Iniciando conexion\n");
+        try {
+            showMessage("Esperando...\n");
+            socket = servidor.accept();
+            showMessage("Se ha establecido la conexion");
+        }
+        catch(IOException e) {
+            JOptionPane.showMessageDialog(null, "No se ha podido establecer la conexion");
+            stopThread();
+            e.getMessage();
+        }
+    }
+    
+    public void outputInputOfData() {
+        try {
+            salida = new ObjectOutputStream(socket.getOutputStream());
+            salida.flush();
+            
+            entrada = new ObjectInputStream(socket.getInputStream());
+            showMessage("Ya se puede enviar mensajes\n");
+        }
+        catch(IOException e) {
+            e.getMessage();
+        }
+    }
+    
+    public void processInformation() throws IOException {
+        do {
+            try {
+                PaqueteDeDatos paquetecliente;
+                paquetecliente = (PaqueteDeDatos) entrada.readObject();
+                mensajeToSave += printPaquete(paquetecliente);
+                showMessage(printPaquete(paquetecliente));
+            }
+            catch(ClassNotFoundException e) {
+                e.getMessage();
+            }
+        }while(socket.isConnected());
+    }
+    
+    public void closeVendedor() {
+        showMessage("Se ha cerrado la conexion");
+        try {
+            if(servidor != null)
+                servidor.close();
+            if(socket != null)
+                socket.close();
+            if(entrada != null)
+                entrada.close();
+            if(salida != null)
+                salida.close();
+            runThread = false;
+        }
+        catch(IOException | NullPointerException e) {
+            System.out.println("error al cerrar");
+        }
+    }
+    
+    public void sendMessages(String message) {
+        PaqueteDeDatos paqueteServidor = null;
+        try {
+            paqueteServidor = new PaqueteDeDatos();
+            paqueteServidor.setNameUser(nameVendedor);
+            paqueteServidor.setMensaje(message);
+            
+            salida.writeObject(paqueteServidor);
+            mensajeToSave += printPaquete(paqueteServidor);
+            showMessage(printPaquete(paqueteServidor));
+        }
+        catch(IOException e) {
+            e.getMessage();
+        }
+    }
+    
+    public String printPaquete(PaqueteDeDatos paquete) {
+        return ("\n" + paquete.getNameUser() + "\n" + paquete.getMensaje() + "\n");
+    }
+    
+    public void showMessage(String message) {
+        textArea.append(message);
+    }
+    
+    public String saveChat() {
+        return mensajeToSave;
+    }
+    
+    public void interruptServer() {
+        stopThread();
+        closeVendedor();
+    }
+    
+    
+    private JTextArea textArea;
+    private ObjectOutputStream salida;
+    private ObjectInputStream entrada;
+    private String mensajeaEnviar = "";
+    private String mensajeToSave = "";
+    private String nameVendedor;
+    private ServerSocket servidor;
+    private Socket socket;
 }
