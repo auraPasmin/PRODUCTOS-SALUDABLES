@@ -15,10 +15,10 @@ import org.math.plot.Plot2DPanel;
 public class VistaSVendedor extends javax.swing.JFrame {
     private double[]x;
     private double[]y;
+    private double[][] xy;
 
-    public VistaSVendedor(double[]x,double[]y) {
-        this.x = x;
-        this.y = y;
+    public VistaSVendedor(double[][] localizacion) {
+        xy = localizacion;
         initComponents();
         setSize(600,600);
     }
@@ -50,9 +50,9 @@ public class VistaSVendedor extends javax.swing.JFrame {
         );
 
         jPanel1.setLayout(new BorderLayout());
-        plot.addScatterPlot("Datos",x, y);
+        plot.addScatterPlot("Datos", xy);
         //graficar en linea
-        plot.addLinePlot("Linea",x, y);
+        plot.addLinePlot("Linea", xy);
         jPanel1.add(plot,BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

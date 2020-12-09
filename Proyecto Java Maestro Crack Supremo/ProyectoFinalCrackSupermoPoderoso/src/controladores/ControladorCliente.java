@@ -32,6 +32,7 @@ public class ControladorCliente {
         this.mostrarTabla();
     }
     private void mostrarTabla(){
+        try {
             this.limpiarListadoTabla();
             Object[][]data = cdao.generarRecibos(cliente);
             System.out.println(Arrays.toString(data));
@@ -40,6 +41,11 @@ public class ControladorCliente {
                 modelo.addRow(data[i]);
             }
         }
+        catch(NullPointerException e) {
+            System.out.println("error de la tabla");
+        }
+    }
+    
     private void limpiarListadoTabla(){
             DefaultTableModel modelo;
             modelo = (DefaultTableModel)  VC.getJtFacturas().getModel();

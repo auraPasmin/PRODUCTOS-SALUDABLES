@@ -137,6 +137,7 @@ public class VendedorDAO {
             }
         }
         catch(SQLException e) {
+            System.out.println("Error de la base de datos");
             System.out.println(e.getMessage());
         }
         finally {
@@ -256,7 +257,8 @@ public class VendedorDAO {
             sqlStatement = "SELECT DISTINCT c.x, C.y, R.Fecha "
                     + "FROM recibo R JOIN Cliente C ON R.C=C.NIT "
                     + "WHERE V= ? AND (Fecha BETWEEN ? AND ?)ORDER BY R.Fecha";
-            instruccion = conexion.prepareStatement(sqlStatement);
+            instruccion = conexion.prepareStatement(sqlStatement, ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
             instruccion.setInt(1,cedula);
             instruccion.setDate(2, Date.valueOf(day));
             instruccion.setDate(3, Date.valueOf(day.plusDays(1)));
@@ -304,7 +306,8 @@ public class VendedorDAO {
         try {
             conexion = Fachada.startConnection();
             sqlStatement =  "SELECT DISTINCT C, Fecha FROM recibo WHERE V = ?";
-            instruccion = conexion.prepareStatement(sqlStatement);
+            instruccion = conexion.prepareStatement(sqlStatement, ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
             instruccion.setInt(1, v.getCedula());
             System.out.println(instruccion);
             resultado = instruccion.executeQuery();

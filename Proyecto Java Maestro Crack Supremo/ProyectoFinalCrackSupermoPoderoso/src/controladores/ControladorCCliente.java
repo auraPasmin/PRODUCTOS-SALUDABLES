@@ -14,9 +14,9 @@ public class ControladorCCliente {
     public ControladorCCliente(String cliente, String direccion) {
         Vista = new VistaChat();
         chatCliente = new CCliente(cliente, direccion, Vista.getChat());
-        //vista.addListenerbtn(new ChatController());
         Vista.addListenerjBotonEnviar(new ChatController());
         Vista.addWindowClose(new WindowAdapter() {
+            
             @Override
             public void windowClosing(WindowEvent e) {
                 String messageSave = chatCliente.saveChat();
@@ -31,6 +31,7 @@ public class ControladorCCliente {
         Vista.setUsuario("Cliente " + cliente);
         Vista.setVisible(true);   
     }
+    
     class ChatController implements ActionListener{
 
         @Override
@@ -40,7 +41,5 @@ public class ControladorCCliente {
                 chatCliente.sendMessages(Vista.getMessage());
             }
         }
-    
-    }
-    
+    } 
 }

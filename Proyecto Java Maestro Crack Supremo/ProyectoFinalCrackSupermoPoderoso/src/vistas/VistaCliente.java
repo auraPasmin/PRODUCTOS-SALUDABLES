@@ -112,7 +112,7 @@ public class VistaCliente extends javax.swing.JFrame {
         );
 
         btnMostrar.setBackground(new java.awt.Color(240, 38, 33));
-        btnMostrar.setForeground(new java.awt.Color(240, 38, 33));
+        btnMostrar.setForeground(new java.awt.Color(255, 255, 255));
         btnMostrar.setText("mostrar");
         btnMostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

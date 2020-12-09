@@ -44,9 +44,10 @@ public class ControladorLogin {
         }
 
     }
+    
     public void ingreso(){
         String cad = vista.getID();
-        Cliente C= null;
+        Cliente C = null;
         Vendedor V = null;
         if(cad.equals("admin123")){
             ControladorAdmin v = new ControladorAdmin();
@@ -59,15 +60,16 @@ public class ControladorLogin {
                 vista.dispose();
                 return;
             } catch (NEDException | NumberFormatException ex) {
-                V = null;
+                System.out.println(ex.getMessage());
             }
+            
             try {
                 C = c.cargarCliente(cad);
                 ControladorCliente controlador = new ControladorCliente(C);
                 vista.dispose();
                 return;
             } catch (NEDException ex) {
-                C = null;
+                System.out.println(ex.getMessage());
             }
             if(V== null && C == null){
                 JOptionPane.showMessageDialog(vista, "No existe ese usuario en el sistema");
@@ -75,4 +77,47 @@ public class ControladorLogin {
         }
         
     }
+    
+    /*public void ingreso() {
+        String cad = vista.getID();
+        Cliente C = null;
+        Vendedor V = null;
+        
+        if(cad.equals("admin123")) {
+            ControladorAdmin controlAdmin = new ControladorAdmin();
+            vista.dispose();
+        }
+        else {
+            if(V == null) {
+                try {
+                    V = v.cargarVendedor(Integer.parseInt(cad));
+                    ControladorVendedor controlV = new ControladorVendedor(V);
+                    if(C != null) {
+                        vista.dispose();
+                        return;
+                    }
+                }
+                catch(NEDException | NullPointerException e) {
+                    System.out.println(e.getCause());
+                }
+            }
+            
+            if(C == null) {
+                try {
+                    C = c.cargarCliente(cad);
+                    ControladorCliente controlC = new ControladorCliente(C);
+                    if(V != null) {
+                        vista.dispose();
+                        return;
+                    }
+                }
+                catch(NEDException | NullPointerException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        if((C == null) && (V == null)) {
+            JOptionPane.showMessageDialog(null, "No existe ese usuario en el sistema");
+        }
+    }*/
 }

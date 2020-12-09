@@ -251,7 +251,8 @@ public class ClienteDAO {
         try {
             conexion = Fachada.startConnection();
             sqlStatement =  "SELECT DISTINCT V, Fecha FROM recibo WHERE C = ?";
-            instruccion = conexion.prepareStatement(sqlStatement);
+            instruccion = conexion.prepareStatement(sqlStatement, ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
             instruccion.setString(1, c.getNIT());
             System.out.println(instruccion);
             resultado = instruccion.executeQuery();

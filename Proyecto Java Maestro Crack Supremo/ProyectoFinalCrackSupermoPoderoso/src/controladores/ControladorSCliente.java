@@ -8,6 +8,7 @@ package controladores;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelo.NEDException;
 import modelo.VendedorDAO;
 import vistas.VistaSVendedor;
@@ -19,15 +20,15 @@ import vistas.VistaSVendedor;
 public class ControladorSCliente {
     private VistaSVendedor vista;
     private VendedorDAO V;
-    public ControladorSCliente(int ven){
+    public ControladorSCliente(int ven, LocalDate date){
         V = new VendedorDAO();
         try {
-            double[][] ub = V.encontrarUbicacion(ven, LocalDate.now());
+            double[][] ub = V.encontrarUbicacion(ven, date);
             
-            vista = new VistaSVendedor(ub[0],ub[1]);
+            vista = new VistaSVendedor(ub);
             vista.setVisible(true);
-        } catch (NEDException ex) {
-            System.out.println("este careximba no tiene datos");
+        } catch (NEDException | NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "El vendedor identificado con " + ven + "No tiene ventas en esa fecha");
         }
         
     }

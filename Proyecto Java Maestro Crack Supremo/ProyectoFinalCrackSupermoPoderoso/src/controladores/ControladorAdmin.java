@@ -3,6 +3,9 @@ package controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.Month;
 import javax.swing.JOptionPane;
 import modelo.VendedorDAO;
 import vistas.VistaAdmin;
@@ -28,7 +31,6 @@ public class ControladorAdmin {
     class buttonEvent implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            System.out.println(event.getActionCommand());
             if(event.getActionCommand().equalsIgnoreCase("Clientes")) {
                 CCRUDS = new ControladorCruds(0);
             }else if(event.getActionCommand().equalsIgnoreCase("Materia Prima")) {
@@ -44,10 +46,25 @@ public class ControladorAdmin {
             }else if(event.getActionCommand().equalsIgnoreCase("Vendedor")) {
                 CCRUDS = new ControladorCruds(6);
             }else if(event.getActionCommand().equalsIgnoreCase("Geolocalizar")){
-                System.out.println("jeje");
-                ControladorSCliente cs = new ControladorSCliente(Integer.parseInt(VA.getFieldsjClocalizar()));
+                LocalDate dateToGeo = dateGeo();
+                if(dateToGeo != null) {
+                    ControladorSCliente cs = new ControladorSCliente(Integer.parseInt(VA.getFieldsjClocalizar()), dateToGeo);
+                }
             }
         }
+    }
+    
+    public LocalDate dateGeo() {
+        int day = VA.getDay();
+        LocalDate date = null;
+        
+        try {
+            date = LocalDate.of(2020, Month.of(VA.getMes()), day);
+        }
+        catch(DateTimeException e) {
+            JOptionPane.showMessageDialog(null, "Esa fecha no existe");
+        }
+        return date;
     }
 
 }
